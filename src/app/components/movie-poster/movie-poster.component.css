@@ -1,0 +1,10 @@
+.posterFrame {
+  height: 300px;
+  width: 200px;
+  overflow: hidden;
+}
+img {
+  object-fit: cover;
+  max-width: 100%;
+  min-height: 100%;
+}
