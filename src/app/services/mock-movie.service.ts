@@ -65,7 +65,11 @@ export class MockMovieService {
   ];
   constructor() {}
 
-  getData(): IMovie[] {
+  getMovieData(): IMovie[] {
     return this.movies;
+  }
+
+  getMoviePosterData() {
+    return this.movies.map(obj => obj.imageUrl);
   }
 }
