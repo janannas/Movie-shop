@@ -1,3 +1,7 @@
-<p>
-  catalog works!
-</p>
+<div>
+  <app-movie-poster
+    *ngFor="let moviePoster of moviePosters"
+    [moviePoster]="moviePoster"
+  >
+  </app-movie-poster>
+</div>
