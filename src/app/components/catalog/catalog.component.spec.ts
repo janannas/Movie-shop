@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
+import { MovieService } from "../../services/movie.service";
+import { MockMovieService } from "../../services/mock-movie.service";
+
 import { CatalogComponent } from "./catalog.component";
 import { MoviePosterComponent } from "../movie-poster/movie-poster.component";
 
@@ -10,7 +13,13 @@ describe("CatalogComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CatalogComponent, MoviePosterComponent]
-    }).compileComponents();
+    })
+      .overrideComponent(CatalogComponent, {
+        set: {
+          providers: [{ provide: MovieService, useClass: MockMovieService }]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
