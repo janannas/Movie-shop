@@ -7,7 +7,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HomeComponent } from "./components/home/home.component";
 import { CatalogComponent } from "./components/catalog/catalog.component";
 import { ShoppingCartComponent } from "./components/cart/cart.component";
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from "./components/not-found/not-found.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     ShoppingCartComponent,
     NotFoundComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]
 })

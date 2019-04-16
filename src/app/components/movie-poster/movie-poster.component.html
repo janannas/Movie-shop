@@ -1,9 +1,8 @@
 <div>
-  <img class="posterFrame" src="{{ moviePoster }}" alt="Poster for movie" />
+  <img
+    class="posterFrame"
+    src="{{ moviePoster }}"
+    onerror="this.style.display='none'"
+    alt="Poster for movie"
+  />
 </div>
-
-<!-- Add to parentcomponent to use moviePoster: -->
-<!-- <app-movie-poster
-  *ngFor="let moviePoster of moviePosters"
-  [moviePoster]="moviePoster"
-></app-movie-poster> -->

@@ -1,11 +1,14 @@
 import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
 
 import { IMovie } from "../interfaces/IMovie";
+import { IMovieService } from "../interfaces/IMovieService";
+import { log } from "util";
 
 @Injectable({
   providedIn: "root"
 })
-export class MockMovieService {
+export class MockMovieService implements IMovieService {
   movies: IMovie[] = [
     {
       id: 76,
@@ -65,11 +68,7 @@ export class MockMovieService {
   ];
   constructor() {}
 
-  getMovieData(): IMovie[] {
-    return this.movies;
-  }
-
-  getMoviePosterData() {
-    return this.movies.map(obj => obj.imageUrl);
+  getMovieData(): Observable<IMovie[]> {
+    return of(this.movies);
   }
 }
