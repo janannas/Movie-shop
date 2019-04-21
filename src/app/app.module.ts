@@ -9,6 +9,7 @@ import { CatalogComponent } from "./components/catalog/catalog.component";
 import { ShoppingCartComponent } from "./components/cart/cart.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HttpClientModule } from "@angular/common/http";
+import { DetailsComponent } from "./components/details/details.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from "@angular/common/http";
     HomeComponent,
     CatalogComponent,
     ShoppingCartComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DetailsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

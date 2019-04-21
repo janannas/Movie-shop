@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+
 import { MovieService } from "src/app/services/movie.service";
+import { IMovie } from "../../interfaces/IMovie";
 
 @Component({
   selector: "app-catalog",
@@ -7,13 +9,14 @@ import { MovieService } from "src/app/services/movie.service";
   styleUrls: ["./catalog.component.css"]
 })
 export class CatalogComponent implements OnInit {
-  moviePosters: string[];
+  movies: IMovie[];
   errorMsg: string;
 
-  constructor(private dataService: MovieService) {
-    this.dataService.getMovieData().subscribe(
+  constructor(private service: MovieService) {
+    this.service.getMovieData().subscribe(
       myData => {
-        this.moviePosters = myData.map(obj => obj.imageUrl);
+        this.movies = myData;
+        //this.moviePosters = myData.map(obj => obj.imageUrl);
       },
       error => {
         this.errorMsg = error;

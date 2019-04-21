@@ -1,8 +1,10 @@
 <div>
-  <img
-    class="posterFrame"
-    src="{{ moviePoster }}"
-    onerror="this.style.display='none'"
-    alt="Poster for movie"
-  />
+  <a [routerLink]="['/catalog', movieId]">
+    <img
+      class="posterFrame"
+      src="{{ moviePoster }}"
+      onerror="this.style.display='none'"
+      alt="Poster for movie"
+    />
+  </a>
 </div>

@@ -1,8 +1,9 @@
 <div>
   <h3>{{ errorMsg }}</h3>
   <app-movie-poster
-    *ngFor="let moviePoster of moviePosters"
-    [moviePoster]="moviePoster"
+    *ngFor="let movie of movies"
+    [moviePoster]="movie.imageUrl"
+    [movieId]="movie.id"
   >
   </app-movie-poster>
 </div>

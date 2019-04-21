@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class MoviePosterComponent implements OnInit {
   @Input() moviePoster: string;
+  @Input() movieId: number;
   constructor() {}
 
   ngOnInit() {}
