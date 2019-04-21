@@ -1,4 +1,10 @@
-<p>
-  details works!
+<div>
   {{ movie | json }}
-</p>
+  <br />
+  <br />
+
+  <p *ngIf="movie">{{ movie.imageUrl }}</p>
+</div>
+<div *ngIf="movie">
+  <img src="{{ movie.imageUrl }}" alt="poster for this image" />
+</div>
