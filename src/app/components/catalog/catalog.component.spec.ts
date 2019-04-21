@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { RouterTestingModule } from "@angular/router/testing";
 import { MovieService } from "../../services/movie.service";
 import { MockMovieService } from "../../services/mock-movie.service";
 
@@ -12,6 +12,7 @@ describe("CatalogComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule.withRoutes([])],
       declarations: [CatalogComponent, MoviePosterComponent]
     })
       .overrideComponent(CatalogComponent, {
@@ -32,7 +33,7 @@ describe("CatalogComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should have length of 3", () => {
-    expect(component.moviePosters.length).toBe(3);
+  it("movies should have the length of 3", () => {
+    expect(component.movies.length).toBe(3);
   });
 });
