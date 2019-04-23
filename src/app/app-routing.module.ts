@@ -9,7 +9,7 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { DetailsComponent } from "./components/details/details.component";
 
 const routes: Routes = [
-  { path: "catalog/:id", component: DetailsComponent },
+  { path: "details/:id", component: DetailsComponent },
   { path: "catalog", component: CatalogComponent },
   { path: "shoppingCart", component: ShoppingCartComponent },
   { path: "", component: HomeComponent },
