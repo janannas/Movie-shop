@@ -17,15 +17,15 @@ export class DetailsComponent implements OnInit {
       this.movies = myData;
       this.route.paramMap.subscribe(myParams => {
         let id = myParams.get("id");
-        this.searchMovies(+id);
+        this.searchMovies(id);
       });
     });
   }
 
-  searchMovies(myId: number): void {
+  searchMovies(myId: string): void {
     for (let i = 0; i < this.movies.length; i++) {
       const elem = this.movies[i];
-      if (myId == elem.id) {
+      if (myId == String(elem.id)) {
         this.movie = elem;
       }
     }
