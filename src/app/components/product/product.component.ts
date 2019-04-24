@@ -10,7 +10,6 @@ import { CartService } from "src/app/services/cart.service";
 export class ProductComponent implements OnInit {
   @Input() movie: IMovie;
   @Input() moviePoster: string;
-  @Input() movieId: number;
 
   constructor(private cartService: CartService) {}
 
