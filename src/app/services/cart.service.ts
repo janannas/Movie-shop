@@ -8,9 +8,8 @@ export class CartService {
   cart: IMovie[] = [];
   constructor() {}
 
-  addToCart(myProduct: IMovie) {
+  addToCart(myProduct: IMovie): void {
     this.cart.push(myProduct);
-    console.log(this.cart);
   }
 
   getCart() {
