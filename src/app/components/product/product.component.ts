@@ -3,11 +3,11 @@ import { IMovie } from "src/app/interfaces/IMovie";
 import { CartService } from "src/app/services/cart.service";
 
 @Component({
-  selector: "app-movie-poster",
-  templateUrl: "./movie-poster.component.html",
-  styleUrls: ["./movie-poster.component.css"]
+  selector: "app-product",
+  templateUrl: "./product.component.html",
+  styleUrls: ["./product.component.css"]
 })
-export class MoviePosterComponent implements OnInit {
+export class ProductComponent implements OnInit {
   @Input() movie: IMovie;
   @Input() moviePoster: string;
   @Input() movieId: number;

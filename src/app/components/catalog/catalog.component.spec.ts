@@ -4,7 +4,7 @@ import { MovieService } from "../../services/movie.service";
 import { MockMovieService } from "../../services/mock-movie.service";
 
 import { CatalogComponent } from "./catalog.component";
-import { MoviePosterComponent } from "../movie-poster/movie-poster.component";
+import { MoviePosterComponent } from "../product/product.component";
 
 describe("CatalogComponent", () => {
   let component: CatalogComponent;

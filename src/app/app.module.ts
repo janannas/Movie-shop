@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
-import { MoviePosterComponent } from "./components/movie-poster/movie-poster.component";
+import { ProductComponent } from "./components/product/product.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HomeComponent } from "./components/home/home.component";
 import { CatalogComponent } from "./components/catalog/catalog.component";
@@ -14,7 +14,7 @@ import { DetailsComponent } from "./components/details/details.component";
 @NgModule({
   declarations: [
     AppComponent,
-    MoviePosterComponent,
+    ProductComponent,
     HomeComponent,
     CatalogComponent,
     ShoppingCartComponent,

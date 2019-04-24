@@ -3,7 +3,7 @@ import { AppComponent } from "./app.component";
 import { RouterTestingModule } from "@angular/router/testing";
 
 import { CatalogComponent } from "./components/catalog/catalog.component";
-import { MoviePosterComponent } from "./components/movie-poster/movie-poster.component";
+import { ProductComponent } from "./components/product/product.component";
 import { DetailsComponent } from "./components/details/details.component";
 
 describe("AppComponent", () => {
@@ -13,7 +13,7 @@ describe("AppComponent", () => {
       declarations: [
         AppComponent,
         CatalogComponent,
-        MoviePosterComponent,
+        ProductComponent,
         DetailsComponent
       ]
     }).compileComponents();
