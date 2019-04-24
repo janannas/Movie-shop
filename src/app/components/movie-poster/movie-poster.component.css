@@ -8,3 +8,9 @@ img {
   max-width: 100%;
   min-height: 100%;
 }
+.buy-button {
+  height: 40px;
+  width: 80px;
+  background-color: green;
+  color: palevioletred;
+}

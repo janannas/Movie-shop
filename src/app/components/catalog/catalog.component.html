@@ -2,6 +2,7 @@
   <h3>{{ errorMsg }}</h3>
   <app-movie-poster
     *ngFor="let movie of movies"
+    [movie]="movie"
     [moviePoster]="movie.imageUrl"
     [movieId]="movie.id"
   >
