@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { CartComponent } from "./cart.component";
+import { BillingFormComponent } from "../billing-form/billing-form.component";
 
 describe("CartComponent", () => {
   let component: CartComponent;
@@ -10,7 +11,8 @@ describe("CartComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CartComponent]
+      imports: [FormsModule, ReactiveFormsModule, HttpClientTestingModule],
+      declarations: [CartComponent, BillingFormComponent]
     }).compileComponents();
   }));
 
