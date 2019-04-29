@@ -7,7 +7,7 @@ import { IMovie } from "src/app/interfaces/IMovie";
   templateUrl: "./cart.component.html",
   styleUrls: ["./cart.component.css"]
 })
-export class ShoppingCartComponent implements OnInit {
+export class CartComponent implements OnInit {
   cart: IMovie[];
   constructor(private cartService: CartService) {}
 

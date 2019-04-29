@@ -6,7 +6,7 @@ import { ProductComponent } from "./components/product/product.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HomeComponent } from "./components/home/home.component";
 import { CatalogComponent } from "./components/catalog/catalog.component";
-import { ShoppingCartComponent } from "./components/cart/cart.component";
+import { CartComponent } from "./components/cart/cart.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HttpClientModule } from "@angular/common/http";
 import { DetailsComponent } from "./components/details/details.component";
@@ -17,7 +17,7 @@ import { DetailsComponent } from "./components/details/details.component";
     ProductComponent,
     HomeComponent,
     CatalogComponent,
-    ShoppingCartComponent,
+    CartComponent,
     NotFoundComponent,
     DetailsComponent
   ],
