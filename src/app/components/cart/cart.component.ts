@@ -9,16 +9,14 @@ import { IMovie } from "src/app/interfaces/IMovie";
 })
 export class ShoppingCartComponent implements OnInit {
   cart: IMovie[];
-  constructor(private movieService: MovieService) {}
-
-  ngOnInit() {
+  totalProducts: number = 0;
+  constructor(private movieService: MovieService) {
     this.cart = this.movieService.getProductsFromCart();
-    console.log(this.cart);
   }
 
-  totalProducts() {
-    /*  return this.products.reduce((sum, product) => {
-      return sum + product.quantity
-    }, 0); */
+  ngOnInit() {
+    for (let i = 0; i < this.cart.length; i++) {
+      this.totalProducts += this.cart[i].price;
+    }
   }
 }

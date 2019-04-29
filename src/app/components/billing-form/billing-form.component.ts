@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -16,6 +16,7 @@ import { IBillingForm } from "src/app/interfaces/IBillingForm";
   styleUrls: ["./billing-form.component.css"]
 })
 export class BillingFormComponent implements OnInit {
+  @Input() totalProducts: number;
   billingForm: FormGroup;
   paymentMethods: string[] = ["Visa", "MasterCard", "Paypal", "Invoice"];
 
@@ -47,7 +48,7 @@ export class BillingFormComponent implements OnInit {
         .format("YYYY-MM-DDTLTS"),
       createdBy: this.email.value,
       paymentMethod: this.paymentMethod.value,
-      totalPrice: 0,
+      totalPrice: this.totalProducts,
       status: 0,
       orderRows: []
     };
