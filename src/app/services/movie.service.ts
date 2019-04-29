@@ -9,11 +9,16 @@ import { HttpErrorResponse } from "@angular/common/http";
 
 import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
+import { IBillingForm } from "../interfaces/IBillingForm";
 
 @Injectable({
   providedIn: "root"
 })
 export class MovieService implements IMovieService {
+  cart: IMovie[] = [];
+  orderUrl: string =
+    "https://medieinstitutet-wie-products.azurewebsites.net/api/orders";
+
   constructor(private http: HttpClient) {}
 
   getMovieData(): Observable<IMovie[]> {
@@ -25,6 +30,19 @@ export class MovieService implements IMovieService {
         retry(3),
         catchError(this.handleError)
       );
+  }
+
+  addProductToCart(myProduct: IMovie): void {
+    this.cart.push(myProduct);
+  }
+
+  getProductsFromCart() {
+    return this.cart;
+  }
+
+  sendOrder(billingData: IBillingForm): Observable<IBillingForm> {
+    console.log(billingData);
+    return this.http.post<IBillingForm>(this.orderUrl, billingData);
   }
 
   handleError(error: HttpErrorResponse) {

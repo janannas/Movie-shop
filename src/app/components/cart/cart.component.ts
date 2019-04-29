@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CartService } from "src/app/services/cart.service";
+import { MovieService } from "src/app/services/movie.service";
 import { IMovie } from "src/app/interfaces/IMovie";
 
 @Component({
@@ -9,10 +9,14 @@ import { IMovie } from "src/app/interfaces/IMovie";
 })
 export class CartComponent implements OnInit {
   cart: IMovie[];
-  constructor(private cartService: CartService) {}
+  totalProducts: number = 0;
+  constructor(private movieService: MovieService) {
+    this.cart = this.movieService.getProductsFromCart();
+  }
 
   ngOnInit() {
-    this.cart = this.cartService.getCart();
-    console.log(this.cart);
+    for (let i = 0; i < this.cart.length; i++) {
+      this.totalProducts += this.cart[i].price;
+    }
   }
 }

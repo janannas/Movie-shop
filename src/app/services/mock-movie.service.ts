@@ -3,7 +3,7 @@ import { Observable, of } from "rxjs";
 
 import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
-import { log } from "util";
+import { IBillingForm } from "../interfaces/IBillingForm";
 
 @Injectable({
   providedIn: "root"
@@ -66,9 +66,23 @@ export class MockMovieService implements IMovieService {
       ]
     }
   ];
+  cart: IMovie[] = [];
+
   constructor() {}
 
   getMovieData(): Observable<IMovie[]> {
     return of(this.movies);
+  }
+
+  addProductToCart(myProduct: IMovie): void {
+    this.cart.push(myProduct);
+  }
+
+  getProductsFromCart(): IMovie[] {
+    return this.cart;
+  }
+
+  sendOrder(billingData: IBillingForm): Observable<IBillingForm> {
+    return of(billingData);
   }
 }

@@ -1,3 +1,7 @@
 <p>
   {{ cart | json }}
 </p>
+<p>
+  {{ totalProducts }}
+</p>
+<app-billing-form [totalProducts]="totalProducts"></app-billing-form>

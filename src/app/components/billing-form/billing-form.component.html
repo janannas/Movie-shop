@@ -1,0 +1,118 @@
+<form [formGroup]="billingForm" (ngSubmit)="handleOrder()">
+  <div>
+    <label>Firstname: </label>
+    <input
+      type="text"
+      formControlName="firstName"
+      [class.invalid]="firstName.invalid && firstName.touched"
+    />
+    <div>
+      <small *ngIf="firstName.invalid && firstName.touched">
+        Firstname is required
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label>Lastname: </label>
+    <input
+      type="text"
+      formControlName="lastName"
+      [class.invalid]="lastName.invalid && lastName.touched"
+    />
+    <div>
+      <small *ngIf="lastName.invalid && lastName.touched">
+        Lastname is required
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label>Email: </label>
+    <input
+      type="email"
+      formControlName="email"
+      [class.invalid]="email.invalid && email.touched"
+    />
+    <div>
+      <small *ngIf="email.invalid && email.touched">
+        Please provide a real email-address
+      </small>
+    </div>
+  </div>
+
+  <div formGroupName="address">
+    <div>
+      <label>Address: </label>
+      <input type="text" formControlName="addressLine" />
+
+      <div>
+        <small *ngIf="addressLine.invalid && addressLine.touched">
+          Address is required
+        </small>
+      </div>
+    </div>
+
+    <div>
+      <label>Postal code: </label>
+      <input type="text" formControlName="postalCode" />
+
+      <div *ngIf="postalCode.invalid && postalCode.touched">
+        <small *ngIf="postalCode.errors?.required">
+          Postal code is required
+        </small>
+        <small *ngIf="postalCode.errors?.pattern">
+          Postal code must be numbers
+        </small>
+      </div>
+    </div>
+
+    <div>
+      <label>City/Town: </label>
+      <input type="text" formControlName="city" />
+
+      <div>
+        <small *ngIf="city.invalid && city.touched">
+          City is required
+        </small>
+      </div>
+    </div>
+
+    <div>
+      <label>Country: </label>
+      <input type="text" formControlName="country" />
+
+      <div>
+        <small *ngIf="country.invalid && country.touched">
+          Country is required
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label>Payment Method: </label>
+    <select
+      type="select"
+      formControlName="paymentMethod"
+      [class.invalid]="paymentMethod.invalid && paymentMethod.touched"
+    >
+      <option value="" selected>Please select:</option>
+      <option *ngFor="let paymentMethod of paymentMethods">
+        {{ paymentMethod }}
+      </option>
+    </select>
+
+    <div>
+      <small *ngIf="paymentMethod.invalid && paymentMethod.touched">
+        Please choose a Payment Method
+      </small>
+    </div>
+  </div>
+
+  <button [disabled]="!billingForm.valid" type="submit">
+    Submit
+  </button>
+</form>
+
+<p>{{ billingForm.value | json }}</p>
