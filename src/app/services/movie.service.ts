@@ -33,10 +33,14 @@ export class MovieService implements IMovieService {
   }
 
   addProductToCart(myProduct: IMovie): void {
-    this.cart.push(myProduct);
+    if (this.cart.includes(myProduct)) {
+      return;
+    } else {
+      this.cart.push(myProduct);
+    }
   }
 
-  getProductsFromCart() {
+  getProductsFromCart(): IMovie[] {
     return this.cart;
   }
 
