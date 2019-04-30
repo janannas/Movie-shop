@@ -16,8 +16,6 @@ import { IBillingForm } from "../interfaces/IBillingForm";
 })
 export class MovieService implements IMovieService {
   cart: IMovie[] = [];
-  orderUrl: string =
-    "https://medieinstitutet-wie-products.azurewebsites.net/api/orders";
 
   constructor(private http: HttpClient) {}
 
@@ -45,8 +43,13 @@ export class MovieService implements IMovieService {
   }
 
   sendOrder(billingData: IBillingForm): Observable<IBillingForm> {
-    console.log(billingData);
-    return this.http.post<IBillingForm>(this.orderUrl, billingData);
+    const orderUrl: string =
+      "https://medieinstitutet-wie-products.azurewebsites.net/api/orders";
+
+    return this.http.post<IBillingForm>(orderUrl, billingData).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
   }
 
   handleError(error: HttpErrorResponse) {

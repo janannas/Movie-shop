@@ -19,6 +19,7 @@ export class BillingFormComponent implements OnInit {
   @Input() totalProducts: number;
   billingForm: FormGroup;
   paymentMethods: string[] = ["Visa", "MasterCard", "Paypal", "Invoice"];
+  errorMsg: string;
 
   constructor(private fb: FormBuilder, private movieService: MovieService) {}
 
@@ -63,11 +64,11 @@ export class BillingFormComponent implements OnInit {
     look more real
     */
 
-    /*  this.movieService
-      .sendOrder(this.billingObject())
+    /* this.movieService
+      .sendOrder(this.getBillingObject())
       .subscribe(
         response => console.log("success", response),
-        error => console.log("error", error)
+        error => (this.errorMsg = error)
       ); */
   }
 
