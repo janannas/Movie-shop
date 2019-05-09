@@ -16,4 +16,4 @@
 
 <hr />
 
-<app-billing-form [totalProducts]="totalProducts"></app-billing-form>
+<app-billing-form (rawForm)="handleForm($event)"></app-billing-form>

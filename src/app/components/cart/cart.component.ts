@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
+import * as moment from "moment";
+import { IBillingForm } from "src/app/interfaces/IBillingForm";
 import { MovieService } from "src/app/services/movie.service";
 import { IMovie } from "src/app/interfaces/IMovie";
+import { IFakeForm } from "src/app/interfaces/IFakeForm";
 
 @Component({
   selector: "app-cart",
@@ -20,6 +23,33 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.calulateTotalProducts();
     this.checkPlural();
+  }
+
+  getBillingObject(form: IFakeForm): IBillingForm {
+    return {
+      companyId: 9,
+      created: moment()
+        .locale("sv")
+        .format("YYYY-MM-DDTLTS"),
+      createdBy: form.email,
+      paymentMethod: form.paymentMethod,
+      totalPrice: this.totalProducts,
+      status: 0,
+      orderRows: []
+    };
+  }
+
+  handleForm(fakeForm: IFakeForm) {
+    console.log(fakeForm);
+    const finalForm = this.getBillingObject(fakeForm);
+    console.log(finalForm);
+
+    /* this.movieService
+.sendOrder(this.getBillingObject())
+.subscribe(
+  response => console.log("success", response),
+  error => (this.errorMsg = error)
+); */
   }
 
   checkPlural() {

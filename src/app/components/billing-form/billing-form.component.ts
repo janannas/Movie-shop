@@ -1,14 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormControl
 } from "@angular/forms";
-import * as moment from "moment";
-
-import { MovieService } from "../../services/movie.service";
-import { IBillingForm } from "src/app/interfaces/IBillingForm";
 
 @Component({
   selector: "app-billing-form",
@@ -16,14 +12,15 @@ import { IBillingForm } from "src/app/interfaces/IBillingForm";
   styleUrls: ["./billing-form.component.css"]
 })
 export class BillingFormComponent implements OnInit {
-  @Input() totalProducts: number;
+  @Output() public rawForm = new EventEmitter<FormGroup>();
   billingForm: FormGroup;
   paymentMethods: string[] = ["Visa", "MasterCard", "Paypal", "Invoice"];
   errorMsg: string;
 
-  constructor(private fb: FormBuilder, private movieService: MovieService) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    //This form contains "fake" form controls in order to look more real
     this.billingForm = this.fb.group({
       firstName: ["Johanna", Validators.required],
       lastName: ["Hellsjo", Validators.required],
@@ -41,35 +38,8 @@ export class BillingFormComponent implements OnInit {
     });
   }
 
-  getBillingObject(): IBillingForm {
-    return {
-      companyId: 9,
-      created: moment()
-        .locale("sv")
-        .format("YYYY-MM-DDTLTS"),
-      createdBy: this.email.value,
-      paymentMethod: this.paymentMethod.value,
-      totalPrice: this.totalProducts,
-      status: 0,
-      orderRows: []
-    };
-  }
-
   handleOrder() {
-    console.log(this.getBillingObject());
-
-    /*
-    The billingObject-func returns the correct billingdata that is requred for
-    the API. The form in template contains "fake" form controls in order to
-    look more real
-    */
-
-    /* this.movieService
-      .sendOrder(this.getBillingObject())
-      .subscribe(
-        response => console.log("success", response),
-        error => (this.errorMsg = error)
-      ); */
+    this.rawForm.emit(this.billingForm.value);
   }
 
   get firstName() {
