@@ -12,6 +12,7 @@ import { BillingFormComponent } from "../billing-form/billing-form.component";
 describe("CartComponent", () => {
   let component: CartComponent;
   let fixture: ComponentFixture<CartComponent>;
+
   const mockProduct = {
     id: 79,
     name: "Modern Times",
@@ -74,16 +75,17 @@ describe("CartComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should calculate total sum of products", () => {
+  it("should create rows", () => {
     const service: MockMovieService = TestBed.get(MockMovieService);
-    expect(component.totalProducts).toEqual(0);
+
     service.addProductToCart(mockProduct);
     component.cart = service.getProductsFromCart();
-    component.calulateTotalProducts();
-    expect(component.totalProducts).toEqual(100);
+
+    component.createOrderRows();
+    expect(component.orderRows[0].amount).toBe(1);
   });
 
-  it("checkPlural should evaluate to true if there are products in cart", () => {
+  it("should evaluate to true if there are serveral products in cart", () => {
     const service: MockMovieService = TestBed.get(MockMovieService);
     expect(component.plural).toEqual(false);
 

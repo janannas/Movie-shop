@@ -1,13 +1,11 @@
-interface IOrderRows {
-  productId: number;
-  amount: number;
-}
+import { IOrderRows } from "./IOrderRows";
+
 export interface IBillingForm {
   companyId: number;
   created: string;
   createdBy: string;
   paymentMethod: string;
-  totalPrice: number;
+  totalPrice: Function;
   status: number;
   orderRows: IOrderRows[];
 }

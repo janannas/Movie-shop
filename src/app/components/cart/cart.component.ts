@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
 import * as moment from "moment";
-import { IBillingForm } from "src/app/interfaces/IBillingForm";
 import { MovieService } from "src/app/services/movie.service";
 import { IMovie } from "src/app/interfaces/IMovie";
 import { IFakeForm } from "src/app/interfaces/IFakeForm";
+import { IOrderRows } from "src/app/interfaces/IOrderRows";
 
 @Component({
   selector: "app-cart",
@@ -15,17 +15,34 @@ export class CartComponent implements OnInit {
   cart: IMovie[];
   totalProducts: number = 0;
   plural: boolean = false;
+  quantity = 1;
+  orderRows: IOrderRows[] = [];
 
   constructor(private movieService: MovieService) {
     this.cart = this.movieService.getProductsFromCart();
   }
 
   ngOnInit() {
-    this.calulateTotalProducts();
     this.checkPlural();
+
+    this.createOrderRows();
   }
 
-  getBillingObject(form: IFakeForm): IBillingForm {
+  createOrderRows() {
+    for (let i = 0; i < this.cart.length; i++) {
+      this.orderRows.push({ productId: this.cart[i].id, amount: 1 });
+    }
+  }
+
+  updateQuantity(amount: number, id: number) {
+    for (const row of this.orderRows) {
+      if (row.productId == id) {
+        row.amount = +amount;
+      }
+    }
+  }
+
+  getBillingObject(form: IFakeForm) {
     return {
       companyId: 9,
       created: moment()
@@ -35,21 +52,20 @@ export class CartComponent implements OnInit {
       paymentMethod: form.paymentMethod,
       totalPrice: this.totalProducts,
       status: 0,
-      orderRows: []
+      orderRows: this.orderRows
     };
   }
 
   handleForm(fakeForm: IFakeForm) {
-    console.log(fakeForm);
     const finalForm = this.getBillingObject(fakeForm);
     console.log(finalForm);
 
     /* this.movieService
-.sendOrder(this.getBillingObject())
-.subscribe(
-  response => console.log("success", response),
-  error => (this.errorMsg = error)
-); */
+      .sendOrder(finalForm)
+      .subscribe(
+        response => console.log("success", response),
+        error => console.log("error", error)
+      ); */
   }
 
   checkPlural() {
@@ -58,9 +74,13 @@ export class CartComponent implements OnInit {
     }
   }
 
-  calulateTotalProducts(): void {
+  calculateTotalProducts() {
+    //TODO:
+    this.totalProducts = 0;
     for (let i = 0; i < this.cart.length; i++) {
-      this.totalProducts += this.cart[i].price;
+      this.totalProducts += this.cart[i].price *= this.orderRows[i].amount;
     }
+
+    return this.totalProducts;
   }
 }

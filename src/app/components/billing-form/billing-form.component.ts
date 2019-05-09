@@ -15,7 +15,6 @@ export class BillingFormComponent implements OnInit {
   @Output() public rawForm = new EventEmitter<FormGroup>();
   billingForm: FormGroup;
   paymentMethods: string[] = ["Visa", "MasterCard", "Paypal", "Invoice"];
-  errorMsg: string;
 
   constructor(private fb: FormBuilder) {}
 
