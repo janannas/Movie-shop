@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+
 import { MovieService } from "src/app/services/movie.service";
 import { IMovie } from "src/app/interfaces/IMovie";
 
@@ -10,6 +11,7 @@ import { IMovie } from "src/app/interfaces/IMovie";
 export class CartComponent implements OnInit {
   cart: IMovie[];
   totalProducts: number = 0;
+  plural: boolean = false;
 
   constructor(private movieService: MovieService) {
     this.cart = this.movieService.getProductsFromCart();
@@ -17,6 +19,13 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.calulateTotalProducts();
+    this.checkPlural();
+  }
+
+  checkPlural() {
+    if (this.cart.length > 1) {
+      this.plural = true;
+    }
   }
 
   calulateTotalProducts(): void {

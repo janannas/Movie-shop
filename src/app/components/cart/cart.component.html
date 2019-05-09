@@ -4,4 +4,16 @@
 <p>
   {{ totalProducts }}
 </p>
+
+<div>
+  <h1 *ngIf="!plural">Overview Cart ({{ cart.length }} product)</h1>
+  <h1 *ngIf="plural">Overview Cart ({{ cart.length }} products)</h1>
+
+  <div *ngFor="let product of cart; let i = index">
+    <p>{{ product.name }}</p>
+  </div>
+</div>
+
+<hr />
+
 <app-billing-form [totalProducts]="totalProducts"></app-billing-form>
