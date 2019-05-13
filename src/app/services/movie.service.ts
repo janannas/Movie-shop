@@ -10,6 +10,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
 import { IBillingForm } from "../interfaces/IBillingForm";
+import { ICategory } from "../interfaces/ICategory";
 
 @Injectable({
   providedIn: "root"
@@ -23,6 +24,17 @@ export class MovieService implements IMovieService {
     return this.http
       .get<IMovie[]>(
         "https://medieinstitutet-wie-products.azurewebsites.net/api/products"
+      )
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
+
+  getCategoryData(): Observable<ICategory[]> {
+    return this.http
+      .get<ICategory[]>(
+        "https://medieinstitutet-wie-products.azurewebsites.net/api/categories"
       )
       .pipe(
         retry(3),

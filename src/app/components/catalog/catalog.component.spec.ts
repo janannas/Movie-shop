@@ -37,4 +37,9 @@ describe("CatalogComponent", () => {
   it("movies should have the length of 3", () => {
     expect(component.movies.length).toBe(3);
   });
+
+  it("should display correct category", () => {
+    const testMovieCategory = component.movies[1].productCategory[0].category;
+    expect(testMovieCategory).toEqual("Sci-fi");
+  });
 });

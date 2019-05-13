@@ -4,6 +4,7 @@ import { Observable, of } from "rxjs";
 import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
 import { IBillingForm } from "../interfaces/IBillingForm";
+import { ICategory } from "../interfaces/ICategory";
 
 @Injectable({
   providedIn: "root"
@@ -67,11 +68,33 @@ export class MockMovieService implements IMovieService {
     }
   ];
   cart: IMovie[] = [];
+  categories: ICategory[] = [
+    {
+      id: 5,
+      name: "Action"
+    },
+    {
+      id: 6,
+      name: "Thriller"
+    },
+    {
+      id: 7,
+      name: "Comedy"
+    },
+    {
+      id: 8,
+      name: "Sci-fi"
+    }
+  ];
 
   constructor() {}
 
   getMovieData(): Observable<IMovie[]> {
     return of(this.movies);
+  }
+
+  getCategoryData(): Observable<ICategory[]> {
+    return of(this.categories);
   }
 
   addProductToCart(myProduct: IMovie): void {
