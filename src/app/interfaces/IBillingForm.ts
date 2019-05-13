@@ -5,7 +5,7 @@ export interface IBillingForm {
   created: string;
   createdBy: string;
   paymentMethod: string;
-  totalPrice: Function;
+  totalPrice: number;
   status: number;
   orderRows: IOrderRows[];
 }

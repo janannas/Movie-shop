@@ -5,6 +5,7 @@ import { MovieService } from "src/app/services/movie.service";
 import { IMovie } from "src/app/interfaces/IMovie";
 import { IFakeForm } from "src/app/interfaces/IFakeForm";
 import { IOrderRows } from "src/app/interfaces/IOrderRows";
+import { IBillingForm } from "src/app/interfaces/IBillingForm";
 
 @Component({
   selector: "app-cart",
@@ -24,8 +25,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.checkPlural();
-
     this.createOrderRows();
+    this.calculateTotalProducts();
   }
 
   createOrderRows() {
@@ -40,9 +41,10 @@ export class CartComponent implements OnInit {
         row.amount = +amount;
       }
     }
+    this.calculateTotalProducts();
   }
 
-  getBillingObject(form: IFakeForm) {
+  getBillingObject(form: IFakeForm): IBillingForm {
     return {
       companyId: 9,
       created: moment()
@@ -50,7 +52,7 @@ export class CartComponent implements OnInit {
         .format("YYYY-MM-DDTLTS"),
       createdBy: form.email,
       paymentMethod: form.paymentMethod,
-      totalPrice: this.totalProducts,
+      totalPrice: 123, //this.totalProducts
       status: 0,
       orderRows: this.orderRows
     };
@@ -78,9 +80,8 @@ export class CartComponent implements OnInit {
     //TODO:
     this.totalProducts = 0;
     for (let i = 0; i < this.cart.length; i++) {
-      this.totalProducts += this.cart[i].price *= this.orderRows[i].amount;
+      this.totalProducts += this.cart[i].price * this.orderRows[i].amount;
     }
-
-    return this.totalProducts;
+    this.totalProducts;
   }
 }
