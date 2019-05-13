@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
+import { ActivatedRoute } from "@angular/router";
+import { ActivatedRouteStub } from "src/app/testing/activated-route-stub";
 
 import { MovieService } from "../../services/movie.service";
 import { MockMovieService } from "../../services/mock-movie.service";
@@ -10,9 +12,12 @@ describe("DetailsComponent", () => {
   let component: DetailsComponent;
   let fixture: ComponentFixture<DetailsComponent>;
 
+  const activatedRoute = new ActivatedRouteStub({ id: "76" });
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
+      providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
       declarations: [DetailsComponent]
     })
       .overrideComponent(DetailsComponent, {
@@ -62,8 +67,7 @@ describe("DetailsComponent", () => {
   });
 
   it("searchMovies should return the the correct id", () => {
-    expect(component.movie).toBeUndefined();
-    component.searchMovies("77");
+    component.searchMovies(77);
     expect(component.movie.id).toBe(77);
   });
 });

@@ -10,23 +10,31 @@ import { IMovie } from "../../interfaces/IMovie";
 })
 export class DetailsComponent implements OnInit {
   movies: IMovie[];
-  movie: IMovie;
+  movie: IMovie = {
+    id: 0,
+    name: "",
+    description: "",
+    price: 0,
+    imageUrl: "",
+    year: 0,
+    added: "",
+    productCategory: []
+  };
 
   constructor(private route: ActivatedRoute, private service: MovieService) {
     this.service.getMovieData().subscribe(myData => {
       this.movies = myData;
       this.route.paramMap.subscribe(myParams => {
-        let id = myParams.get("id");
+        const id = +myParams.get("id");
         this.searchMovies(id);
       });
     });
   }
 
-  searchMovies(myId: string): void {
+  searchMovies(myId: number): void {
     for (let i = 0; i < this.movies.length; i++) {
-      const elem = this.movies[i];
-      if (myId == String(elem.id)) {
-        this.movie = elem;
+      if (myId === this.movies[i].id) {
+        this.movie = this.movies[i];
       }
     }
   }

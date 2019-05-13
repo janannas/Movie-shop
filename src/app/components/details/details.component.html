@@ -3,8 +3,8 @@
   <br />
   <br />
 
-  <p *ngIf="movie">{{ movie.imageUrl }}</p>
+  <p>{{ movie.imageUrl }}</p>
 </div>
 <div *ngIf="movie">
-  <img src="{{ movie.imageUrl }}" alt="poster for this image" />
+  <img src="{{ movie.imageUrl }}" alt="poster for {{ movie.name }}" />
 </div>
