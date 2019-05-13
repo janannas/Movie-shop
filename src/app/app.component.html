@@ -5,9 +5,20 @@
     [routerLinkActiveOptions]="{ exact: true }"
     >Home</a
   >
-  <input type="text" />
+
+  <input
+    type="text"
+    name="search"
+    [(ngModel)]="search"
+    (keyUp.enter)="handleSearch(search); search = ''"
+  />
+  <button (click)="handleSearch(search); search = ''">
+    Search
+  </button>
+
   <a routerLink="/catalog" routerLinkActive="linkActive">View Shop</a>
   <a routerLink="/cart" routerLinkActive="linkActive">View Cart</a>
   <a routerLink="/contact" routerLinkActive="linkActive">Contact</a>
 </nav>
+
 <router-outlet></router-outlet>

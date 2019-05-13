@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 import { catchError, retry } from "rxjs/operators";
 import { throwError } from "rxjs";
@@ -17,6 +17,7 @@ import { ICategory } from "../interfaces/ICategory";
 })
 export class MovieService implements IMovieService {
   cart: IMovie[] = [];
+  searchResults = new Subject<any>();
 
   constructor(private http: HttpClient) {}
 
@@ -40,6 +41,22 @@ export class MovieService implements IMovieService {
         retry(3),
         catchError(this.handleError)
       );
+  }
+
+  getSearchResults(): Observable<any> {
+    return this.searchResults.asObservable();
+  }
+
+  searchMovies(searchText: string): void {
+    this.http
+      .get(
+        `https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=${searchText}`
+      )
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      )
+      .subscribe(results => this.searchResults.next(results));
   }
 
   addProductToCart(myProduct: IMovie): void {

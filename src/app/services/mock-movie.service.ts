@@ -97,6 +97,10 @@ export class MockMovieService implements IMovieService {
     return of(this.categories);
   }
 
+  getSearchResults(): Observable<any> {
+    return of(this.movies[1]);
+  }
+
   addProductToCart(myProduct: IMovie): void {
     if (this.cart.includes(myProduct)) {
       return;

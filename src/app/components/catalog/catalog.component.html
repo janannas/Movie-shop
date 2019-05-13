@@ -1,5 +1,16 @@
+<div *ngIf="noSearchResults">SRY, no result</div>
+
 <div>
-  <h3>{{ errorMsg }}</h3>
+  <app-product
+    *ngFor="let movie of searchResults"
+    [movie]="movie"
+    [moviePoster]="movie.imageUrl"
+    [movieId]="movie.id"
+  >
+  </app-product>
+</div>
+
+<div>
   <app-product
     *ngFor="let movie of movies"
     [movie]="movie"
