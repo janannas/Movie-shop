@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
   @Input() moviePoster: string;
   @Input() movieId: number;
 
-  constructor(private MovieService: MovieService) {}
+  constructor(public MovieService: MovieService) {}
 
   ngOnInit() {}
 

@@ -5,15 +5,20 @@ import { MovieService } from "src/app/services/movie.service";
 import { MockMovieService } from "src/app/services/mock-movie.service";
 
 import { ProductComponent } from "./product.component";
+import { Component } from "@angular/core";
+import { IMovie } from "src/app/interfaces/IMovie";
 
 describe("ProductComponent", () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
 
+  let testHostComponent: TestHostComponent;
+  let testHostFixture: ComponentFixture<TestHostComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
-      declarations: [ProductComponent]
+      declarations: [ProductComponent, TestHostComponent]
     })
       .overrideComponent(ProductComponent, {
         set: {
@@ -27,9 +32,61 @@ describe("ProductComponent", () => {
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    testHostFixture = TestBed.createComponent(TestHostComponent);
+    testHostComponent = testHostFixture.componentInstance;
+    testHostFixture.detectChanges();
   });
 
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it("should create", () => {
+    expect(testHostComponent).toBeTruthy();
+  });
+
+  it("should get path for movie poster", () => {
+    expect(
+      testHostFixture.nativeElement.querySelector("img").getAttribute("src")
+    ).toEqual(
+      "https://images-na.ssl-images-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg"
+    );
+  });
+
+  it("should call addProductToCart", async(() => {
+    spyOn(component.MovieService, "addProductToCart");
+
+    let button = fixture.debugElement.nativeElement.querySelector("button");
+    button.click();
+
+    fixture.whenStable().then(() => {
+      expect(component.MovieService.addProductToCart).toHaveBeenCalled();
+    });
+  }));
+
+  @Component({
+    selector: `host-component`,
+    template: `
+      <app-product
+        *ngFor="let movie of movies"
+        [movie]="movie"
+        [moviePoster]="movie.imageUrl"
+      ></app-product>
+    `
+  })
+  class TestHostComponent {
+    movies: IMovie[];
+
+    constructor(private service: MockMovieService) {
+      this.service.getMovieData().subscribe(
+        myData => {
+          this.movies = myData;
+        },
+        error => {
+          console.log("error: " + error);
+        }
+      );
+    }
+  }
 });
