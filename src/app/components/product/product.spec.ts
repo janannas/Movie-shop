@@ -65,6 +65,14 @@ describe("ProductComponent", () => {
     });
   }));
 
+  it("should display correct category", () => {
+    let link = testHostFixture.nativeElement
+      .querySelectorAll("a")[1]
+      .querySelector("p");
+
+    expect(link.innerHTML).toContain("Action");
+  });
+
   @Component({
     selector: `host-component`,
     template: `
@@ -72,21 +80,25 @@ describe("ProductComponent", () => {
         *ngFor="let movie of movies"
         [movie]="movie"
         [moviePoster]="movie.imageUrl"
+        [categories]="movie.productCategory"
       ></app-product>
     `
   })
   class TestHostComponent {
     movies: IMovie[];
+    category = { id: 5, name: "Action" };
 
     constructor(private service: MockMovieService) {
-      this.service.getMovieData().subscribe(
-        myData => {
-          this.movies = myData;
-        },
-        error => {
-          console.log("error: " + error);
+      this.service.getMovieData().subscribe(myMovieData => {
+        this.movies = myMovieData;
+
+        for (const movie of this.movies) {
+          const firstMovie = movie.productCategory[0];
+          if (firstMovie.categoryId === this.category.id) {
+            firstMovie.category = this.category.name;
+          }
         }
-      );
+      });
     }
   }
 });
