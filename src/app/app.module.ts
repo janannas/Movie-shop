@@ -11,9 +11,9 @@ import { HomeComponent } from "./components/home/home.component";
 import { CatalogComponent } from "./components/catalog/catalog.component";
 import { CartComponent } from "./components/cart/cart.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { DetailsComponent } from "./components/details/details.component";
+import { ProductDetailsComponent } from "./components/product-details/product-details.component";
 import { BillingFormComponent } from "./components/billing-form/billing-form.component";
-import { CategoryDetailsComponent } from './components/category-details/category-details.component';
+import { CategoryDetailsComponent } from "./components/category-details/category-details.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { CategoryDetailsComponent } from './components/category-details/category
     CatalogComponent,
     CartComponent,
     NotFoundComponent,
-    DetailsComponent,
+    ProductDetailsComponent,
     BillingFormComponent,
     CategoryDetailsComponent
   ],

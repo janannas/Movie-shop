@@ -4,11 +4,11 @@ import { MovieService } from "../../services/movie.service";
 import { IMovie } from "../../interfaces/IMovie";
 
 @Component({
-  selector: "app-details",
-  templateUrl: "./details.component.html",
-  styleUrls: ["./details.component.css"]
+  selector: "app-product-details",
+  templateUrl: "./product-details.component.html",
+  styleUrls: ["./product-details.component.css"]
 })
-export class DetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit {
   movies: IMovie[];
   movie: IMovie = {
     id: 0,

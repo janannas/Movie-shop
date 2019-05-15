@@ -6,11 +6,11 @@ import { ActivatedRouteStub } from "src/app/testing/activated-route-stub";
 import { MovieService } from "../../services/movie.service";
 import { MockMovieService } from "../../services/mock-movie.service";
 
-import { DetailsComponent } from "./details.component";
+import { ProductDetailsComponent } from "./product-details.component";
 
-describe("DetailsComponent", () => {
-  let component: DetailsComponent;
-  let fixture: ComponentFixture<DetailsComponent>;
+describe("ProductDetailsComponent", () => {
+  let component: ProductDetailsComponent;
+  let fixture: ComponentFixture<ProductDetailsComponent>;
 
   const activatedRoute = new ActivatedRouteStub({ id: "76" });
 
@@ -18,9 +18,9 @@ describe("DetailsComponent", () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
       providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
-      declarations: [DetailsComponent]
+      declarations: [ProductDetailsComponent]
     })
-      .overrideComponent(DetailsComponent, {
+      .overrideComponent(ProductDetailsComponent, {
         set: {
           providers: [{ provide: MovieService, useClass: MockMovieService }]
         }
@@ -29,7 +29,7 @@ describe("DetailsComponent", () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DetailsComponent);
+    fixture = TestBed.createComponent(ProductDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

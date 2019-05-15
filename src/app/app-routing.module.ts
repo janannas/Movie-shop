@@ -6,12 +6,12 @@ import { HomeComponent } from "./components/home/home.component";
 import { CatalogComponent } from "./components/catalog/catalog.component";
 import { CartComponent } from "./components/cart/cart.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { DetailsComponent } from "./components/details/details.component";
+import { ProductDetailsComponent } from "./components/product-details/product-details.component";
 import { CategoryDetailsComponent } from "./components/category-details/category-details.component";
 
 const routes: Routes = [
   { path: "categoryDetails/:id", component: CategoryDetailsComponent },
-  { path: "details/:id", component: DetailsComponent },
+  { path: "details/:id", component: ProductDetailsComponent },
   { path: "catalog", component: CatalogComponent },
   { path: "cart", component: CartComponent },
   { path: "", component: HomeComponent },
