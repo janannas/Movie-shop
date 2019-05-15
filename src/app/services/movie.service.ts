@@ -18,6 +18,7 @@ import { ICategory } from "../interfaces/ICategory";
 export class MovieService implements IMovieService {
   cart: IMovie[] = [];
   searchResults = new Subject<any>();
+  cartEmpty: boolean;
 
   constructor(private http: HttpClient) {}
 
@@ -67,7 +68,12 @@ export class MovieService implements IMovieService {
     }
   }
 
+  checkCartEmpty() {
+    this.cart.length === 0 ? (this.cartEmpty = true) : (this.cartEmpty = false);
+  }
+
   getProductsFromCart(): IMovie[] {
+    this.checkCartEmpty();
     return this.cart;
   }
 

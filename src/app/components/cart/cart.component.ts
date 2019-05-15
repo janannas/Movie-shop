@@ -18,9 +18,11 @@ export class CartComponent implements OnInit {
   plural: boolean = false;
   quantity = 1;
   orderRows: IOrderRows[] = [];
+  cartEmpty: boolean;
 
   constructor(private movieService: MovieService) {
     this.cart = this.movieService.getProductsFromCart();
+    this.cartEmpty = this.movieService.cartEmpty;
   }
 
   ngOnInit() {
@@ -73,6 +75,17 @@ export class CartComponent implements OnInit {
   checkPlural() {
     if (this.cart.length > 1) {
       this.plural = true;
+    }
+  }
+
+  removeProduct(productToRemove: IMovie) {
+    for (let i = 0; i < this.cart.length; i++) {
+      if (productToRemove.id === this.cart[i].id) {
+        this.orderRows.splice(i, 1) && this.cart.splice(i, 1);
+        if (this.orderRows.length <= 0) {
+          this.cartEmpty = true;
+        }
+      }
     }
   }
 

@@ -86,6 +86,7 @@ export class MockMovieService implements IMovieService {
       name: "Sci-fi"
     }
   ];
+  cartEmpty: boolean;
 
   constructor() {}
 
@@ -98,6 +99,7 @@ export class MockMovieService implements IMovieService {
   }
 
   getSearchResults(): Observable<any> {
+    //FIXME:
     return of(this.movies[1]);
   }
 
@@ -109,7 +111,17 @@ export class MockMovieService implements IMovieService {
     }
   }
 
+  checkCartEmpty() {
+    /* if (this.cart.length === 0) {
+      this.cartEmpty = true;
+    } else {
+      this.cartEmpty = false;
+    } */
+    this.cart.length === 0 ? (this.cartEmpty = true) : (this.cartEmpty = false);
+  }
+
   getProductsFromCart(): IMovie[] {
+    this.checkCartEmpty();
     return this.cart;
   }
 

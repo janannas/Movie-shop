@@ -9,37 +9,38 @@
   <h1 *ngIf="!plural">Overview Cart ({{ cart.length }} product)</h1>
   <h1 *ngIf="plural">Overview Cart ({{ cart.length }} products)</h1>
 
-  <div *ngFor="let product of cart; let i = index">
+  <div *ngFor="let product of cart">
     <p>{{ product.name }}</p>
 
     <div>
       <label>Quantity: </label>
 
-      <form>
-        <select
-          name="test"
-          #quantitySelect
-          (blur)="updateQuantity(quantitySelect.value, product.id)"
-        >
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-        </select>
-      </form>
+      <select
+        name="test"
+        #quantitySelect
+        (blur)="updateQuantity(quantitySelect.value, product.id)"
+      >
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+      </select>
 
       <div>
         <p>{{ quantitySelect.value }}</p>
       </div>
     </div>
+    <button (click)="removeProduct(product)">Remove</button>
   </div>
 </div>
 
 <hr />
 
 <app-billing-form (rawForm)="handleForm($event)"></app-billing-form>
+
+<div *ngIf="cartEmpty">Oh, look like your cart is empty</div>
