@@ -1,0 +1,12 @@
+<p>
+  category-details works!
+</p>
+<div>
+  <app-product
+    *ngFor="let movie of movies"
+    [movie]="movie"
+    [moviePoster]="movie.imageUrl"
+    [movieId]="movie.id"
+  >
+  </app-product>
+</div>

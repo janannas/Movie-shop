@@ -13,6 +13,7 @@ import { CartComponent } from "./components/cart/cart.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { DetailsComponent } from "./components/details/details.component";
 import { BillingFormComponent } from "./components/billing-form/billing-form.component";
+import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BillingFormComponent } from "./components/billing-form/billing-form.com
     CartComponent,
     NotFoundComponent,
     DetailsComponent,
-    BillingFormComponent
+    BillingFormComponent,
+    CategoryDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 
 import { MovieService } from "src/app/services/movie.service";
 import { IMovie } from "../../interfaces/IMovie";
-import { ICategory } from "src/app/interfaces/ICategory";
 
 @Component({
   selector: "app-catalog",
@@ -12,7 +11,6 @@ import { ICategory } from "src/app/interfaces/ICategory";
 export class CatalogComponent {
   movies: IMovie[];
   errorMsg: string;
-  categories: ICategory[];
   noSearchResults: boolean = false;
   searchResults: IMovie[];
 
@@ -36,15 +34,13 @@ export class CatalogComponent {
         this.movies = myMovieData;
 
         this.service.getCategoryData().subscribe(myCategoryData => {
-          this.categories = myCategoryData;
-
           /*
           Looping through movieCategories inside this.movies to connect
           category-id with correct category-name
           */
           for (const movie of this.movies) {
             for (const movieCategory of movie.productCategory) {
-              for (const category of this.categories) {
+              for (const category of myCategoryData) {
                 if (movieCategory.categoryId === category.id) {
                   movieCategory.category = category.name;
                 }

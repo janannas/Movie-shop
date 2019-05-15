@@ -11,6 +11,7 @@ export class ProductComponent implements OnInit {
   @Input() movie: IMovie;
   @Input() moviePoster: string;
   @Input() movieId: number;
+  @Input() categories: IMovie[];
 
   constructor(public MovieService: MovieService) {}
 

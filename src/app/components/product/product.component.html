@@ -9,4 +9,10 @@
   </a>
 </div>
 
+<div *ngFor="let category of categories">
+  <a routerLink="/categoryDetails/{{ category.categoryId }}">
+    <p class="testClass">{{ category.category }}</p>
+  </a>
+</div>
+
 <button class="buy-button" (click)="handleClick(movie)">BUY</button>
