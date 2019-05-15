@@ -90,11 +90,9 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotalProducts() {
-    //TODO:
     this.totalProducts = 0;
     for (let i = 0; i < this.cart.length; i++) {
       this.totalProducts += this.cart[i].price * this.orderRows[i].amount;
     }
-    this.totalProducts;
   }
 }
