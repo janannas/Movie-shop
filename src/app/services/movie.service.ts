@@ -17,7 +17,7 @@ import { ICategory } from "../interfaces/ICategory";
 })
 export class MovieService implements IMovieService {
   cart: IMovie[] = [];
-  searchResults = new Subject<any>();
+  searchResults = new Subject<IMovie[]>();
   cartEmpty: boolean;
 
   constructor(private http: HttpClient) {}
@@ -44,13 +44,13 @@ export class MovieService implements IMovieService {
       );
   }
 
-  getSearchResults(): Observable<any> {
+  getSearchResults(): Observable<IMovie[]> {
     return this.searchResults.asObservable();
   }
 
   searchMovies(searchText: string): void {
     this.http
-      .get(
+      .get<IMovie[]>(
         `https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=${searchText}`
       )
       .pipe(

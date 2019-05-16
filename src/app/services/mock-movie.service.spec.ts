@@ -49,4 +49,11 @@ describe("MockMovieService", () => {
     service.addProductToCart(mockProduct);
     expect(service.cart.length).toBe(1);
   });
+
+  it("should be able to search for movie", () => {
+    const service: MockMovieService = TestBed.get(MockMovieService);
+    const result = service.searchMovies("Dark");
+
+    expect(result).toBeDefined();
+  });
 });

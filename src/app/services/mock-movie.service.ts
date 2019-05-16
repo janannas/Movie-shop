@@ -98,9 +98,14 @@ export class MockMovieService implements IMovieService {
     return of(this.categories);
   }
 
-  getSearchResults(): Observable<any> {
-    //FIXME:
-    return of(this.movies[1]);
+  getSearchResults(): Observable<IMovie[]> {
+    return of([this.movies[1]]);
+  }
+
+  searchMovies(searchText: string) {
+    if (this.movies[0].name.includes(searchText)) {
+      return of(this.movies[0]);
+    }
   }
 
   addProductToCart(myProduct: IMovie): void {
@@ -112,11 +117,6 @@ export class MockMovieService implements IMovieService {
   }
 
   checkCartEmpty() {
-    /* if (this.cart.length === 0) {
-      this.cartEmpty = true;
-    } else {
-      this.cartEmpty = false;
-    } */
     this.cart.length === 0 ? (this.cartEmpty = true) : (this.cartEmpty = false);
   }
 
