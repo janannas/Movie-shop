@@ -8,3 +8,5 @@
 <div *ngIf="movie">
   <img src="{{ movie.imageUrl }}" alt="poster for {{ movie.name }}" />
 </div>
+
+<app-error *ngIf="error"></app-error>

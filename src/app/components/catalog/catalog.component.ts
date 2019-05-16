@@ -10,7 +10,7 @@ import { IMovie } from "../../interfaces/IMovie";
 })
 export class CatalogComponent {
   movies: IMovie[];
-  errorMsg: string;
+  error: boolean;
   noSearchResults: boolean = false;
   searchResults: IMovie[];
 
@@ -25,7 +25,8 @@ export class CatalogComponent {
         }
       },
       error => {
-        this.errorMsg = error;
+        this.error = true;
+        console.log("Error: " + error);
       }
     );
 
@@ -50,7 +51,8 @@ export class CatalogComponent {
         });
       },
       error => {
-        this.errorMsg = error;
+        this.error = true;
+        console.log("Error: " + error);
       }
     );
   }

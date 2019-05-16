@@ -10,14 +10,21 @@ import { IMovie } from "src/app/interfaces/IMovie";
 })
 export class CategoryDetailsComponent implements OnInit {
   movies: IMovie[] = [];
+  error: boolean;
 
   constructor(private route: ActivatedRoute, private service: MovieService) {
-    this.service.getMovieData().subscribe(myMovieData => {
-      this.route.paramMap.subscribe(myParams => {
-        const id = +myParams.get("id");
-        this.searchCategories(id, myMovieData);
-      });
-    });
+    this.service.getMovieData().subscribe(
+      myMovieData => {
+        this.route.paramMap.subscribe(myParams => {
+          const id = +myParams.get("id");
+          this.searchCategories(id, myMovieData);
+        });
+      },
+      error => {
+        this.error = true;
+        console.log("Error: " + error);
+      }
+    );
   }
 
   searchCategories(myId: number, myMovieData: IMovie[]) {

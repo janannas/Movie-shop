@@ -7,6 +7,7 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { CatalogComponent } from "./components/catalog/catalog.component";
 import { ProductComponent } from "./components/product/product.component";
 import { ProductDetailsComponent } from "./components/product-details/product-details.component";
+import { ErrorComponent } from "./components/error/error.component";
 
 describe("AppComponent", () => {
   beforeEach(async(() => {
@@ -21,7 +22,8 @@ describe("AppComponent", () => {
         AppComponent,
         CatalogComponent,
         ProductComponent,
-        ProductDetailsComponent
+        ProductDetailsComponent,
+        ErrorComponent
       ]
     }).compileComponents();
   }));

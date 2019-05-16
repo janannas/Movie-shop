@@ -7,6 +7,7 @@ import { MovieService } from "../../services/movie.service";
 import { MockMovieService } from "../../services/mock-movie.service";
 
 import { ProductDetailsComponent } from "./product-details.component";
+import { ErrorComponent } from "../error/error.component";
 
 describe("ProductDetailsComponent", () => {
   let component: ProductDetailsComponent;
@@ -18,7 +19,7 @@ describe("ProductDetailsComponent", () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
       providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
-      declarations: [ProductDetailsComponent]
+      declarations: [ProductDetailsComponent, ErrorComponent]
     })
       .overrideComponent(ProductDetailsComponent, {
         set: {

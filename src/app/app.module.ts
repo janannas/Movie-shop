@@ -14,6 +14,7 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { ProductDetailsComponent } from "./components/product-details/product-details.component";
 import { BillingFormComponent } from "./components/billing-form/billing-form.component";
 import { CategoryDetailsComponent } from "./components/category-details/category-details.component";
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CategoryDetailsComponent } from "./components/category-details/category
     NotFoundComponent,
     ProductDetailsComponent,
     BillingFormComponent,
-    CategoryDetailsComponent
+    CategoryDetailsComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { IMovie } from "../../interfaces/IMovie";
 })
 export class ProductDetailsComponent implements OnInit {
   movies: IMovie[];
+  error: boolean;
   movie: IMovie = {
     id: 0,
     name: "",
@@ -22,13 +23,19 @@ export class ProductDetailsComponent implements OnInit {
   };
 
   constructor(private route: ActivatedRoute, private service: MovieService) {
-    this.service.getMovieData().subscribe(myData => {
-      this.movies = myData;
-      this.route.paramMap.subscribe(myParams => {
-        const id = +myParams.get("id");
-        this.searchMovies(id);
-      });
-    });
+    this.service.getMovieData().subscribe(
+      myData => {
+        this.movies = myData;
+        this.route.paramMap.subscribe(myParams => {
+          const id = +myParams.get("id");
+          this.searchMovies(id);
+        });
+      },
+      error => {
+        this.error = true;
+        console.log("Error: " + error);
+      }
+    );
   }
 
   searchMovies(myId: number): void {

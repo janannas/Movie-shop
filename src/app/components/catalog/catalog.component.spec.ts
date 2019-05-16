@@ -6,6 +6,7 @@ import { MockMovieService } from "../../services/mock-movie.service";
 
 import { CatalogComponent } from "./catalog.component";
 import { ProductComponent } from "../product/product.component";
+import { ErrorComponent } from "../error/error.component";
 
 describe("CatalogComponent", () => {
   let component: CatalogComponent;
@@ -14,7 +15,7 @@ describe("CatalogComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
-      declarations: [CatalogComponent, ProductComponent]
+      declarations: [CatalogComponent, ProductComponent, ErrorComponent]
     })
       .overrideComponent(CatalogComponent, {
         set: {
