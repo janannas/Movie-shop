@@ -54,7 +54,7 @@ export class CartComponent implements OnInit {
         .format("YYYY-MM-DDTLTS"),
       createdBy: form.email,
       paymentMethod: form.paymentMethod,
-      totalPrice: 123, //this.totalProducts
+      totalPrice: this.totalProducts,
       status: 0,
       orderRows: this.orderRows
     };

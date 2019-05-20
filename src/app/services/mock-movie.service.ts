@@ -88,7 +88,7 @@ export class MockMovieService implements IMovieService {
   ];
   cartEmpty: boolean;
 
-  constructor() {}
+  constructor() { }
 
   getMovieData(): Observable<IMovie[]> {
     return of(this.movies);
@@ -110,10 +110,17 @@ export class MockMovieService implements IMovieService {
   }
 
   addProductToCart(myProduct: IMovie): void {
-    if (this.cart.includes(myProduct)) {
-      return;
-    } else {
+    if (this.cart.length === 0) {
       this.cart.push(myProduct);
+
+    } else {
+      let index = this.cart.findIndex(x => x.id === myProduct.id);
+
+      if (index === -1) {
+        this.cart.push(myProduct);
+      } else {
+        console.log(`no`);
+      }
     }
   }
 
