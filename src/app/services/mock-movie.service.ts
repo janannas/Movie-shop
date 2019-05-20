@@ -102,10 +102,11 @@ export class MockMovieService implements IMovieService {
     return of([this.movies[1]]);
   }
 
-  searchMovies(searchText: string) {
+  searchMovies(searchText: string): Observable<IMovie[]> {
     if (this.movies[0].name.includes(searchText)) {
-      return of(this.movies[0]);
+      return of([this.movies[0]]);
     }
+    return of([]);
   }
 
   addProductToCart(myProduct: IMovie): void {

@@ -1,18 +1,8 @@
 <nav>
-  <a
-    routerLink=""
-    routerLinkActive="linkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    >Home</a
-  >
+  <a routerLink="" routerLinkActive="linkActive" [routerLinkActiveOptions]="{ exact: true }">Home</a>
 
-  <input
-    type="text"
-    name="search"
-    [(ngModel)]="search"
-    (keyUp.enter)="handleSearch(search); search = ''"
-  />
-  <button (click)="handleSearch(search); search = ''">
+  <input type="text" name="search" [(ngModel)]="search" (keyUp.enter)="handleSearch(search); search = ''" />
+  <button (click)="handleSearch(search); search = ''" (blur)="resetEmptySearch()">
     Search
   </button>
 
@@ -20,5 +10,5 @@
   <a routerLink="/cart" routerLinkActive="linkActive">View Cart</a>
   <a routerLink="/contact" routerLinkActive="linkActive">Contact</a>
 </nav>
-
+<div *ngIf="emptySearch">Must search something sry!</div>
 <router-outlet></router-outlet>

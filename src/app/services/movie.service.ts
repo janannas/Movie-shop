@@ -20,7 +20,7 @@ export class MovieService implements IMovieService {
   searchResults = new Subject<IMovie[]>();
   cartEmpty: boolean;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getMovieData(): Observable<IMovie[]> {
     return this.http
@@ -48,16 +48,20 @@ export class MovieService implements IMovieService {
     return this.searchResults.asObservable();
   }
 
-  searchMovies(searchText: string): void {
-    this.http
-      .get<IMovie[]>(
-        `https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=${searchText}`
-      )
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      )
-      .subscribe(results => this.searchResults.next(results));
+  searchMovies(searchText: string): Observable<IMovie[]> {
+    if (searchText === undefined || searchText === "") {
+      return;
+    } else {
+      this.http
+        .get<IMovie[]>(
+          `https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=${searchText}`
+        )
+        .pipe(
+          retry(3),
+          catchError(this.handleError)
+        )
+        .subscribe(results => this.searchResults.next(results));
+    }
   }
 
   addProductToCart(myProduct: IMovie): void {

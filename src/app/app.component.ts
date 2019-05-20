@@ -8,10 +8,19 @@ import { Router } from "@angular/router";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  constructor(private service: MovieService, private router: Router) {}
+  emptySearch: boolean = false;
+  constructor(private service: MovieService, private router: Router) { }
 
   handleSearch(searchText: string) {
-    this.service.searchMovies(searchText);
-    this.router.navigateByUrl("/catalog");
+    if (searchText === undefined || searchText === "") {
+      this.emptySearch = true;
+    } else if (searchText) {
+      this.service.searchMovies(searchText);
+      this.router.navigateByUrl("/catalog");
+    }
+  }
+
+  resetEmptySearch() {
+    this.emptySearch = false;
   }
 }

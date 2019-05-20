@@ -12,6 +12,7 @@ describe("CatalogComponent", () => {
   let component: CatalogComponent;
   let fixture: ComponentFixture<CatalogComponent>;
 
+  let service: MockMovieService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
@@ -29,6 +30,8 @@ describe("CatalogComponent", () => {
     fixture = TestBed.createComponent(CatalogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    service = TestBed.get(MockMovieService);
   });
 
   it("should create", () => {
@@ -42,5 +45,19 @@ describe("CatalogComponent", () => {
   it("should display correct category", () => {
     const testMovieCategory = component.movies[1].productCategory[0].category;
     expect(testMovieCategory).toEqual("Sci-fi");
+  });
+
+  it("should return true if there are no search result", () => {
+    service.searchMovies("abcd").subscribe(data => {
+      component.checkIfSearchResults(data);
+    });
+    expect(component.noSearchResult).toBe(true);
+  });
+
+  it("should return false if there are a search result", () => {
+    service.searchMovies("Dark").subscribe(data => {
+      component.checkIfSearchResults(data);
+    });
+    expect(component.noSearchResult).toBe(false);
   });
 });

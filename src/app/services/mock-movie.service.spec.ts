@@ -21,28 +21,27 @@ describe("MockMovieService", () => {
     ]
   };
 
-  beforeEach(() =>
+  let service: MockMovieService;
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
-    })
-  );
+    });
+
+    service = TestBed.get(MockMovieService);
+  });
 
   it("should be created", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
     expect(service).toBeTruthy();
   });
 
   it("should add product to cart", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
-
     expect(service.cart.length).toBe(0);
     service.addProductToCart(mockProduct);
     expect(service.cart.length).toBe(1);
   });
 
   it("should not add product to cart if cart already contain that product", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
-
     expect(service.cart.length).toBe(0);
     service.addProductToCart(mockProduct);
     expect(service.cart.length).toBe(1);
@@ -51,9 +50,17 @@ describe("MockMovieService", () => {
   });
 
   it("should be able to search for movie", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
     const result = service.searchMovies("Dark");
 
     expect(result).toBeDefined();
+  });
+
+  it("should return empty if searchText is empty", () => {
+    let result = [];
+    service.searchMovies("abcd").subscribe(data => {
+      result = data;
+    });
+
+    expect(result.length).toBe(0);
   });
 });

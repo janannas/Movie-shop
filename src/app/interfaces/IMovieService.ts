@@ -13,7 +13,7 @@ export interface IMovieService {
   getMovieData(): Observable<IMovie[]>;
   getCategoryData(): Observable<ICategory[]>;
   getSearchResults(): Observable<any>;
-  searchMovies(searchText: string): void;
+  searchMovies(searchText: string): Observable<IMovie[]>;
   addProductToCart(myProduct: IMovie): void;
   checkCartEmpty(): void;
   getProductsFromCart(): IMovie[];
