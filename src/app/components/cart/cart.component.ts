@@ -16,33 +16,22 @@ export class CartComponent implements OnInit {
   cart: IMovie[];
   totalProducts: number = 0;
   plural: boolean = false;
-  quantity = 1;
   orderRows: IOrderRows[] = [];
   emptyCart: boolean;
 
   constructor(private movieService: MovieService) {
     this.cart = this.movieService.getProductsFromCart();
     this.emptyCart = this.movieService.checkCartEmpty();
+    this.orderRows = this.movieService.createOrderRows();
   }
 
   ngOnInit() {
     this.checkPlural();
-    this.createOrderRows();
     this.calculateTotalProducts();
   }
 
-  createOrderRows() {
-    for (let i = 0; i < this.cart.length; i++) {
-      this.orderRows.push({ productId: this.cart[i].id, amount: 1 });
-    }
-  }
-
   updateAmount(amount: number, id: number) {
-    for (const row of this.orderRows) {
-      if (row.productId == id) {
-        row.amount = +amount;
-      }
-    }
+    this.movieService.updateAmount(amount, id);
     this.calculateTotalProducts();
   }
 

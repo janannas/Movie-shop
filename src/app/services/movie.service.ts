@@ -11,6 +11,7 @@ import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
 import { IBillingForm } from "../interfaces/IBillingForm";
 import { ICategory } from "../interfaces/ICategory";
+import { IOrderRows } from '../interfaces/IOrderRows';
 
 @Injectable({
   providedIn: "root"
@@ -18,6 +19,7 @@ import { ICategory } from "../interfaces/ICategory";
 export class MovieService implements IMovieService {
   cart: IMovie[] = [];
   searchResults = new Subject<IMovie[]>();
+  orderRows: IOrderRows[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -41,6 +43,21 @@ export class MovieService implements IMovieService {
         retry(3),
         catchError(this.handleError)
       );
+  }
+
+  createOrderRows() {
+    for (let i = 0; i < this.cart.length; i++) {
+      this.orderRows.push({ productId: this.cart[i].id, amount: 1 });
+    }
+    return this.orderRows;
+  }
+
+  updateAmount(amount: number, id: number) {
+    for (const row of this.orderRows) {
+      if (row.productId == id) {
+        row.amount = +amount;
+      }
+    }
   }
 
   getSearchResults(): Observable<IMovie[]> {
