@@ -63,4 +63,18 @@ describe("MockMovieService", () => {
 
     expect(result.length).toBe(0);
   });
+
+  it("should add product to cart", () => {
+    expect(service.cart.length).toBe(0);
+    service.addProductToCart(mockProduct);
+    expect(service.cart.length).toBe(1);
+  })
+
+  it("should not add product to cart if it's already there", () => {
+    expect(service.cart.length).toBe(0);
+    service.addProductToCart(mockProduct);
+    expect(service.cart.length).toBe(1);
+    service.addProductToCart(mockProduct);
+    expect(service.cart.length).toBe(1);
+  })
 });

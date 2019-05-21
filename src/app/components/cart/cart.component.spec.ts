@@ -12,6 +12,7 @@ import { BillingFormComponent } from "../billing-form/billing-form.component";
 describe("CartComponent", () => {
   let component: CartComponent;
   let fixture: ComponentFixture<CartComponent>;
+  let service: MockMovieService;
 
   const mockProduct = {
     id: 79,
@@ -69,6 +70,8 @@ describe("CartComponent", () => {
     fixture = TestBed.createComponent(CartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    service = TestBed.get(MockMovieService)
   });
 
   it("should create", () => {
@@ -76,17 +79,12 @@ describe("CartComponent", () => {
   });
 
   it("should create rows", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
-
     service.addProductToCart(mockProduct);
-    component.cart = service.getProductsFromCart();
-
-    component.createOrderRows();
+    component.orderRows = service.createOrderRows();
     expect(component.orderRows[0].amount).toBe(1);
   });
 
   it("should evaluate to true if there are serveral products in cart", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
     expect(component.plural).toEqual(false);
 
     service.addProductToCart(mockProduct);
@@ -101,43 +99,35 @@ describe("CartComponent", () => {
   });
 
   it("should remove product from cart", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
-
     service.addProductToCart(mockProduct);
     component.cart = service.getProductsFromCart();
 
     expect(component.cart.length).toBe(1);
 
-    component.removeProduct(mockProduct2);
+    service.removeProductFromCart(mockProduct2);
     expect(component.cart.length).toBe(1);
 
-    component.removeProduct(mockProduct);
+    service.removeProductFromCart(mockProduct);
     expect(component.cart.length).toBe(0);
   });
 
   it("should return true if cart is empty", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
-
     service.getProductsFromCart();
-
-    expect(service.cartEmpty).toBe(true);
+    expect(component.emptyCart).toBe(true);
   });
 
   it("should return false if there are products in cart", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
-
     service.addProductToCart(mockProduct);
-    service.getProductsFromCart();
+    component.emptyCart = service.checkCartEmpty();
 
-    expect(service.cartEmpty).toBe(false);
+    expect(component.emptyCart).toBe(false);
   });
 
   it("should return true if last product is removed from cart", () => {
-    const service: MockMovieService = TestBed.get(MockMovieService);
     service.addProductToCart(mockProduct);
     service.getProductsFromCart();
-    component.removeProduct(mockProduct);
+    service.removeProductFromCart(mockProduct);
 
-    expect(component.cartEmpty).toBe(true);
+    expect(component.emptyCart).toBe(true);
   });
 });

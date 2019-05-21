@@ -5,6 +5,7 @@ import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
 import { IBillingForm } from "../interfaces/IBillingForm";
 import { ICategory } from "../interfaces/ICategory";
+import { IOrderRows } from '../interfaces/IOrderRows';
 
 @Injectable({
   providedIn: "root"
@@ -86,6 +87,7 @@ export class MockMovieService implements IMovieService {
       name: "Sci-fi"
     }
   ];
+  orderRows: IOrderRows[] = [];
 
   constructor() { }
 
@@ -131,6 +133,21 @@ export class MockMovieService implements IMovieService {
     for (let i = 0; i < this.cart.length; i++) {
       if (productToRemove.id === this.cart[i].id) {
         this.cart.splice(i, 1);
+      }
+    }
+  }
+
+  createOrderRows(): IOrderRows[] {
+    for (let i = 0; i < this.cart.length; i++) {
+      this.orderRows.push({ productId: this.cart[i].id, amount: 1 });
+    }
+    return this.orderRows;
+  }
+
+  updateAmount(amount: number, id: number): void {
+    for (const row of this.orderRows) {
+      if (row.productId == id) {
+        row.amount = +amount;
       }
     }
   }
