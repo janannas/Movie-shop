@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
     this.calculateTotalProducts();
   }
 
-  getBillingObject(form: IFakeForm): IBillingForm {
+  createBillingObject(form: IFakeForm): IBillingForm {
     return {
       companyId: 9,
       created: moment()
@@ -50,7 +50,7 @@ export class CartComponent implements OnInit {
   }
 
   handleForm(fakeForm: IFakeForm) {
-    const finalForm = this.getBillingObject(fakeForm);
+    const finalForm = this.createBillingObject(fakeForm);
     console.log(finalForm);
 
     /* this.movieService

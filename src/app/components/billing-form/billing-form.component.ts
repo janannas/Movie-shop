@@ -12,11 +12,11 @@ import {
   styleUrls: ["./billing-form.component.css"]
 })
 export class BillingFormComponent implements OnInit {
-  @Output() public rawForm = new EventEmitter<FormGroup>();
+  @Output() public fakeForm = new EventEmitter<FormGroup>();
   billingForm: FormGroup;
   paymentMethods: string[] = ["Visa", "MasterCard", "Paypal", "Invoice"];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     //This form contains "fake" form controls in order to look more real
@@ -38,7 +38,7 @@ export class BillingFormComponent implements OnInit {
   }
 
   handleOrder() {
-    this.rawForm.emit(this.billingForm.value);
+    this.fakeForm.emit(this.billingForm.value);
   }
 
   get firstName() {

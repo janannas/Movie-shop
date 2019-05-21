@@ -31,7 +31,7 @@ export class CatalogComponent {
         this.movies = myMovieData;
 
         this.service.getCategoryData().subscribe(myCategoryData => {
-          this.addCategories(myCategoryData);
+          this.connectCategoriesToMovie(myCategoryData);
         });
       },
       error => {
@@ -51,7 +51,7 @@ export class CatalogComponent {
     }
   }
 
-  addCategories(myCategoryData: ICategory[]) {
+  connectCategoriesToMovie(myCategoryData: ICategory[]) {
     for (const movie of this.movies) {
 
       for (const movieCategory of movie.productCategory) {

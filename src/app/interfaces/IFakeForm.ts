@@ -10,5 +10,5 @@ export interface IFakeForm {
   lastName: string;
   email: string;
   paymentMethod: string;
-  adress: IAddress[];
+  adress: IAddress;
 }
