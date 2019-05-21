@@ -30,7 +30,7 @@ export class CartComponent implements OnInit {
     this.calculateTotalProducts();
   }
 
-  updateAmount(amount: number, id: number) {
+  handleUpdateAmount(amount: number, id: number) {
     this.movieService.updateAmount(amount, id);
     this.calculateTotalProducts();
   }

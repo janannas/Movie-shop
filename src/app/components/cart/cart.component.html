@@ -9,13 +9,13 @@
   <h1 *ngIf="!plural">Overview Cart ({{ cart.length }} product)</h1>
   <h1 *ngIf="plural">Overview Cart ({{ cart.length }} products)</h1>
 
-  <div *ngFor="let product of cart">
+  <div *ngFor="let product of cart; let i = index">
     <p>{{ product.name }}</p>
 
     <div>
       <label>Quantity: </label>
 
-      <select name="amount" #amountSelect (blur)="updateAmount(amountSelect.value, product.id)"
+      <select #amountSelect (blur)="handleUpdateAmount(amountSelect.value, product.id)"
         (blur)="calculateTotalProducts()">
         <option>1</option>
         <option>2</option>
@@ -29,7 +29,7 @@
       </select>
 
       <div>
-        <p>{{ amountSelect.value }}</p>
+        <p>{{ orderRows[i].amount }}</p>
       </div>
     </div>
     <button (click)="handleRemoveProduct(product)" (blur)="calculateTotalProducts()">
