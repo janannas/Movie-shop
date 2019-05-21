@@ -111,18 +111,26 @@ export class MockMovieService implements IMovieService {
   }
 
   addProductToCart(myProduct: IMovie): void {
-    if (this.cart.length === 0) {
+    let index = this.cart.findIndex(x => x.id === myProduct.id);
+
+    if (index === -1) {
       this.cart.push(myProduct);
-
     } else {
-      let index = this.cart.findIndex(x => x.id === myProduct.id);
+      this.createOrderRows();
+      for (const rows of this.orderRows) {
+        if (myProduct.id === rows.productId) {
+          const max = this.checkMaximumAmount(rows.amount);
 
-      if (index === -1) {
-        this.cart.push(myProduct);
-      } else {
-        console.log(`no`);
+          if (!max) {
+            ++rows.amount;
+          }
+        }
       }
     }
+  }
+
+  checkMaximumAmount(amount: number): boolean {
+    return amount >= 9 ? true : false;
   }
 
   checkCartEmpty(): boolean {
