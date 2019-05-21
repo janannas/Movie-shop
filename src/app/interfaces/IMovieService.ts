@@ -8,14 +8,14 @@ export interface IMovieService {
   movies?: IMovie[];
   cart: IMovie[];
   categories?: ICategory[];
-  cartEmpty: boolean;
 
   getMovieData(): Observable<IMovie[]>;
   getCategoryData(): Observable<ICategory[]>;
   getSearchResults(): Observable<any>;
   searchMovies(searchText: string): Observable<IMovie[]>;
   addProductToCart(myProduct: IMovie): void;
-  checkCartEmpty(): void;
+  checkCartEmpty(): boolean;
+  removeProductFromCart(productToRemove: IMovie): void;
   getProductsFromCart(): IMovie[];
   sendOrder(billingData: IBillingForm): Observable<IBillingForm>;
   handleError?(error: HttpErrorResponse): void;

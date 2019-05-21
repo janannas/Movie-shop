@@ -86,7 +86,6 @@ export class MockMovieService implements IMovieService {
       name: "Sci-fi"
     }
   ];
-  cartEmpty: boolean;
 
   constructor() { }
 
@@ -124,8 +123,16 @@ export class MockMovieService implements IMovieService {
     }
   }
 
-  checkCartEmpty() {
-    this.cart.length === 0 ? (this.cartEmpty = true) : (this.cartEmpty = false);
+  checkCartEmpty(): boolean {
+    return this.cart.length === 0 ? true : false;
+  }
+
+  removeProductFromCart(productToRemove: IMovie): void {
+    for (let i = 0; i < this.cart.length; i++) {
+      if (productToRemove.id === this.cart[i].id) {
+        this.cart.splice(i, 1);
+      }
+    }
   }
 
   getProductsFromCart(): IMovie[] {

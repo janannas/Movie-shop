@@ -18,11 +18,11 @@ export class CartComponent implements OnInit {
   plural: boolean = false;
   quantity = 1;
   orderRows: IOrderRows[] = [];
-  cartEmpty: boolean;
+  emptyCart: boolean;
 
   constructor(private movieService: MovieService) {
     this.cart = this.movieService.getProductsFromCart();
-    this.cartEmpty = this.movieService.cartEmpty;
+    this.emptyCart = this.movieService.checkCartEmpty();
   }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
     }
   }
 
-  updateQuantity(amount: number, id: number) {
+  updateAmount(amount: number, id: number) {
     for (const row of this.orderRows) {
       if (row.productId == id) {
         row.amount = +amount;
@@ -80,17 +80,10 @@ export class CartComponent implements OnInit {
     }
   }
 
-  removeProduct(productToRemove: IMovie) {
-    for (let i = 0; i < this.cart.length; i++) {
-      if (productToRemove.id === this.cart[i].id) {
-        this.orderRows.splice(i, 1) && this.cart.splice(i, 1);
-
-        if (this.orderRows.length <= 0) {
-          this.cartEmpty = true;
-        }
-      }
-      this.checkPlural();
-    }
+  handleRemoveProduct(productToRemove: IMovie) {
+    this.movieService.removeProductFromCart(productToRemove);
+    this.checkPlural();
+    this.emptyCart = this.movieService.checkCartEmpty();
   }
 
   calculateTotalProducts() {

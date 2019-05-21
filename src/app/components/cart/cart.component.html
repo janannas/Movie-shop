@@ -15,12 +15,8 @@
     <div>
       <label>Quantity: </label>
 
-      <select
-        name="test"
-        #quantitySelect
-        (blur)="updateQuantity(quantitySelect.value, product.id)"
-        (blur)="calculateTotalProducts()"
-      >
+      <select name="amount" #amountSelect (blur)="updateAmount(amountSelect.value, product.id)"
+        (blur)="calculateTotalProducts()">
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -33,10 +29,10 @@
       </select>
 
       <div>
-        <p>{{ quantitySelect.value }}</p>
+        <p>{{ amountSelect.value }}</p>
       </div>
     </div>
-    <button (click)="removeProduct(product)" (blur)="calculateTotalProducts()">
+    <button (click)="handleRemoveProduct(product)" (blur)="calculateTotalProducts()">
       Remove
     </button>
   </div>

@@ -18,7 +18,6 @@ import { ICategory } from "../interfaces/ICategory";
 export class MovieService implements IMovieService {
   cart: IMovie[] = [];
   searchResults = new Subject<IMovie[]>();
-  cartEmpty: boolean;
 
   constructor(private http: HttpClient) { }
 
@@ -79,8 +78,16 @@ export class MovieService implements IMovieService {
     }
   }
 
-  checkCartEmpty() {
-    this.cart.length === 0 ? (this.cartEmpty = true) : (this.cartEmpty = false);
+  checkCartEmpty(): boolean {
+    return this.cart.length === 0 ? true : false;
+  }
+
+  removeProductFromCart(productToRemove: IMovie): void {
+    for (let i = 0; i < this.cart.length; i++) {
+      if (productToRemove.id === this.cart[i].id) {
+        this.cart.splice(i, 1);
+      }
+    }
   }
 
   getProductsFromCart(): IMovie[] {
