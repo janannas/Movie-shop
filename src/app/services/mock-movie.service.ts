@@ -116,21 +116,22 @@ export class MockMovieService implements IMovieService {
     if (index === -1) {
       this.cart.push(myProduct);
     } else {
-      this.createOrderRows();
-      for (const rows of this.orderRows) {
-        if (myProduct.id === rows.productId) {
-          const max = this.checkMaximumAmount(rows.amount);
-
-          if (!max) {
-            ++rows.amount;
-          }
-        }
-      }
+      this.addAmount(myProduct);
     }
   }
 
-  checkMaximumAmount(amount: number): boolean {
-    return amount >= 9 ? true : false;
+  addAmount(myProduct: IMovie): void {
+    this.createOrderRows();
+
+    for (const rows of this.orderRows) {
+      if (myProduct.id === rows.productId) {
+        const max = rows.amount >= 9 ? true : false;
+
+        if (!max) {
+          ++rows.amount;
+        }
+      }
+    }
   }
 
   checkCartEmpty(): boolean {
@@ -140,7 +141,7 @@ export class MockMovieService implements IMovieService {
   removeProductFromCart(productToRemove: IMovie): void {
     for (let i = 0; i < this.cart.length; i++) {
       if (productToRemove.id === this.cart[i].id) {
-        this.cart.splice(i, 1);
+        this.cart.splice(i, 1) && this.orderRows.splice(i, 1);
       }
     }
   }

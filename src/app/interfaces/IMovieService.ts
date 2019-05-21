@@ -16,7 +16,7 @@ export interface IMovieService {
   getSearchResults(): Observable<any>;
   searchMovies(searchText: string): Observable<IMovie[]>;
   addProductToCart(myProduct: IMovie): void;
-  checkMaximumAmount(amount: number): boolean;
+  addAmount(myProduct: IMovie): void;
   checkCartEmpty(): boolean;
   removeProductFromCart(productToRemove: IMovie): void;
   createOrderRows(): IOrderRows[];

@@ -1,11 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
-import { Observable, Subject } from "rxjs";
-
+import { Observable, Subject, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
-import { throwError } from "rxjs";
-import { HttpErrorResponse } from "@angular/common/http";
 
 import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
@@ -71,21 +68,22 @@ export class MovieService implements IMovieService {
     if (index === -1) {
       this.cart.push(myProduct);
     } else {
-      this.createOrderRows();
-      for (const rows of this.orderRows) {
-        if (myProduct.id === rows.productId) {
-          const max = this.checkMaximumAmount(rows.amount);
-
-          if (!max) {
-            ++rows.amount;
-          }
-        }
-      }
+      this.addAmount(myProduct);
     }
   }
 
-  checkMaximumAmount(amount: number): boolean {
-    return amount >= 9 ? true : false;
+  addAmount(myProduct: IMovie): void {
+    this.createOrderRows();
+
+    for (const rows of this.orderRows) {
+      if (myProduct.id === rows.productId) {
+        const max = rows.amount >= 9 ? true : false;
+
+        if (!max) {
+          ++rows.amount;
+        }
+      }
+    }
   }
 
   checkCartEmpty(): boolean {

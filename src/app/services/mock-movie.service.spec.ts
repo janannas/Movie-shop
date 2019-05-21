@@ -49,13 +49,27 @@ describe("MockMovieService", () => {
     expect(service.cart.length).toBe(1);
   });
 
+  it("should not add order-row if it already exists", () => {
+    expect(service.orderRows.length).toBe(0);
+    service.addProductToCart(mockProduct);
+    service.addProductToCart(mockProduct);
+    expect(service.orderRows.length).toBe(1);
+  })
+
+  it("should not add more than 9 products to amount", () => {
+    for (let i = 0; i < 10; i++) {
+      service.addProductToCart(mockProduct);
+    }
+    expect(service.orderRows[0].amount).toBe(9);
+  })
+
   it("should be able to search for movie", () => {
     const result = service.searchMovies("Dark");
 
     expect(result).toBeDefined();
   });
 
-  it("should return empty if searchText is empty", () => {
+  it("should return empty if search-input is empty", () => {
     let result = [];
     service.searchMovies("abcd").subscribe(data => {
       result = data;
@@ -63,18 +77,4 @@ describe("MockMovieService", () => {
 
     expect(result.length).toBe(0);
   });
-
-  it("should add product to cart", () => {
-    expect(service.cart.length).toBe(0);
-    service.addProductToCart(mockProduct);
-    expect(service.cart.length).toBe(1);
-  })
-
-  it("should not add product to cart if it's already there", () => {
-    expect(service.cart.length).toBe(0);
-    service.addProductToCart(mockProduct);
-    expect(service.cart.length).toBe(1);
-    service.addProductToCart(mockProduct);
-    expect(service.cart.length).toBe(1);
-  })
 });
