@@ -147,7 +147,9 @@ export class MockMovieService implements IMovieService {
 
   createOrderRows(): IOrderRows[] {
     for (let i = 0; i < this.cart.length; i++) {
-      this.orderRows.push({ productId: this.cart[i].id, amount: 1 });
+      if (!this.orderRows[i]) {
+        this.orderRows.push({ productId: this.cart[i].id, amount: 1 });
+      }
     }
     return this.orderRows;
   }
