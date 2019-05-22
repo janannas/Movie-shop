@@ -13,11 +13,11 @@ export class ProductComponent implements OnInit {
   @Input() movieId: number;
   @Input() categories: IMovie[];
 
-  constructor(public MovieService: MovieService) {}
+  constructor(public service: MovieService) {}
 
   ngOnInit() {}
 
   handleClick(product: IMovie): void {
-    this.MovieService.addProductToCart(product);
+    this.service.addProductToCart(product);
   }
 }

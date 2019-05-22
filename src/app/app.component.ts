@@ -9,7 +9,30 @@ import { Router } from "@angular/router";
 })
 export class AppComponent {
   emptySearch: boolean = false;
-  constructor(private service: MovieService, private router: Router) { }
+  productAdded: boolean = false;
+  productAmount: number;
+  productName: string;
+  productRejected: boolean;
+
+  constructor(private service: MovieService, private router: Router) {
+    this.service.getProductMsg().subscribe(result => {
+      let {
+        productAdded,
+        productAmount,
+        productName,
+        productRejected
+      } = result;
+
+      this.productAdded = productAdded;
+      this.productAmount = productAmount;
+      this.productName = productName;
+      this.productRejected = productRejected;
+
+      setTimeout(() => {
+        this.productAdded = false;
+      }, 3000);
+    });
+  }
 
   handleSearch(searchText: string) {
     if (searchText === undefined || searchText === "") {

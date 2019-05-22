@@ -8,7 +8,7 @@ import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
 import { IBillingForm } from "../interfaces/IBillingForm";
 import { ICategory } from "../interfaces/ICategory";
-import { IOrderRows } from '../interfaces/IOrderRows';
+import { IOrderRows } from "../interfaces/IOrderRows";
 
 @Injectable({
   providedIn: "root"
@@ -17,8 +17,9 @@ export class MovieService implements IMovieService {
   cart: IMovie[] = [];
   searchResults = new Subject<IMovie[]>();
   orderRows: IOrderRows[] = [];
+  confirm = new Subject<any>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getMovieData(): Observable<IMovie[]> {
     return this.http
@@ -67,6 +68,12 @@ export class MovieService implements IMovieService {
 
     if (index === -1) {
       this.cart.push(myProduct);
+      this.productMsg({
+        productAdded: true,
+        productAmount: 1,
+        productName: myProduct.name,
+        productRejected: false
+      });
     } else {
       this.addAmount(myProduct);
     }
@@ -81,9 +88,45 @@ export class MovieService implements IMovieService {
 
         if (!max) {
           ++rows.amount;
+          this.productMsg({
+            productAdded: true,
+            productAmount: rows.amount,
+            productName: myProduct.name,
+            productRejected: false
+          });
+        } else {
+          this.productMsg({
+            productAdded: true,
+            productAmount: rows.amount,
+            productName: myProduct.name,
+            productRejected: true
+          });
         }
       }
     }
+  }
+
+  getProductMsg() {
+    return this.confirm.asObservable();
+  }
+
+  productMsg({
+    productAdded,
+    productAmount,
+    productName,
+    productRejected
+  }: {
+    productAdded: boolean;
+    productAmount: number;
+    productName: string;
+    productRejected: boolean;
+  }) {
+    this.confirm.next({
+      productAdded,
+      productAmount,
+      productName,
+      productRejected
+    });
   }
 
   checkCartEmpty(): boolean {
