@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule, FormGroup } from "@angular/forms";
 
 import { MovieService } from "../../services/movie.service";
 import { MockMovieService } from "../../services/mock-movie.service";
@@ -32,4 +32,12 @@ describe("BillingFormComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit', () => {
+    component.fakeForm.subscribe((myFormData: FormGroup) => {
+      expect(myFormData).toBeDefined();
+    })
+    component.handleOrder();
+  });
 });
+
