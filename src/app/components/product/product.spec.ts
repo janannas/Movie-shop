@@ -55,13 +55,13 @@ describe("ProductComponent", () => {
   });
 
   it("should call addProductToCart", async(() => {
-    spyOn(component.MovieService, "addProductToCart");
+    spyOn(component.cartService, "addProductToCart");
 
     let button = fixture.debugElement.nativeElement.querySelector("button");
     button.click();
 
     fixture.whenStable().then(() => {
-      expect(component.MovieService.addProductToCart).toHaveBeenCalled();
+      expect(component.cartService.addProductToCart).toHaveBeenCalled();
     });
   }));
 

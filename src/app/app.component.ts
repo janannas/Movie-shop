@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { MovieService } from "./services/movie.service";
 import { Router } from "@angular/router";
+import { CartService } from "./services/cart-service.service";
 
 @Component({
   selector: "app-root",
@@ -14,10 +15,14 @@ export class AppComponent {
   productName: string;
   productRejected: boolean;
 
-  constructor(private service: MovieService, private router: Router) {
+  constructor(
+    private movieService: MovieService,
+    private cartService: CartService,
+    private router: Router
+  ) {
     let isRunning = false;
 
-    this.service.getProductMsg().subscribe(result => {
+    this.cartService.getProductMsg().subscribe(result => {
       let { productAmount, productName, productRejected } = result;
 
       this.productAdded = true;
@@ -40,7 +45,7 @@ export class AppComponent {
     if (searchText === undefined || searchText === "") {
       this.emptySearch = true;
     } else if (searchText) {
-      this.service.searchMovies(searchText);
+      this.movieService.searchMovies(searchText);
       this.router.navigateByUrl("/catalog");
     }
   }

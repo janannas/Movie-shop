@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { IMovie } from "src/app/interfaces/IMovie";
-import { MovieService } from "src/app/services/movie.service";
+import { CartService } from "src/app/services/cart-service.service";
 
 @Component({
   selector: "app-product",
@@ -13,11 +13,11 @@ export class ProductComponent implements OnInit {
   @Input() movieId: number;
   @Input() categories: IMovie[];
 
-  constructor(public service: MovieService) {}
+  constructor(public cartService: CartService) {}
 
   ngOnInit() {}
 
   handleClick(product: IMovie): void {
-    this.service.addProductToCart(product);
+    this.cartService.addProductToCart(product);
   }
 }

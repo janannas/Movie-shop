@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import * as moment from "moment";
-import { MovieService } from "src/app/services/movie.service";
+import { CartService } from "src/app/services/cart-service.service";
 import { IMovie } from "src/app/interfaces/IMovie";
 import { IFakeForm } from "src/app/interfaces/IFakeForm";
 import { IOrderRows } from "src/app/interfaces/IOrderRows";
@@ -19,10 +19,10 @@ export class CartComponent implements OnInit {
   orderRows: IOrderRows[] = [];
   emptyCart: boolean;
 
-  constructor(private movieService: MovieService) {
-    this.cart = this.movieService.getProductsFromCart();
-    this.emptyCart = this.movieService.checkCartEmpty();
-    this.orderRows = this.movieService.createOrderRows();
+  constructor(private cartService: CartService) {
+    this.cart = this.cartService.getProductsFromCart();
+    this.emptyCart = this.cartService.checkCartEmpty();
+    this.orderRows = this.cartService.createOrderRows();
   }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
   }
 
   handleUpdateAmount(amount: number, id: number) {
-    this.movieService.updateAmount(amount, id);
+    this.cartService.updateAmount(amount, id);
     this.calculateTotalProducts();
   }
 
@@ -70,9 +70,9 @@ export class CartComponent implements OnInit {
   }
 
   handleRemoveProduct(productToRemove: IMovie) {
-    this.movieService.removeProductFromCart(productToRemove);
+    this.cartService.removeProductFromCart(productToRemove);
     this.checkPlural();
-    this.emptyCart = this.movieService.checkCartEmpty();
+    this.emptyCart = this.cartService.checkCartEmpty();
   }
 
   calculateTotalProducts() {
