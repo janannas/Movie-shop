@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
 import { IMovie } from "./IMovie";
-import { IBillingForm } from "./IBillingForm";
+import { IOrder } from "./IOrder";
 import { ICategory } from "./ICategory";
 import { HttpErrorResponse } from "@angular/common/http";
-import { IOrderRows } from './IOrderRows';
+import { IOrderRows } from "./IOrderRows";
 
 export interface IMovieService {
   movies?: IMovie[];
@@ -22,6 +22,6 @@ export interface IMovieService {
   createOrderRows(): IOrderRows[];
   updateAmount(amount: number, id: number): void;
   getProductsFromCart(): IMovie[];
-  sendOrder(billingData: IBillingForm): Observable<IBillingForm>;
+  sendOrder(billingData: IOrder): Observable<IOrder>;
   handleError?(error: HttpErrorResponse): void;
 }

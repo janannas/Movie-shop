@@ -3,9 +3,9 @@ import { Component, OnInit } from "@angular/core";
 import * as moment from "moment";
 import { CartService } from "src/app/services/cart-service.service";
 import { IMovie } from "src/app/interfaces/IMovie";
-import { IFakeForm } from "src/app/interfaces/IFakeForm";
-import { IOrderRows } from "src/app/interfaces/IOrderRows";
 import { IBillingForm } from "src/app/interfaces/IBillingForm";
+import { IOrderRows } from "src/app/interfaces/IOrderRows";
+import { IOrder } from "src/app/interfaces/IOrder";
 
 @Component({
   selector: "app-cart",
@@ -35,26 +35,26 @@ export class CartComponent implements OnInit {
     this.calculateTotalProducts();
   }
 
-  createBillingObject(form: IFakeForm): IBillingForm {
+  createOrder(billingForm: IBillingForm): IOrder {
     return {
       companyId: 9,
       created: moment()
         .locale("sv")
         .format("YYYY-MM-DDTLTS"),
-      createdBy: form.email,
-      paymentMethod: form.paymentMethod,
+      createdBy: billingForm.email,
+      paymentMethod: billingForm.paymentMethod,
       totalPrice: this.totalProducts,
       status: 0,
       orderRows: this.orderRows
     };
   }
 
-  handleForm(fakeForm: IFakeForm) {
-    const finalForm = this.createBillingObject(fakeForm);
-    console.log(finalForm);
+  handleForm(billingForm: IBillingForm) {
+    const order = this.createOrder(billingForm);
+    console.log(order);
 
     /* this.movieService
-      .sendOrder(finalForm)
+      .sendOrder(order)
       .subscribe(
         response => console.log("success", response),
         error => console.log("error", error)

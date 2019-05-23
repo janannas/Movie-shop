@@ -1,11 +1,14 @@
-import { IOrderRows } from "./IOrderRows";
+interface IAddress {
+  addressLine: string;
+  city: string;
+  postalCode: number;
+  country: string;
+}
 
 export interface IBillingForm {
-  companyId: number;
-  created: string;
-  createdBy: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   paymentMethod: string;
-  totalPrice: number;
-  status: number;
-  orderRows: IOrderRows[];
+  address: IAddress;
 }

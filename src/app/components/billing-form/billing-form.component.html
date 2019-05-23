@@ -1,4 +1,4 @@
-<form [formGroup]="billingForm" (ngSubmit)="handleOrder()">
+<form [formGroup]="form" (ngSubmit)="handleOrder()">
   <div>
     <label>Firstname: </label>
     <input
@@ -110,9 +110,9 @@
     </div>
   </div>
 
-  <button [disabled]="!billingForm.valid" type="submit">
+  <button [disabled]="!form.valid" type="submit">
     Submit
   </button>
 </form>
 
-<p>{{ billingForm.value | json }}</p>
+<p>{{ form.value | json }}</p>

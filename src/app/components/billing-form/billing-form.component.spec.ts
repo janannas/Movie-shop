@@ -33,11 +33,10 @@ describe("BillingFormComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit', () => {
-    component.fakeForm.subscribe((myFormData: FormGroup) => {
+  it("should emit", () => {
+    component.billlingForm.subscribe((myFormData: FormGroup) => {
       expect(myFormData).toBeDefined();
-    })
+    });
     component.handleOrder();
   });
 });
-

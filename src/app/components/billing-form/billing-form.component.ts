@@ -12,15 +12,15 @@ import {
   styleUrls: ["./billing-form.component.css"]
 })
 export class BillingFormComponent implements OnInit {
-  @Output() public fakeForm = new EventEmitter<FormGroup>();
-  billingForm: FormGroup;
-  paymentMethods: string[] = ["Visa", "MasterCard", "Paypal", "Invoice"];
+  @Output() public billlingForm = new EventEmitter<FormGroup>();
+  form: FormGroup;
+  paymentMethods: string[] = ["Visa", "MasterCard", "Paypal"];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     //This form contains "fake" form controls in order to look more real
-    this.billingForm = this.fb.group({
+    this.form = this.fb.group({
       firstName: ["Johanna", Validators.required],
       lastName: ["Hellsjo", Validators.required],
       email: ["jan.hekk@gmail.com", [Validators.required, Validators.email]],
@@ -38,38 +38,38 @@ export class BillingFormComponent implements OnInit {
   }
 
   handleOrder() {
-    this.fakeForm.emit(this.billingForm.value);
+    this.billlingForm.emit(this.form.value);
   }
 
   get firstName() {
-    return this.billingForm.get("firstName") as FormControl;
+    return this.form.get("firstName") as FormControl;
   }
 
   get lastName() {
-    return this.billingForm.get("lastName") as FormControl;
+    return this.form.get("lastName") as FormControl;
   }
 
   get email() {
-    return this.billingForm.get("email") as FormControl;
+    return this.form.get("email") as FormControl;
   }
 
   get addressLine() {
-    return this.billingForm.get("address").get("addressLine") as FormControl;
+    return this.form.get("address").get("addressLine") as FormControl;
   }
 
   get postalCode() {
-    return this.billingForm.get("address").get("postalCode") as FormControl;
+    return this.form.get("address").get("postalCode") as FormControl;
   }
 
   get city() {
-    return this.billingForm.get("address").get("city") as FormControl;
+    return this.form.get("address").get("city") as FormControl;
   }
 
   get country() {
-    return this.billingForm.get("address").get("country") as FormControl;
+    return this.form.get("address").get("country") as FormControl;
   }
 
   get paymentMethod() {
-    return this.billingForm.get("paymentMethod") as FormControl;
+    return this.form.get("paymentMethod") as FormControl;
   }
 }

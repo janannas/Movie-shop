@@ -5,7 +5,7 @@ import { Observable, Subject, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 
 import { IMovie } from "../interfaces/IMovie";
-import { IBillingForm } from "../interfaces/IBillingForm";
+import { IOrder } from "../interfaces/IOrder";
 import { ICategory } from "../interfaces/ICategory";
 
 @Injectable({
@@ -58,11 +58,11 @@ export class MovieService {
     }
   }
 
-  sendOrder(billingData: IBillingForm): Observable<IBillingForm> {
+  sendOrder(order: IOrder): Observable<IOrder> {
     const orderUrl: string =
       "https://medieinstitutet-wie-products.azurewebsites.net/api/orders";
 
-    return this.http.post<IBillingForm>(orderUrl, billingData).pipe(
+    return this.http.post<IOrder>(orderUrl, order).pipe(
       retry(3),
       catchError(this.handleError)
     );

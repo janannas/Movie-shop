@@ -3,9 +3,9 @@ import { Observable, of } from "rxjs";
 
 import { IMovie } from "../interfaces/IMovie";
 import { IMovieService } from "../interfaces/IMovieService";
-import { IBillingForm } from "../interfaces/IBillingForm";
+import { IOrder } from "../interfaces/IOrder";
 import { ICategory } from "../interfaces/ICategory";
-import { IOrderRows } from '../interfaces/IOrderRows';
+import { IOrderRows } from "../interfaces/IOrderRows";
 
 @Injectable({
   providedIn: "root"
@@ -89,7 +89,7 @@ export class MockMovieService implements IMovieService {
   ];
   orderRows: IOrderRows[] = [];
 
-  constructor() { }
+  constructor() {}
 
   getMovieData(): Observable<IMovie[]> {
     return of(this.movies);
@@ -168,7 +168,7 @@ export class MockMovieService implements IMovieService {
     return this.cart;
   }
 
-  sendOrder(billingData: IBillingForm): Observable<IBillingForm> {
-    return of(billingData);
+  sendOrder(order: IOrder): Observable<IOrder> {
+    return of(order);
   }
 }
