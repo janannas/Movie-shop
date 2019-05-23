@@ -69,7 +69,6 @@ export class MovieService implements IMovieService {
     if (index === -1) {
       this.cart.push(myProduct);
       this.productMsg({
-        productAdded: true,
         productAmount: 1,
         productName: myProduct.name,
         productRejected: false
@@ -89,14 +88,12 @@ export class MovieService implements IMovieService {
         if (!max) {
           ++rows.amount;
           this.productMsg({
-            productAdded: true,
             productAmount: rows.amount,
             productName: myProduct.name,
             productRejected: false
           });
         } else {
           this.productMsg({
-            productAdded: true,
             productAmount: rows.amount,
             productName: myProduct.name,
             productRejected: true
@@ -111,18 +108,15 @@ export class MovieService implements IMovieService {
   }
 
   productMsg({
-    productAdded,
     productAmount,
     productName,
     productRejected
   }: {
-    productAdded: boolean;
     productAmount: number;
     productName: string;
     productRejected: boolean;
   }) {
     this.confirm.next({
-      productAdded,
       productAmount,
       productName,
       productRejected

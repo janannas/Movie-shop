@@ -15,22 +15,24 @@ export class AppComponent {
   productRejected: boolean;
 
   constructor(private service: MovieService, private router: Router) {
-    this.service.getProductMsg().subscribe(result => {
-      let {
-        productAdded,
-        productAmount,
-        productName,
-        productRejected
-      } = result;
+    let isRunning = false;
 
-      this.productAdded = productAdded;
+    this.service.getProductMsg().subscribe(result => {
+      let { productAmount, productName, productRejected } = result;
+
+      this.productAdded = true;
       this.productAmount = productAmount;
       this.productName = productName;
       this.productRejected = productRejected;
 
-      setTimeout(() => {
-        this.productAdded = false;
-      }, 3000);
+      if (!isRunning) {
+        isRunning = true;
+
+        setTimeout(() => {
+          isRunning = false;
+          this.productAdded = false;
+        }, 3000);
+      }
     });
   }
 
