@@ -2,17 +2,16 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+import { MockCartService } from "src/app/services/mock-cart.service";
+import { CartService } from "src/app/services/cart-service.service";
+
 import { CartComponent } from "./cart.component";
-
-import { MovieService } from "src/app/services/movie.service";
-import { MockMovieService } from "src/app/services/mock-movie.service";
-
 import { BillingFormComponent } from "../billing-form/billing-form.component";
 
 describe("CartComponent", () => {
   let component: CartComponent;
   let fixture: ComponentFixture<CartComponent>;
-  let service: MockMovieService;
+  let service: MockCartService;
 
   const mockProduct = {
     id: 79,
@@ -60,7 +59,7 @@ describe("CartComponent", () => {
     })
       .overrideComponent(CartComponent, {
         set: {
-          providers: [{ provide: MovieService, useClass: MockMovieService }]
+          providers: [{ provide: CartService, useClass: MockCartService }]
         }
       })
       .compileComponents();
@@ -71,7 +70,7 @@ describe("CartComponent", () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    service = TestBed.get(MockMovieService)
+    service = TestBed.get(MockCartService);
   });
 
   it("should create", () => {

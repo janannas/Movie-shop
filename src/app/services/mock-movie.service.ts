@@ -68,7 +68,6 @@ export class MockMovieService implements IMovieService {
       ]
     }
   ];
-  cart: IMovie[] = [];
   categories: ICategory[] = [
     {
       id: 5,
@@ -87,7 +86,6 @@ export class MockMovieService implements IMovieService {
       name: "Sci-fi"
     }
   ];
-  orderRows: IOrderRows[] = [];
 
   constructor() {}
 
@@ -108,64 +106,6 @@ export class MockMovieService implements IMovieService {
       return of([this.movies[0]]);
     }
     return of([]);
-  }
-
-  addProductToCart(myProduct: IMovie): void {
-    let index = this.cart.findIndex(x => x.id === myProduct.id);
-
-    if (index === -1) {
-      this.cart.push(myProduct);
-    } else {
-      this.addAmount(myProduct);
-    }
-  }
-
-  addAmount(myProduct: IMovie): void {
-    this.createOrderRows();
-
-    for (const rows of this.orderRows) {
-      if (myProduct.id === rows.productId) {
-        const max = rows.amount >= 9 ? true : false;
-
-        if (!max) {
-          ++rows.amount;
-        }
-      }
-    }
-  }
-
-  checkCartEmpty(): boolean {
-    return this.cart.length === 0 ? true : false;
-  }
-
-  removeProductFromCart(productToRemove: IMovie): void {
-    for (let i = 0; i < this.cart.length; i++) {
-      if (productToRemove.id === this.cart[i].id) {
-        this.cart.splice(i, 1) && this.orderRows.splice(i, 1);
-      }
-    }
-  }
-
-  createOrderRows(): IOrderRows[] {
-    for (let i = 0; i < this.cart.length; i++) {
-      if (!this.orderRows[i]) {
-        this.orderRows.push({ productId: this.cart[i].id, amount: 1 });
-      }
-    }
-    return this.orderRows;
-  }
-
-  updateAmount(amount: number, id: number): void {
-    for (const row of this.orderRows) {
-      if (row.productId == id) {
-        row.amount = +amount;
-      }
-    }
-  }
-
-  getProductsFromCart(): IMovie[] {
-    this.checkCartEmpty();
-    return this.cart;
   }
 
   sendOrder(order: IOrder): Observable<IOrder> {

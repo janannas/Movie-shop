@@ -7,11 +7,12 @@ import { catchError, retry } from "rxjs/operators";
 import { IMovie } from "../interfaces/IMovie";
 import { IOrder } from "../interfaces/IOrder";
 import { ICategory } from "../interfaces/ICategory";
+import { IMovieService } from "../interfaces/IMovieService";
 
 @Injectable({
   providedIn: "root"
 })
-export class MovieService {
+export class MovieService implements IMovieService {
   searchResults = new Subject<IMovie[]>();
 
   constructor(private http: HttpClient) {}
