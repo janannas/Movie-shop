@@ -14,5 +14,5 @@ export interface IMovieService {
   getSearchResults(): Observable<any>;
   searchMovies(searchText: string): Observable<IMovie[]>;
   sendOrder(billingData: IOrder): Observable<IOrder>;
-  handleError?(error: HttpErrorResponse): void;
+  handleError?(error: HttpErrorResponse): any;
 }

@@ -2,13 +2,8 @@
   category-details works!
 </p>
 <div>
-  <app-product
-    *ngFor="let movie of movies"
-    [movie]="movie"
-    [moviePoster]="movie.imageUrl"
-    [movieId]="movie.id"
-  >
+  <app-product *ngFor="let movie of movies" [movie]="movie" [moviePoster]="movie.imageUrl" [movieId]="movie.id">
   </app-product>
 </div>
 
-<app-error [errorMsg]="errorMsg" *ngIf="error"></app-error>
+<app-error *ngIf="error"></app-error>

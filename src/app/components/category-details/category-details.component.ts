@@ -11,7 +11,6 @@ import { IMovie } from "src/app/interfaces/IMovie";
 export class CategoryDetailsComponent implements OnInit {
   movies: IMovie[] = [];
   error: boolean;
-  errorMsg: string;
 
   constructor(private route: ActivatedRoute, private service: MovieService) {
     this.service.getMovieData().subscribe(
@@ -23,7 +22,6 @@ export class CategoryDetailsComponent implements OnInit {
       },
       error => {
         this.error = true;
-        this.errorMsg = error;
         console.log("Error: " + error);
       }
     );
@@ -39,5 +37,5 @@ export class CategoryDetailsComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
