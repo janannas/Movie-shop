@@ -1,0 +1,21 @@
+<h1>All orders!</h1>
+<div *ngFor="let order of orders">
+
+  <div class="box">
+    <p>id: {{order.id}}</p>
+    <p>time: {{order.created}}</p>
+    <p>totalPrice: {{order.totalPrice}}</p>
+
+    <h4>rows: </h4>
+    <div *ngFor="let rows of order.orderRows">
+      <p>{{rows|json}}</p>
+    </div>
+
+    <button (click)="removeOrder(order)">Remove</button>
+  </div>
+
+</div>
+
+<br />
+
+<button (click)="saveUpdatedOrders()">Update Orders</button>

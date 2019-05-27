@@ -15,6 +15,7 @@ import { ProductDetailsComponent } from "./components/product-details/product-de
 import { BillingFormComponent } from "./components/billing-form/billing-form.component";
 import { CategoryDetailsComponent } from "./components/category-details/category-details.component";
 import { ErrorComponent } from './components/error/error.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ErrorComponent } from './components/error/error.component';
     ProductDetailsComponent,
     BillingFormComponent,
     CategoryDetailsComponent,
-    ErrorComponent
+    ErrorComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -39,4 +41,4 @@ import { ErrorComponent } from './components/error/error.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

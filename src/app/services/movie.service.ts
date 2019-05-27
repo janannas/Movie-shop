@@ -18,9 +18,11 @@ export class MovieService implements IMovieService {
   constructor(private http: HttpClient) { }
 
   getMovieData(): Observable<IMovie[]> {
+    const moviesUrl = "https://medieinstitutet-wie-products.azurewebsites.net/api/products";
+
     return this.http
       .get<IMovie[]>(
-        "https://medieinstitutet-wie-products.azurewebsites.net/api/products"
+        moviesUrl
       )
       .pipe(
         retry(3),
@@ -29,9 +31,11 @@ export class MovieService implements IMovieService {
   }
 
   getCategoryData(): Observable<ICategory[]> {
+    const categoryUrl = "https://medieinstitutet-wie-products.azurewebsites.net/api/categories";
+
     return this.http
       .get<ICategory[]>(
-        "https://medieinstitutet-wie-products.azurewebsites.net/api/categories"
+        categoryUrl
       )
       .pipe(
         retry(3),
@@ -44,12 +48,13 @@ export class MovieService implements IMovieService {
   }
 
   searchMovies(searchText: string): Observable<IMovie[]> {
+    const searchUrl = `https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=${searchText}`;
     if (searchText === undefined || searchText === "") {
       return;
     } else {
       this.http
         .get<IMovie[]>(
-          `https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=${searchText}`
+          searchUrl
         )
         .pipe(
           retry(3),
@@ -68,6 +73,21 @@ export class MovieService implements IMovieService {
       catchError(this.handleError)
     );
   }
+
+  getOrders(): Observable<IOrder[]> {
+    const myOrdersUrl: string = "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9"
+
+    return this.http.get<IOrder[]>(myOrdersUrl).pipe(retry(3), catchError(this.handleError));
+  }
+
+  deleteOrder(orderToDelete) {
+    console.log(orderToDelete);
+
+    const myOrdersUrl: string = "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9"
+
+    //return this.http.delete<IOrder[]>(myOrdersUrl, orderToDelete).pipe(retry(3), catchError(this.handleError));
+  }
+
 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

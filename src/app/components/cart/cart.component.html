@@ -9,7 +9,7 @@
   <h1 *ngIf="!plural">Overview Cart ({{ cart.length }} product)</h1>
   <h1 *ngIf="plural">Overview Cart ({{ cart.length }} products)</h1>
 
-  <div *ngFor="let product of cart; let i = index">
+  <div *ngFor="let product of cart">
     <p>{{ product.name }}</p>
 
     <div>
@@ -40,6 +40,6 @@
 
 <hr />
 
-<app-billing-form (fakeForm)="handleForm($event)"></app-billing-form>
+<app-billing-form (billingForm)="handleForm($event)"></app-billing-form>
 
 <div *ngIf="emptyCart">Oh, look like your cart is empty</div>

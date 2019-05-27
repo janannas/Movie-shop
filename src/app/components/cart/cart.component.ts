@@ -55,14 +55,13 @@ export class CartComponent implements OnInit {
 
   handleForm(billingForm: IBillingForm) {
     const order = this.createOrder(billingForm);
-    console.log(order);
 
-    /* this.movieService
+    this.movieService
       .sendOrder(order)
       .subscribe(
         response => console.log("success", response),
         error => console.log("error", error)
-      ); */
+      );
   }
 
   checkPlural() {
