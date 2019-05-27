@@ -34,7 +34,7 @@ describe("BillingFormComponent", () => {
   });
 
   it("should emit", () => {
-    component.billlingForm.subscribe((myFormData: FormGroup) => {
+    component.billingForm.subscribe((myFormData: FormGroup) => {
       expect(myFormData).toBeDefined();
     });
     component.handleOrder();

@@ -12,7 +12,7 @@ import {
   styleUrls: ["./billing-form.component.css"]
 })
 export class BillingFormComponent implements OnInit {
-  @Output() public billlingForm = new EventEmitter<FormGroup>();
+  @Output() public billingForm = new EventEmitter<FormGroup>();
   form: FormGroup;
   paymentMethods: string[] = ["Visa", "MasterCard", "Paypal"];
 
@@ -38,7 +38,7 @@ export class BillingFormComponent implements OnInit {
   }
 
   handleOrder() {
-    this.billlingForm.emit(this.form.value);
+    this.billingForm.emit(this.form.value);
   }
 
   get firstName() {
