@@ -12,7 +12,7 @@ export interface IMovieService {
   getMovieData(): Observable<IMovie[]>;
   getCategoryData(): Observable<ICategory[]>;
   getSearchResults(): Observable<any>;
-  searchMovies(searchText: string): Observable<IMovie[]>;
+  searchMovies(searchText: string);
   sendOrder(billingData: IOrder): Observable<IOrder>;
   handleError?(error: HttpErrorResponse): any;
 }

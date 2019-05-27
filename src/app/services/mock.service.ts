@@ -106,7 +106,7 @@ export class MockService implements ICartService, IMovieService {
     return of([this.movies[1]]);
   }
 
-  searchMovies(searchText: string): Observable<IMovie[]> {
+  searchMovies(searchText: string) {
     if (this.movies[0].name.includes(searchText)) {
       return of([this.movies[0]]);
     }

@@ -47,21 +47,18 @@ export class MovieService implements IMovieService {
     return this.searchResults.asObservable();
   }
 
-  searchMovies(searchText: string): Observable<IMovie[]> {
+  searchMovies(searchText: string) {
     const searchUrl = `https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=${searchText}`;
-    if (searchText === undefined || searchText === "") {
-      return;
-    } else {
-      this.http
-        .get<IMovie[]>(
-          searchUrl
-        )
-        .pipe(
-          retry(3),
-          catchError(this.handleError)
-        )
-        .subscribe(results => this.searchResults.next(results));
-    }
+
+    return this.http
+      .get<IMovie[]>(
+        searchUrl
+      )
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      )
+      .subscribe(results => this.searchResults.next(results));
   }
 
   sendOrder(order: IOrder): Observable<IOrder> {
@@ -85,7 +82,7 @@ export class MovieService implements IMovieService {
 
     const myOrdersUrl: string = "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9"
 
-    //return this.http.delete<IOrder[]>(myOrdersUrl, orderToDelete).pipe(retry(3), catchError(this.handleError));
+    return this.http.delete<IOrder[]>(myOrdersUrl, orderToDelete).pipe(retry(3), catchError(this.handleError));
   }
 
 

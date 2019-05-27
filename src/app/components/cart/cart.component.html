@@ -1,45 +1,50 @@
-<p>
-  {{ cart | json }}
-</p>
-<p>
-  {{ totalProducts }}
-</p>
-
 <div>
-  <h1 *ngIf="!plural">Overview Cart ({{ cart.length }} product)</h1>
-  <h1 *ngIf="plural">Overview Cart ({{ cart.length }} products)</h1>
+  <div>
+    <h1 *ngIf="!plural">Overview Cart ({{ cart.length }} product)</h1>
+    <h1 *ngIf="plural">Overview Cart ({{ cart.length }} products)</h1>
 
-  <div *ngFor="let product of cart">
-    <p>{{ product.name }}</p>
-
-    <div>
-      <label>Quantity: </label>
-
-      <select #amountSelect (blur)="handleUpdateAmount(amountSelect.value, product.id)"
-        (blur)="calculateTotalProducts()">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-      </select>
+    <div *ngFor="let product of cart; let i = index">
+      <p>{{ product.name }}</p>
 
       <div>
-        <p>{{ orderRows[i].amount }}</p>
+        <label>Quantity: </label>
+
+        <select #amountSelect (blur)="handleUpdateAmount(amountSelect.value, product.id)"
+          (blur)="calculateTotalProducts()">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+        </select>
+
+        <div>
+          <p>Amount: {{ orderRows[i].amount }}</p>
+          <p>Cost each: {{ product.price }}</p>
+          <p>{{ orderRows[i].amount * product.price }}</p>
+        </div>
       </div>
+
+      <button (click)="handleRemoveProduct(product)" (blur)="calculateTotalProducts()">
+        Remove
+      </button>
     </div>
-    <button (click)="handleRemoveProduct(product)" (blur)="calculateTotalProducts()">
-      Remove
-    </button>
   </div>
+
+  <p>
+    Total: {{ totalProducts | currency:'SEK' }}
+  </p>
+
+  <hr />
+
+
+  <app-billing-form (billingForm)="handleForm($event)"></app-billing-form>
+
+
 </div>
-
-<hr />
-
-<app-billing-form (billingForm)="handleForm($event)"></app-billing-form>
 
 <div *ngIf="emptyCart">Oh, look like your cart is empty</div>
