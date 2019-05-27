@@ -2,11 +2,10 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 
 import { MovieService } from "src/app/services/movie.service";
-import { MockMovieService } from "src/app/services/mock-movie.service";
-
 import { ProductComponent } from "./product.component";
 import { Component } from "@angular/core";
 import { IMovie } from "src/app/interfaces/IMovie";
+import { MockService } from 'src/app/services/mock.service';
 
 describe("ProductComponent", () => {
   let component: ProductComponent;
@@ -22,7 +21,7 @@ describe("ProductComponent", () => {
     })
       .overrideComponent(ProductComponent, {
         set: {
-          providers: [{ provide: MovieService, useClass: MockMovieService }]
+          providers: [{ provide: MovieService, useClass: MockService }]
         }
       })
       .compileComponents();
@@ -88,7 +87,7 @@ describe("ProductComponent", () => {
     movies: IMovie[];
     category = { id: 5, name: "Action" };
 
-    constructor(private service: MockMovieService) {
+    constructor(private service: MockService) {
       this.service.getMovieData().subscribe(myMovieData => {
         this.movies = myMovieData;
 

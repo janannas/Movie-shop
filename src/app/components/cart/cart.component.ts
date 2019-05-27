@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 
 import * as moment from "moment";
-import { CartService } from "src/app/services/cart-service.service";
+import { CartService } from "src/app/services/cart.service";
 import { IMovie } from "src/app/interfaces/IMovie";
 import { IBillingForm } from "src/app/interfaces/IBillingForm";
 import { IOrderRows } from "src/app/interfaces/IOrderRows";
 import { IOrder } from "src/app/interfaces/IOrder";
+import { MovieService } from "src/app/services/movie.service";
 
 @Component({
   selector: "app-cart",
@@ -19,7 +20,10 @@ export class CartComponent implements OnInit {
   orderRows: IOrderRows[] = [];
   emptyCart: boolean;
 
-  constructor(private cartService: CartService) {
+  constructor(
+    private cartService: CartService,
+    private movieService: MovieService
+  ) {
     this.cart = this.cartService.getProductsFromCart();
     this.emptyCart = this.cartService.checkCartEmpty();
     this.orderRows = this.cartService.createOrderRows();

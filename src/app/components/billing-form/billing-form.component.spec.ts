@@ -2,9 +2,8 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule, FormGroup } from "@angular/forms";
 
 import { MovieService } from "../../services/movie.service";
-import { MockMovieService } from "../../services/mock-movie.service";
-
 import { BillingFormComponent } from "./billing-form.component";
+import { MockService } from 'src/app/services/mock.service';
 
 describe("BillingFormComponent", () => {
   let component: BillingFormComponent;
@@ -17,7 +16,7 @@ describe("BillingFormComponent", () => {
     })
       .overrideComponent(BillingFormComponent, {
         set: {
-          providers: [{ provide: MovieService, useClass: MockMovieService }]
+          providers: [{ provide: MovieService, useClass: MockService }]
         }
       })
       .compileComponents();

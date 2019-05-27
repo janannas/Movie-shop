@@ -2,18 +2,20 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 
 import { MovieService } from "../../services/movie.service";
-import { MockMovieService } from "../../services/mock-movie.service";
-
 import { CatalogComponent } from "./catalog.component";
 import { ProductComponent } from "../product/product.component";
 import { ErrorComponent } from "../error/error.component";
-import { connect } from 'net';
+import { mockProducts } from "../../testing/mockData";
+import { MockService } from 'src/app/services/mock.service';
 
 describe("CatalogComponent", () => {
   let component: CatalogComponent;
   let fixture: ComponentFixture<CatalogComponent>;
 
-  let service: MockMovieService;
+  let service: MockService;
+
+  let { mockProduct1 } = mockProducts;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
@@ -21,7 +23,7 @@ describe("CatalogComponent", () => {
     })
       .overrideComponent(CatalogComponent, {
         set: {
-          providers: [{ provide: MovieService, useClass: MockMovieService }]
+          providers: [{ provide: MovieService, useClass: MockService }]
         }
       })
       .compileComponents();
@@ -32,7 +34,7 @@ describe("CatalogComponent", () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    service = TestBed.get(MockMovieService);
+    service = TestBed.get(MockService);
   });
 
   it("should create", () => {
@@ -50,30 +52,11 @@ describe("CatalogComponent", () => {
         name: "MockCategory"
       }
     ];
-    const mockProduct = [
-      {
-        id: 78,
-        name: "Le fabuleux destin d'Amélie Poulain",
-        description:
-          "Amélie is an innocent and naive girl in Paris with her own sense of justice. She decides to help those around her and, along the way, discovers love.",
-        price: 100,
-        imageUrl:
-          "https://images-na.ssl-images-amazon.com/images/M/MV5BNDg4NjM1YjMtYmNhZC00MjM0LWFiZmYtNGY1YjA3MzZmODc5XkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SY1000_CR0,0,666,1000_AL_.jpg",
-        year: 2001,
-        added: "2017-07-10T00:00:00",
-        productCategory: [
-          {
-            categoryId: 7,
-            category: null
-          }
-        ]
-      }
-    ];
 
-    component.movies = mockProduct;
-
+    component.movies = [mockProduct1];
     component.connectCategoriesToMovie(mockCategory);
-    expect(mockProduct[0].productCategory[0].categoryId).toBe(7);
+
+    expect(mockProduct1.productCategory[0].categoryId).toBe(7);
   })
 
   it("should display correct category", () => {
@@ -81,14 +64,12 @@ describe("CatalogComponent", () => {
     expect(testMovieCategory).toEqual("Sci-fi");
   });
 
-  it("should return true if there are no search result", () => {
+  it("should check if there are any search result", () => {
     service.searchMovies("abcd").subscribe(data => {
       component.checkIfSearchResults(data);
     });
     expect(component.noSearchResult).toBe(true);
-  });
 
-  it("should return false if there are a search result", () => {
     service.searchMovies("Dark").subscribe(data => {
       component.checkIfSearchResults(data);
     });

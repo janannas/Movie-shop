@@ -4,10 +4,10 @@ import { ActivatedRoute } from "@angular/router";
 import { ActivatedRouteStub } from "src/app/testing/activated-route-stub";
 
 import { MovieService } from "../../services/movie.service";
-import { MockMovieService } from "../../services/mock-movie.service";
 
 import { ProductDetailsComponent } from "./product-details.component";
 import { ErrorComponent } from "../error/error.component";
+import { MockService } from 'src/app/services/mock.service';
 
 describe("ProductDetailsComponent", () => {
   let component: ProductDetailsComponent;
@@ -23,7 +23,7 @@ describe("ProductDetailsComponent", () => {
     })
       .overrideComponent(ProductDetailsComponent, {
         set: {
-          providers: [{ provide: MovieService, useClass: MockMovieService }]
+          providers: [{ provide: MovieService, useClass: MockService }]
         }
       })
       .compileComponents();
