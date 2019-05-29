@@ -6,45 +6,63 @@ import { CartService } from "./services/cart.service";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
   emptySearch: boolean = false;
   productAdded: boolean = false;
   productAmount: number;
   productName: string;
+  productImage: string;
   productRejected: boolean;
+  isRunning: boolean = false;
+  //toggles dropdown and overlay scss-classes
+  isShowing: boolean = false;
 
   constructor(
     private movieService: MovieService,
     private cartService: CartService,
     private router: Router
   ) {
-    let isRunning = false;
+    let timerId;
 
     this.cartService.getProductMsg().subscribe(result => {
-      let { productAmount, productName, productRejected } = result;
+      let {
+        productAmount,
+        productName,
+        productImage,
+        productRejected
+      } = result;
 
-      this.productAdded = true;
       this.productAmount = productAmount;
       this.productName = productName;
+      this.productImage = productImage;
       this.productRejected = productRejected;
+      console.log(this.productAmount);
 
-      if (!isRunning) {
-        isRunning = true;
+      this.productAdded = true;
 
-        setTimeout(() => {
-          isRunning = false;
-          this.productAdded = false;
-        }, 3000);
+      if (!this.isRunning) {
+        this.isRunning = true;
+        timerId = setTimeout(this.closeProductMsg.bind(this), 3000);
+      } else if (this.isRunning) {
+        clearTimeout(timerId);
+        //console.log(timerId);
+        timerId = setTimeout(this.closeProductMsg.bind(this), 3000);
       }
     });
+  }
+
+  closeProductMsg() {
+    this.isRunning = false;
+    this.productAdded = false;
   }
 
   handleSearch(searchText: string) {
     if (searchText === undefined || searchText === "") {
       this.emptySearch = true;
     } else if (searchText) {
+      this.isShowing = false;
       this.movieService.searchMovies(searchText);
       this.router.navigateByUrl("/catalog");
     }
@@ -52,5 +70,9 @@ export class AppComponent {
 
   resetEmptySearch() {
     this.emptySearch = false;
+  }
+
+  toggleDropdown() {
+    this.isShowing = !this.isShowing;
   }
 }

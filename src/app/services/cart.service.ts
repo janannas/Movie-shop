@@ -27,6 +27,7 @@ export class CartService implements ICartService {
       this.productMsg({
         productAmount: 1,
         productName: myProduct.name,
+        productImage: myProduct.imageUrl,
         productRejected: false
       });
     } else {
@@ -55,12 +56,14 @@ export class CartService implements ICartService {
           this.productMsg({
             productAmount: rows.amount,
             productName: myProduct.name,
+            productImage: myProduct.imageUrl,
             productRejected: false
           });
         } else {
           this.productMsg({
             productAmount: rows.amount,
             productName: myProduct.name,
+            productImage: myProduct.imageUrl,
             productRejected: true
           });
         }
@@ -75,15 +78,18 @@ export class CartService implements ICartService {
   productMsg({
     productAmount,
     productName,
+    productImage,
     productRejected
   }: {
     productAmount: number;
     productName: string;
+    productImage: string;
     productRejected: boolean;
   }) {
     this.message.next({
       productAmount,
       productName,
+      productImage,
       productRejected
     });
   }

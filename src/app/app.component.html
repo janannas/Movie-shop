@@ -1,41 +1,71 @@
+<a
+  routerLink=""
+  routerLinkActive="linkActive"
+  [routerLinkActiveOptions]="{ exact: true }"
+  ><img src="../assets/images/logo.svg" alt="Logo of the brand" class="logo"
+/></a>
+
 <nav>
-  <a
-    routerLink=""
-    routerLinkActive="linkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    >Home</a
-  >
+  <a class="dropdown-button nav-link" (click)="toggleDropdown()">
+    <i class="fas fa-search"></i>
+  </a>
 
-  <input
-    type="text"
-    name="search"
-    [(ngModel)]="search"
-    (keyUp.enter)="handleSearch(search); search = ''"
-  />
-  <button
-    (click)="handleSearch(search); search = ''"
-    (blur)="resetEmptySearch()"
-  >
-    Search
-  </button>
+  <div
+    id="overlay"
+    [class.overlay]="isShowing"
+    (click)="toggleDropdown()"
+  ></div>
 
-  <a routerLink="/catalog" routerLinkActive="linkActive">View Shop</a>
-  <a routerLink="/cart" routerLinkActive="linkActive">View Cart</a>
-  <a routerLink="/contact" routerLinkActive="linkActive">Contact</a>
+  <a routerLink="/cart" routerLinkActive="linkActive" class="nav-link">
+    <i class="fas fa-shopping-cart"></i>
+    <div [class.cart-indicator]="productAmount >= 0 ? true : false"></div>
+  </a>
+
+  <!-- <a routerLink="/contact" routerLinkActive="linkActive">Contact</a> -->
 </nav>
 
-<div *ngIf="emptySearch">Must search something sry!</div>
+<div class="dropdown-menu" [class.show-dropdown]="isShowing">
+  <div>
+    <a class="close" (click)="toggleDropdown()"></a>
 
-<div *ngIf="productAdded">
-  <div *ngIf="!productRejected">
-    Product added to cart are:
-    <br />
-    {{ productName }}
-    <br />
-    amount: {{ productAmount }}
+    <div class="search-container">
+      <h1 class="subtitle">
+        Search for movies:
+      </h1>
+      <input
+        type="text"
+        name="search"
+        [(ngModel)]="search"
+        class="search-input"
+        (keyUp.enter)="handleSearch(search); search = ''"
+      />
+      <small *ngIf="emptySearch">A title to search is required!</small>
+      <button
+        (click)="handleSearch(search); search = ''"
+        (blur)="resetEmptySearch()"
+      >
+        Search
+      </button>
+    </div>
   </div>
-  <div *ngIf="productRejected">
-    <h4>Srry, can't add more than 9</h4>
+</div>
+<!-- dropdown-menu -->
+
+<div class="product-msg" [class.show-product-msg]="productAdded">
+  <div>
+    <h2 class="subtitle large">Added to cart!</h2>
+
+    <div class="card">
+      <img src="{{ productImage }}" alt="Image of product" />
+      <div>
+        <br />
+        <p class="large">{{ productName }}</p>
+        <p>{{ productDirector }}</p>
+        <br />
+        <p *ngIf="!productRejected">Amount: {{ productAmount }} pcs</p>
+        <p *ngIf="productRejected">Amount is limited to 9 pcs</p>
+      </div>
+    </div>
   </div>
 </div>
 
