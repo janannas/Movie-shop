@@ -3,6 +3,7 @@ import { IMovie } from "../interfaces/IMovie";
 import { IOrderRows } from "../interfaces/IOrderRows";
 import { Subject } from "rxjs";
 import { ICartService } from "../interfaces/ICartService";
+import { IProductMsg } from "../interfaces/IProductMsg";
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,7 @@ import { ICartService } from "../interfaces/ICartService";
 export class CartService implements ICartService {
   cart: IMovie[] = [];
   orderRows: IOrderRows[] = [];
-  message = new Subject<any>();
+  message = new Subject<IProductMsg>();
 
   constructor() {}
 

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { MovieService } from "./services/movie.service";
 import { Router } from "@angular/router";
 import { CartService } from "./services/cart.service";
+import { IProductMsg } from "./interfaces/IProductMsg";
 
 @Component({
   selector: "app-root",
@@ -11,11 +12,12 @@ import { CartService } from "./services/cart.service";
 export class AppComponent {
   emptySearch: boolean = false;
   productAdded: boolean = false;
+  timerId: NodeJS.Timer;
+  isRunning: boolean = false;
   productAmount: number;
   productName: string;
   productImage: string;
   productRejected: boolean;
-  isRunning: boolean = false;
   //toggles dropdown and overlay scss-classes
   isShowing: boolean = false;
 
@@ -24,38 +26,37 @@ export class AppComponent {
     private cartService: CartService,
     private router: Router
   ) {
-    let timerId;
-
-    this.cartService.getProductMsg().subscribe(result => {
-      let {
-        productAmount,
-        productName,
-        productImage,
-        productRejected
-      } = result;
-
-      this.productAmount = productAmount;
-      this.productName = productName;
-      this.productImage = productImage;
-      this.productRejected = productRejected;
-      console.log(this.productAmount);
-
-      this.productAdded = true;
-
-      if (!this.isRunning) {
-        this.isRunning = true;
-        timerId = setTimeout(this.closeProductMsg.bind(this), 3000);
-      } else if (this.isRunning) {
-        clearTimeout(timerId);
-        //console.log(timerId);
-        timerId = setTimeout(this.closeProductMsg.bind(this), 3000);
-      }
-    });
+    this.cartService
+      .getProductMsg()
+      .subscribe(msg => this.handleProductMsg(msg));
   }
 
-  closeProductMsg() {
-    this.isRunning = false;
-    this.productAdded = false;
+  handleProductMsg(myMsg: IProductMsg) {
+    let { productAmount, productName, productImage, productRejected } = myMsg;
+
+    this.productAmount = productAmount;
+    this.productName = productName;
+    this.productImage = productImage;
+    this.productRejected = productRejected;
+
+    this.startTimer();
+  }
+
+  startTimer() {
+    this.productAdded = true;
+
+    const closeProductMsg = () => {
+      this.isRunning = false;
+      this.productAdded = false;
+    };
+
+    if (!this.isRunning) {
+      this.isRunning = true;
+      this.timerId = setTimeout(closeProductMsg.bind(this), 3000);
+    } else if (this.isRunning) {
+      clearTimeout(this.timerId);
+      this.timerId = setTimeout(closeProductMsg.bind(this), 3000);
+    }
   }
 
   handleSearch(searchText: string) {
