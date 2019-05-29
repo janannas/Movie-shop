@@ -34,3 +34,19 @@ li {
   font-weight: 300;
   text-align: center;
 }
+
+.primory-button {
+  color: $main-contrast-color;
+  font-family: "Montserrat", sans-serif;
+  background-color: $main-dark-shade-color;
+  border: solid 2.5px $main-contrast-color;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 15px 27px;
+
+  &:hover {
+    color: $main-dark-shade-color;
+    border-color: $main-dark-shade-color;
+    background-color: $main-contrast-color;
+  }
+}

@@ -1,0 +1,53 @@
+@import "~src/variables";
+
+.container {
+  padding-top: calc(#{$nav-height} + 40px);
+}
+
+img {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+}
+
+h2,
+h1 {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  margin: 0;
+  color: $main-light-shade-color;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 34px;
+  line-height: 1.5;
+}
+
+.cta {
+  display: flex;
+  padding: 30px 20px 60px 20px;
+
+  a {
+    margin: auto;
+  }
+}
+
+.hero {
+  max-width: 300px;
+  margin: auto;
+  line-height: 1.5;
+
+  p {
+    color: $main-light-shade-color;
+    text-align: center;
+  }
+}
