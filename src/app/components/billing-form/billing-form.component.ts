@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -16,29 +16,49 @@ export class BillingFormComponent implements OnInit {
   form: FormGroup;
   paymentMethods: string[] = ["Visa", "MasterCard", "Paypal"];
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {
+  constructor(private fb: FormBuilder) {
     //This form contains "fake" form controls in order to look more real
     this.form = this.fb.group({
-      firstName: ["Johanna", Validators.required],
-      lastName: ["Hellsjo", Validators.required],
-      email: ["jan.hekk@gmail.com", [Validators.required, Validators.email]],
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
       paymentMethod: ["", [Validators.required]],
       address: this.fb.group({
-        addressLine: ["Starrarpsgatan 36", [Validators.required]],
-        city: ["Stockholm", [Validators.required]],
-        postalCode: [
-          "123 45",
-          [Validators.required, Validators.pattern(/[0-9]/)]
-        ],
-        country: ["Sweden", [Validators.required]]
+        addressLine: ["", [Validators.required]],
+        city: ["", [Validators.required]],
+        postalCode: ["", [Validators.required, Validators.pattern(/[0-9]/)]],
+        country: ["", [Validators.required]]
       })
     });
   }
 
+  ngOnInit() {
+    const storedForm = sessionStorage.getItem("form");
+    storedForm && this.setForm(storedForm);
+  }
+
+  setForm(myStoredForm: string) {
+    let {
+      firstName,
+      lastName,
+      email,
+      paymentMethod,
+      address: { addressLine, city, postalCode, country }
+    } = JSON.parse(myStoredForm);
+
+    this.firstName.setValue(firstName);
+    this.lastName.setValue(lastName);
+    this.email.setValue(email);
+    this.paymentMethod.setValue(paymentMethod);
+    this.addressLine.setValue(addressLine);
+    this.city.setValue(city);
+    this.postalCode.setValue(postalCode);
+    this.country.setValue(country);
+  }
+
   handleOrder() {
     this.billingForm.emit(this.form.value);
+    sessionStorage.setItem("form", JSON.stringify(this.form.value));
   }
 
   get firstName() {
