@@ -18,7 +18,7 @@
 
   <a routerLink="/cart" routerLinkActive="linkActive" class="nav-link">
     <i class="fas fa-shopping-cart"></i>
-    <div [class.cart-indicator]="productAmount >= 0 ? true : false"></div>
+    <div [class.cart-indicator]="!lastRemoved && productAmount >= 0"></div>
   </a>
 
   <!-- <a routerLink="/contact" routerLinkActive="linkActive">Contact</a> -->

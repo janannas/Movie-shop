@@ -12,6 +12,7 @@ export class CartService implements ICartService {
   cart: IMovie[] = [];
   orderRows: IOrderRows[] = [];
   message = new Subject<IProductMsg>();
+  lastRemoved = new Subject<boolean>();
 
   constructor() {}
 
@@ -22,14 +23,14 @@ export class CartService implements ICartService {
 
   addProductToCart(myProduct: IMovie): void {
     let index = this.cart.findIndex(x => x.id === myProduct.id);
+    this.lastRemoved.next(false);
 
     if (index === -1) {
       this.cart.push(myProduct);
       this.productMsg({
         productAmount: 1,
         productName: myProduct.name,
-        productImage: myProduct.imageUrl,
-        productRejected: false
+        productImage: myProduct.imageUrl
       });
     } else {
       this.increaseAmount(myProduct);
@@ -57,14 +58,10 @@ export class CartService implements ICartService {
           this.productMsg({
             productAmount: rows.amount,
             productName: myProduct.name,
-            productImage: myProduct.imageUrl,
-            productRejected: false
+            productImage: myProduct.imageUrl
           });
         } else {
           this.productMsg({
-            productAmount: rows.amount,
-            productName: myProduct.name,
-            productImage: myProduct.imageUrl,
             productRejected: true
           });
         }
@@ -77,15 +74,15 @@ export class CartService implements ICartService {
   }
 
   productMsg({
-    productAmount,
-    productName,
-    productImage,
-    productRejected
+    productAmount = undefined,
+    productName = undefined,
+    productImage = undefined,
+    productRejected = false
   }: {
-    productAmount: number;
-    productName: string;
-    productImage: string;
-    productRejected: boolean;
+    productAmount?: number;
+    productName?: string;
+    productImage?: string;
+    productRejected?: boolean;
   }): void {
     this.message.next({
       productAmount,
@@ -107,10 +104,17 @@ export class CartService implements ICartService {
     return this.cart.length === 0 ? true : false;
   }
 
+  getLastRemoved(): Observable<boolean> {
+    return this.lastRemoved.asObservable();
+  }
+
   removeProductFromCart(productToRemove: IMovie): void {
     for (let i = 0; i < this.cart.length; i++) {
       if (productToRemove.id === this.cart[i].id) {
         this.cart.splice(i, 1) && this.orderRows.splice(i, 1);
+
+        //toggle little dot on cart in nav
+        this.checkCartEmpty() && this.lastRemoved.next(true);
       }
     }
   }

@@ -18,8 +18,9 @@ export class AppComponent {
   productName: string;
   productImage: string;
   productRejected: boolean;
-  //toggles dropdown and overlay scss-classes
+  //toggles scss-classes
   isShowing: boolean = false;
+  lastRemoved: boolean;
 
   constructor(
     private movieService: MovieService,
@@ -29,6 +30,10 @@ export class AppComponent {
     this.cartService
       .getProductMsg()
       .subscribe(msg => this.handleProductMsg(msg));
+
+    this.cartService
+      .getLastRemoved()
+      .subscribe(bool => (this.lastRemoved = bool));
   }
 
   handleProductMsg(myMsg: IProductMsg) {
@@ -42,7 +47,7 @@ export class AppComponent {
     this.startTimer();
   }
 
-  startTimer() {
+  startTimer(): void {
     this.productAdded = true;
 
     const closeProductMsg = () => {
@@ -59,7 +64,7 @@ export class AppComponent {
     }
   }
 
-  handleSearch(searchText: string) {
+  handleSearch(searchText: string): void {
     if (searchText === undefined || searchText === "") {
       this.emptySearch = true;
     } else if (searchText) {
@@ -69,11 +74,11 @@ export class AppComponent {
     }
   }
 
-  resetEmptySearch() {
+  resetEmptySearch(): void {
     this.emptySearch = false;
   }
 
-  toggleDropdown() {
+  toggleDropdown(): void {
     this.isShowing = !this.isShowing;
   }
 }
