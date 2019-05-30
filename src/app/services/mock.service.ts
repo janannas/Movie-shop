@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { Observable, Subject, of } from "rxjs";
 
 import { IMovie } from "../interfaces/IMovie";
@@ -6,10 +6,11 @@ import { IOrderRows } from "../interfaces/IOrderRows";
 import { ICartService } from "../interfaces/ICartService";
 import { IOrder } from "../interfaces/IOrder";
 import { ICategory } from "../interfaces/ICategory";
-import { IMovieService } from '../interfaces/IMovieService';
+import { IMovieService } from "../interfaces/IMovieService";
+import { IProductMsg } from "../interfaces/IProductMsg";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class MockService implements ICartService, IMovieService {
   movies: IMovie[] = [
@@ -92,7 +93,7 @@ export class MockService implements ICartService, IMovieService {
   orderRows: IOrderRows[] = [];
   message = new Subject<any>();
 
-  constructor() { }
+  constructor() {}
 
   getMovieData(): Observable<IMovie[]> {
     return of(this.movies);
@@ -106,7 +107,7 @@ export class MockService implements ICartService, IMovieService {
     return of([this.movies[1]]);
   }
 
-  searchMovies(searchText: string) {
+  searchMovies(searchText: string): Observable<IMovie[]> {
     if (this.movies[0].name.includes(searchText)) {
       return of([this.movies[0]]);
     }
@@ -130,6 +131,7 @@ export class MockService implements ICartService, IMovieService {
       this.productMsg({
         productAmount: 1,
         productName: myProduct.name,
+        productImage: myProduct.imageUrl,
         productRejected: false
       });
     } else {
@@ -158,12 +160,14 @@ export class MockService implements ICartService, IMovieService {
           this.productMsg({
             productAmount: rows.amount,
             productName: myProduct.name,
+            productImage: myProduct.imageUrl,
             productRejected: false
           });
         } else {
           this.productMsg({
             productAmount: rows.amount,
             productName: myProduct.name,
+            productImage: myProduct.imageUrl,
             productRejected: true
           });
         }
@@ -175,6 +179,8 @@ export class MockService implements ICartService, IMovieService {
     return this.productMsg({
       productAmount: 1,
       productName: "Interstellar",
+      productImage:
+        "https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SY1000_CR0,0,640,1000_AL_.jpg",
       productRejected: false
     });
   }
@@ -182,17 +188,20 @@ export class MockService implements ICartService, IMovieService {
   productMsg({
     productAmount,
     productName,
+    productImage,
     productRejected
   }: {
     productAmount: number;
     productName: string;
+    productImage: string;
     productRejected: boolean;
-  }) {
+  }): Observable<IProductMsg> {
     return of({
       productAmount,
       productName,
+      productImage,
       productRejected
-    })
+    });
   }
 
   updateAmount(amount: number, id: number): void {

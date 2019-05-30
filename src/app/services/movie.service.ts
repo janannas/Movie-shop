@@ -1,7 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
-import { Observable, Subject, throwError } from "rxjs";
+import {
+  Observable,
+  Subject,
+  throwError,
+  Subscriber,
+  Subscription
+} from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 
 import { IMovie } from "../interfaces/IMovie";
@@ -15,45 +21,37 @@ import { IMovieService } from "../interfaces/IMovieService";
 export class MovieService implements IMovieService {
   searchResults = new Subject<IMovie[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getMovieData(): Observable<IMovie[]> {
-    const moviesUrl = "https://medieinstitutet-wie-products.azurewebsites.net/api/products";
+    const moviesUrl =
+      "https://medieinstitutet-wie-products.azurewebsites.net/api/products";
 
-    return this.http
-      .get<IMovie[]>(
-        moviesUrl
-      )
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      );
+    return this.http.get<IMovie[]>(moviesUrl).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
   }
 
   getCategoryData(): Observable<ICategory[]> {
-    const categoryUrl = "https://medieinstitutet-wie-products.azurewebsites.net/api/categories";
+    const categoryUrl =
+      "https://medieinstitutet-wie-products.azurewebsites.net/api/categories";
 
-    return this.http
-      .get<ICategory[]>(
-        categoryUrl
-      )
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      );
+    return this.http.get<ICategory[]>(categoryUrl).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
   }
 
   getSearchResults(): Observable<IMovie[]> {
     return this.searchResults.asObservable();
   }
 
-  searchMovies(searchText: string) {
+  searchMovies(searchText: string): Subscription {
     const searchUrl = `https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchText=${searchText}`;
 
     return this.http
-      .get<IMovie[]>(
-        searchUrl
-      )
+      .get<IMovie[]>(searchUrl)
       .pipe(
         retry(3),
         catchError(this.handleError)
@@ -72,19 +70,26 @@ export class MovieService implements IMovieService {
   }
 
   getOrders(): Observable<IOrder[]> {
-    const myOrdersUrl: string = "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9"
+    const myOrdersUrl: string =
+      "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9";
 
-    return this.http.get<IOrder[]>(myOrdersUrl).pipe(retry(3), catchError(this.handleError));
+    return this.http.get<IOrder[]>(myOrdersUrl).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
   }
 
   deleteOrder(orderToDelete) {
     console.log(orderToDelete);
 
-    const myOrdersUrl: string = "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9"
+    const myOrdersUrl: string =
+      "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9";
 
-    return this.http.delete<IOrder[]>(myOrdersUrl, orderToDelete).pipe(retry(3), catchError(this.handleError));
+    return this.http.delete<IOrder[]>(myOrdersUrl, orderToDelete).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
   }
-
 
   handleError(error) {
     if (error.error instanceof ErrorEvent) {
@@ -96,8 +101,6 @@ export class MovieService implements IMovieService {
         `Backend returned code ${error.status}, ` + `body was: ${error.error}`
       );
     }
-    return throwError(
-      `There was an error, please try again later.`
-    );
+    return throwError(`There was an error, please try again later.`);
   }
 }

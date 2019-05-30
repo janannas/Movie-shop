@@ -1,17 +1,19 @@
 import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-import { MockService } from './mock.Service';
+import { MockService } from "./mock.Service";
 import { mockProducts } from "../testing/mockData";
-import { CartService } from './cart.Service';
+import { CartService } from "./cart.Service";
 
 describe("MockCartmockService", () => {
   const mockService = new MockService();
   let { mockProduct1 } = mockProducts;
 
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule]
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule]
+    })
+  );
 
   it("should be created", () => {
     const mockService: MockService = TestBed.get(CartService);
@@ -48,19 +50,30 @@ describe("MockCartmockService", () => {
     mockService.addProductToCart(mockProduct1);
     mockService.updateAmount(3, 79);
     expect(mockService.orderRows[0].amount).toBe(3);
-  })
+  });
 
   it("should check if cart is empty", () => {
     mockService.removeProductFromCart(mockProduct1);
 
     const test = mockService.checkCartEmpty();
     expect(test).toBe(true);
-  })
+  });
 
   it("should remove product from cart", () => {
     mockService.removeProductFromCart(mockProduct1);
 
     expect(mockService.cart.length).toBe(0);
     expect(mockService.orderRows.length).toBe(0);
-  })
+  });
+
+  it("should return message about product", () => {
+    mockService.getProductMsg().subscribe(result => {
+      expect(result.productAmount).toBe(1);
+      expect(result.productName).toBe("Interstellar");
+      expect(result.productImage).toBe(
+        "https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SY1000_CR0,0,640,1000_AL_.jpg"
+      );
+      expect(result.productRejected).toBe(false);
+    });
+  });
 });

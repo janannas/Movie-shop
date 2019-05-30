@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { IMovie } from "../interfaces/IMovie";
 import { IOrderRows } from "../interfaces/IOrderRows";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 import { ICartService } from "../interfaces/ICartService";
 import { IProductMsg } from "../interfaces/IProductMsg";
 
@@ -72,7 +72,7 @@ export class CartService implements ICartService {
     }
   }
 
-  getProductMsg() {
+  getProductMsg(): Observable<IProductMsg> {
     return this.message.asObservable();
   }
 
@@ -86,7 +86,7 @@ export class CartService implements ICartService {
     productName: string;
     productImage: string;
     productRejected: boolean;
-  }) {
+  }): void {
     this.message.next({
       productAmount,
       productName,

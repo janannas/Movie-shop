@@ -1,6 +1,7 @@
 import { IMovie } from "./IMovie";
 import { IOrderRows } from "./IOrderRows";
 import { Subject, Observable } from "rxjs";
+import { IProductMsg } from "./IProductMsg";
 
 export interface ICartService {
   cart: IMovie[];
@@ -11,7 +12,18 @@ export interface ICartService {
   addProductToCart(myProduct: IMovie): void;
   createOrderRows(): IOrderRows[];
   increaseAmount(myProduct: IMovie): void;
-  getProductMsg(): Observable<any>;
+  getProductMsg(): Observable<IProductMsg>;
+  productMsg({
+    productAmount,
+    productName,
+    productImage,
+    productRejected
+  }: {
+    productAmount: number;
+    productName: string;
+    productImage: string;
+    productRejected: boolean;
+  }): void | Observable<IProductMsg>;
   updateAmount(amount: number, id: number): void;
   checkCartEmpty(): boolean;
   removeProductFromCart(productToRemove: IMovie): void;
