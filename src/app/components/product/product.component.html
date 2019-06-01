@@ -1,18 +1,22 @@
 <div>
-  <a routerLink="/details/{{ movieId }}">
-    <img
-      class="posterFrame"
-      src="{{ moviePoster }}"
-      onerror="this.style.display='none'"
-      alt="Poster for movie"
-    />
-  </a>
-</div>
+  <div class="card">
+    <a routerLink="/details/{{ movieId }}">
+      <img
+        class="poster"
+        src="{{ moviePoster }}"
+        onerror="this.style.display='none'"
+        alt="Poster for movie"
+      />
+    </a>
 
-<div *ngFor="let category of categories">
-  <a routerLink="/categoryDetails/{{ category.categoryId }}">
-    <p class="testClass">{{ category.category }}</p>
-  </a>
-</div>
+    <div class="label">
+      <h2 class="display2">{{ movie.name }}</h2>
+      <p class="subtitle subtitle--no-margin">Year: {{ movie.year }}</p>
 
-<button class="buy-button" (click)="handleClick(movie)">BUY</button>
+      <h2 class="price">{{ movie.price | currency: "SEK" }}</h2>
+      <button class="primory-button-inverse" (click)="handleClick(movie)">
+        BUY
+      </button>
+    </div>
+  </div>
+</div>

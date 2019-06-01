@@ -5,7 +5,7 @@ import { CartService } from "src/app/services/cart.service";
 @Component({
   selector: "app-product",
   templateUrl: "./product.component.html",
-  styleUrls: ["./product.component.css"]
+  styleUrls: ["./product.component.scss"]
 })
 export class ProductComponent implements OnInit {
   @Input() movie: IMovie;
@@ -13,9 +13,9 @@ export class ProductComponent implements OnInit {
   @Input() movieId: number;
   @Input() categories: IMovie[];
 
-  constructor(public cartService: CartService) { }
+  constructor(public cartService: CartService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   handleClick(product: IMovie): void {
     this.cartService.addProductToCart(product);

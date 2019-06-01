@@ -7,13 +7,15 @@ import { ICategory } from "src/app/interfaces/ICategory";
 @Component({
   selector: "app-catalog",
   templateUrl: "./catalog.component.html",
-  styleUrls: ["./catalog.component.css"]
+  styleUrls: ["./catalog.component.scss"]
 })
 export class CatalogComponent {
   movies: IMovie[];
   error: boolean;
+  categories: ICategory[];
   noSearchResult: boolean = false;
   searchResults: IMovie[];
+  toggleDropdown: boolean = false;
 
   constructor(private service: MovieService) {
     this.service.getSearchResults().subscribe(
@@ -31,6 +33,7 @@ export class CatalogComponent {
         this.movies = myMovieData;
 
         this.service.getCategoryData().subscribe(myCategoryData => {
+          this.categories = myCategoryData;
           this.connectCategoriesToMovie(myCategoryData);
         });
       },
@@ -45,7 +48,6 @@ export class CatalogComponent {
     if (searchResults.length > 0) {
       this.noSearchResult = false;
       this.searchResults = searchResults;
-
     } else if (searchResults.length === 0) {
       this.noSearchResult = true;
     }
@@ -53,11 +55,8 @@ export class CatalogComponent {
 
   connectCategoriesToMovie(myCategoryData: ICategory[]) {
     for (const movie of this.movies) {
-
       for (const movieCategory of movie.productCategory) {
-
         for (const category of myCategoryData) {
-
           if (movieCategory.categoryId === category.id) {
             movieCategory.category = category.name;
           }

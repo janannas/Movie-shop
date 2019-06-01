@@ -12,7 +12,7 @@ nav,
 p,
 h1,
 h2 {
-  //border: solid 1px red;
+  border: solid 1px red;
 }
 
 body {
@@ -22,22 +22,49 @@ body {
 }
 a {
   text-decoration: none;
+  color: $main-dark-shade-color;
 }
 ul,
 li {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
+.display1 {
+  font-family: "Playfair Display", serif;
+  color: $main-light-shade-color;
+  margin: 0 0 20px 0;
+  font-size: 33px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.display2 {
+  font-size: 29px;
+  font-weight: 300;
+  text-align: center;
+}
+
 .subtitle {
   color: $main-dark-shade-color;
   font-size: 20px;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   text-align: center;
+
+  &--no-margin {
+    margin: 0;
+  }
+}
+
+.navbar-pad {
+  padding-top: calc(#{$nav-height} + 40px);
 }
 
 .primory-button {
-  color: $main-contrast-color;
   font-family: "Montserrat", sans-serif;
+  color: $main-contrast-color;
   background-color: $main-dark-shade-color;
   border: solid 2.5px $main-contrast-color;
   cursor: pointer;
@@ -48,5 +75,21 @@ li {
     color: $main-dark-shade-color;
     border-color: $main-dark-shade-color;
     background-color: $main-contrast-color;
+  }
+}
+
+.primory-button-inverse {
+  font-family: "Montserrat", sans-serif;
+  color: $main-dark-shade-color;
+  border-color: $main-dark-shade-color;
+  background-color: $main-contrast-color;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 15px 27px;
+
+  &:hover {
+    color: $main-contrast-color;
+    background-color: $main-dark-shade-color;
+    border: solid 2.5px $main-contrast-color;
   }
 }
