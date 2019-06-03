@@ -15,37 +15,45 @@ nav {
   height: $nav-height;
   background-color: $main-bg-color;
   z-index: 1;
-}
 
-.linkActive {
-  i {
-    color: $main-contrast-color;
-  }
-}
-
-.nav-link {
-  color: $main-middle-shade-color;
-  margin-right: 24px;
-  font-size: 22px;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.5;
+  a:first-child {
+    margin: 0 24px 0 0;
+    font-size: 29px;
+    font-weight: 900;
+    padding-bottom: 4px;
   }
 
-  &:last-child {
-    margin-right: 37px;
-  }
-}
+  .nav-link {
+    color: $main-middle-shade-color;
+    margin-right: 24px;
+    font-size: 22px;
+    cursor: pointer;
 
-.cart-indicator {
-  height: 13px;
-  width: 13px;
-  position: absolute;
-  background-color: $main-brand-color;
-  border-radius: 50%;
-  display: inline-block;
-  right: 30px;
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &:last-child {
+      margin-right: 37px;
+    }
+  }
+
+  .linkActive {
+    i,
+    a {
+      color: $main-contrast-color;
+    }
+  }
+
+  .cart-indicator {
+    height: 13px;
+    width: 13px;
+    position: absolute;
+    background-color: $main-brand-color;
+    border-radius: 50%;
+    display: inline-block;
+    right: 30px;
+  }
 }
 
 .dropdown-menu {
@@ -56,6 +64,78 @@ nav {
   transform: translateY(-300px);
   transition: all ease 1s;
   z-index: 3;
+
+  @media screen and (min-width: $tablet) {
+    width: 500px;
+    left: 50%;
+    margin-left: -250px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 650px;
+    left: 50%;
+    margin-left: -325px;
+  }
+
+  .close {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.5;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+    &:before,
+    &:after {
+      position: absolute;
+      left: 15px;
+      content: " ";
+      height: 33px;
+      width: 2px;
+      background-color: $main-dark-shade-color;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .search-container {
+    background-color: #87859d;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 40px 0px;
+    flex-direction: column;
+    background-image: $pop-up-gradient;
+
+    input {
+      height: 35px;
+      width: 200px;
+      margin: 10px;
+      font-size: 19px;
+      border: solid 1.5px $main-brand-color;
+      border-radius: 3px;
+
+      @media screen and (min-width: $mobile-small) {
+        width: 300px;
+      }
+
+      @media screen and (min-width: $tablet) {
+        width: 400px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        width: 500px;
+      }
+    }
+  }
 }
 
 .dropdown-menu-open {
@@ -63,57 +143,6 @@ nav {
   opacity: 1;
   transform: translateY(0px);
   transition: all ease 1s;
-}
-
-.close {
-  position: absolute;
-  right: 10px;
-  top: 12px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.5;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 1;
-  }
-  &:before,
-  &:after {
-    position: absolute;
-    left: 15px;
-    content: " ";
-    height: 33px;
-    width: 2px;
-    background-color: $main-dark-shade-color;
-  }
-  &:before {
-    transform: rotate(45deg);
-  }
-  &:after {
-    transform: rotate(-45deg);
-  }
-}
-
-.search-container {
-  background-color: #87859d;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 40px 0px;
-  flex-direction: column;
-  background-image: $pop-up-gradient;
-
-  input {
-    height: 35px;
-    width: 200px;
-    margin: 10px;
-    border: solid 1.5px $main-brand-color;
-    border-radius: 3px;
-
-    @media screen and (min-width: $mobile-small) {
-      width: 300px;
-    }
-  }
 }
 
 .overlay {
@@ -137,6 +166,12 @@ nav {
   position: fixed;
   opacity: 0;
   transition: all ease 0.5s;
+
+  @media screen and (min-width: $tablet) {
+    max-width: 500px;
+    left: 50%;
+    margin-left: -250px;
+  }
 
   .card {
     background-color: $main-bg-color;

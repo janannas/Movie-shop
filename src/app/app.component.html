@@ -6,6 +6,13 @@
 /></a>
 
 <nav>
+  <a
+    routerLink="/catalog"
+    routerLinkActive="linkActive"
+    class="display1 nav-link"
+    >M</a
+  >
+
   <a class="dropdown-button nav-link" (click)="isShowing = !isShowing">
     <i class="fas fa-search"></i>
   </a>
@@ -20,8 +27,6 @@
     <i class="fas fa-shopping-cart"></i>
     <div [class.cart-indicator]="!lastRemoved && productAmount >= 0"></div>
   </a>
-
-  <!-- <a routerLink="/contact" routerLinkActive="linkActive">Contact</a> -->
 </nav>
 
 <div class="dropdown-menu" [class.dropdown-menu-open]="isShowing">
@@ -43,8 +48,9 @@
       <button
         (click)="handleSearch(search); search = ''"
         (blur)="resetEmptySearch()"
+        class="button secondary-button"
       >
-        Search
+        SEARCH
       </button>
     </div>
   </div>
@@ -70,3 +76,5 @@
 </div>
 
 <router-outlet></router-outlet>
+
+<!-- footer: <a routerLink="/contact" routerLinkActive="linkActive">Contact</a> -->

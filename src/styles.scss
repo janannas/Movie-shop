@@ -150,7 +150,7 @@ li {
 .secondary-button {
   color: $main-light-shade-color;
   background-color: $main-brand-color;
-  border: solid 2.5px $main-brand-color;
+  border: solid 2.5px $main-light-shade-color;
 
   &:hover {
     color: $main-brand-color;
