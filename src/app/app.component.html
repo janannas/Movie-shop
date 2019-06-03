@@ -57,7 +57,7 @@
 </div>
 <!-- dropdown-menu -->
 
-<div class="product-msg" [class.show-product-msg]="productAdded">
+<div class="product-msg" [class.product-msg-open]="productAdded">
   <div>
     <h2 class="subtitle large">Added to cart!</h2>
 
@@ -77,4 +77,6 @@
 
 <router-outlet></router-outlet>
 
-<!-- footer: <a routerLink="/contact" routerLinkActive="linkActive">Contact</a> -->
+<footer>
+  <a class="body1">Contact</a>
+</footer>
