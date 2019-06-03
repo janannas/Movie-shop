@@ -77,8 +77,4 @@ export class AppComponent {
   resetEmptySearch(): void {
     this.emptySearch = false;
   }
-
-  toggleDropdown(): void {
-    this.isShowing = !this.isShowing;
-  }
 }

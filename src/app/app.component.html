@@ -6,14 +6,14 @@
 /></a>
 
 <nav>
-  <a class="dropdown-button nav-link" (click)="toggleDropdown()">
+  <a class="dropdown-button nav-link" (click)="isShowing = !isShowing">
     <i class="fas fa-search"></i>
   </a>
 
   <div
     id="overlay"
     [class.overlay]="isShowing"
-    (click)="toggleDropdown()"
+    (click)="isShowing = !isShowing"
   ></div>
 
   <a routerLink="/cart" routerLinkActive="linkActive" class="nav-link">
@@ -24,9 +24,9 @@
   <!-- <a routerLink="/contact" routerLinkActive="linkActive">Contact</a> -->
 </nav>
 
-<div class="dropdown-menu" [class.show-dropdown]="isShowing">
+<div class="dropdown-menu" [class.dropdown-menu-open]="isShowing">
   <div>
-    <a class="close" (click)="toggleDropdown()"></a>
+    <a class="close" (click)="isShowing = !isShowing"></a>
 
     <div class="search-container">
       <h1 class="subtitle">

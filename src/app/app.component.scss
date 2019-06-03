@@ -19,8 +19,7 @@ nav {
 
 .linkActive {
   i {
-    /* padding: 4px 7px 4px 4px;
-    border-bottom: solid #e8eb3f; */
+    color: $main-contrast-color;
   }
 }
 
@@ -43,7 +42,7 @@ nav {
   height: 13px;
   width: 13px;
   position: absolute;
-  background-color: $main-contrast-color;
+  background-color: $main-brand-color;
   border-radius: 50%;
   display: inline-block;
   right: 30px;
@@ -59,7 +58,7 @@ nav {
   z-index: 3;
 }
 
-.show-dropdown {
+.dropdown-menu-open {
   visibility: visible;
   opacity: 1;
   transform: translateY(0px);
