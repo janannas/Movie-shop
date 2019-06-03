@@ -1,7 +1,6 @@
 @import "~src/variables";
 
-$mobile-small-width: 270px;
-$tablet-width: 340px;
+$mobile-large-width: 270px;
 
 .card {
   display: flex;
@@ -33,14 +32,12 @@ $tablet-width: 340px;
     box-sizing: border-box;
   }
 
-  @media screen and (min-width: $mobile-small) {
-    max-width: $mobile-small-width;
+  @media screen and (min-width: $mobile-large) {
+    max-width: $mobile-large-width;
 
     .label {
       padding-bottom: 35px;
     }
-  }
-  @media screen and (min-width: $tablet) {
   }
 }
 
@@ -55,11 +52,8 @@ $tablet-width: 340px;
     min-height: 100%;
   }
 
-  @media screen and (min-width: $mobile-small) {
+  @media screen and (min-width: $mobile-large) {
     height: 410px;
-    width: $mobile-small-width;
-  }
-
-  @media screen and (min-width: $tablet) {
+    width: $mobile-large-width;
   }
 }
