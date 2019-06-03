@@ -9,7 +9,7 @@ import {
 @Component({
   selector: "app-billing-form",
   templateUrl: "./billing-form.component.html",
-  styleUrls: ["./billing-form.component.css"]
+  styleUrls: ["./billing-form.component.scss"]
 })
 export class BillingFormComponent implements OnInit {
   @Output() public billingForm = new EventEmitter<FormGroup>();

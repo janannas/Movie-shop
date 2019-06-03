@@ -1,0 +1,65 @@
+@import "~src/variables";
+
+.padding-top {
+  padding-top: 100px;
+
+  @media screen and (min-width: $tablet) {
+    padding-top: 0;
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .margin-left-desktop {
+    margin-left: 90px;
+    text-align: left;
+  }
+}
+
+form {
+  width: 300px;
+  margin: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  @media screen and (min-width: $mobile-small) {
+    width: 400px;
+  }
+
+  @media screen and (min-width: $tablet) {
+    width: 300px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    border-left: 2px $main-brand-color solid;
+    padding-left: 40px;
+    margin-left: 50px;
+    width: 400px;
+  }
+
+  input,
+  select {
+    width: 100%;
+    border: 2px $main-brand-color solid;
+    border-radius: 3px;
+    font-size: 19px;
+  }
+
+  input {
+    padding: 10px;
+    margin: 5px 5px 5px 0;
+  }
+
+  select {
+    padding: 6px;
+    margin: 10px 0 50px 0;
+  }
+
+  small {
+    color: red;
+    margin-bottom: 10px;
+
+    .invalid {
+      border-color: red;
+    }
+  }
+}

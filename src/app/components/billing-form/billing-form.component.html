@@ -1,3 +1,7 @@
+<h2 class="display1 display1--inverse padding-top margin-left-desktop">
+  SHIPPING
+</h2>
+
 <form [formGroup]="form" (ngSubmit)="handleOrder()">
   <div>
     <label>Firstname: </label>
@@ -92,6 +96,13 @@
 
   <div>
     <label>Payment Method: </label>
+
+    <div>
+      <small *ngIf="paymentMethod.invalid && paymentMethod.touched">
+        Please choose a Payment Method
+      </small>
+    </div>
+
     <select
       type="select"
       formControlName="paymentMethod"
@@ -102,17 +113,13 @@
         {{ paymentMethod }}
       </option>
     </select>
-
-    <div>
-      <small *ngIf="paymentMethod.invalid && paymentMethod.touched">
-        Please choose a Payment Method
-      </small>
-    </div>
   </div>
 
-  <button [disabled]="!form.valid" type="submit">
-    Submit
+  <button
+    [disabled]="!form.valid"
+    type="submit"
+    class="button secondary-button secondary-button--center"
+  >
+    CHECKOUT
   </button>
 </form>
-
-<p>{{ form.value | json }}</p>

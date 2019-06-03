@@ -11,11 +11,11 @@ import { MovieService } from "src/app/services/movie.service";
 @Component({
   selector: "app-cart",
   templateUrl: "./cart.component.html",
-  styleUrls: ["./cart.component.css"]
+  styleUrls: ["./cart.component.scss"]
 })
 export class CartComponent implements OnInit {
   cart: IMovie[];
-  totalProducts: number = 0;
+  totalProducts: number = 49;
   plural: boolean = false;
   orderRows: IOrderRows[] = [];
   emptyCart: boolean;
@@ -79,7 +79,7 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotalProducts() {
-    this.totalProducts = 0;
+    this.totalProducts = 49;
     for (let i = 0; i < this.cart.length; i++) {
       this.totalProducts += this.cart[i].price * this.orderRows[i].amount;
     }

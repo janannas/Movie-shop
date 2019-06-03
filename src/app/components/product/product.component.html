@@ -14,7 +14,10 @@
       <p class="subtitle subtitle--no-margin">Year: {{ movie.year }}</p>
 
       <h2 class="price">{{ movie.price | currency: "SEK" }}</h2>
-      <button class="primory-button-inverse" (click)="handleClick(movie)">
+      <button
+        class="button primory-button-inverse"
+        (click)="handleClick(movie)"
+      >
         BUY
       </button>
     </div>

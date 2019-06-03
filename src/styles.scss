@@ -20,10 +20,12 @@ body {
   padding: 0;
   font-family: "Roboto", sans-serif;
 }
+
 a {
   text-decoration: none;
   color: $main-dark-shade-color;
 }
+
 ul,
 li {
   list-style: none;
@@ -38,12 +40,32 @@ li {
   font-size: 33px;
   font-weight: 300;
   text-align: center;
+
+  &--right {
+    text-align: right;
+  }
+
+  &--inverse {
+    color: $main-dark-shade-color;
+  }
 }
 
 .display2 {
   font-size: 29px;
   font-weight: 300;
   text-align: center;
+
+  &--no-margin {
+    margin: 0;
+  }
+
+  &--right {
+    text-align: right;
+  }
+
+  &--inverse {
+    color: $main-light-shade-color;
+  }
 }
 
 .subtitle {
@@ -56,40 +78,88 @@ li {
   &--no-margin {
     margin: 0;
   }
+
+  &--left {
+    text-align: left;
+  }
+
+  &--inverse {
+    color: $main-light-shade-color;
+  }
+}
+
+.body1 {
+  font-size: 17px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  margin: 0;
+  text-align: right;
 }
 
 .navbar-pad {
   padding-top: calc(#{$nav-height} + 40px);
 }
 
-.primory-button {
+.bg {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  bottom: 150px;
+  right: 0;
+  left: 0;
+  background-image: linear-gradient(#575577, transparent);
+}
+
+.button {
   font-family: "Montserrat", sans-serif;
-  color: $main-contrast-color;
-  background-color: $main-dark-shade-color;
-  border: solid 2.5px $main-contrast-color;
   cursor: pointer;
   font-size: 16px;
   padding: 15px 27px;
+}
+
+.primory-button {
+  color: $main-contrast-color;
+  background-color: $main-dark-shade-color;
+  border: solid 2.5px $main-contrast-color;
 
   &:hover {
     color: $main-dark-shade-color;
     border-color: $main-dark-shade-color;
     background-color: $main-contrast-color;
   }
+
+  &--center {
+    margin: auto;
+    display: block;
+  }
 }
 
 .primory-button-inverse {
-  font-family: "Montserrat", sans-serif;
   color: $main-dark-shade-color;
   border-color: $main-dark-shade-color;
   background-color: $main-contrast-color;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 15px 27px;
+  border: solid 2.5px $main-dark-shade-color;
 
   &:hover {
     color: $main-contrast-color;
     background-color: $main-dark-shade-color;
-    border: solid 2.5px $main-contrast-color;
+    border-color: $main-contrast-color;
+  }
+}
+
+.secondary-button {
+  color: $main-light-shade-color;
+  background-color: $main-brand-color;
+  border: solid 2.5px $main-brand-color;
+
+  &:hover {
+    color: $main-brand-color;
+    border-color: $main-brand-color;
+    background-color: $main-light-shade-color;
+  }
+
+  &--center {
+    margin: auto;
+    display: block;
   }
 }
