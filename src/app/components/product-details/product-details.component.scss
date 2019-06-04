@@ -1,0 +1,76 @@
+@import "~src/variables";
+
+.container {
+  padding: 0 30px 80px 30px;
+
+  .marker {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    height: 3px;
+    width: 47px;
+    background-color: $main-brand-color;
+  }
+
+  img {
+    height: 400px;
+    display: block;
+    margin: auto;
+  }
+
+  p + .price-label {
+    margin-top: 80px;
+  }
+}
+
+.d-none {
+  display: none;
+}
+
+@media screen and(min-width: $tablet) {
+  .container {
+    padding: $nav-height 0 80px 30px;
+  }
+
+  .d-none-tablet {
+    display: none;
+  }
+
+  .bg {
+    position: relative;
+  }
+
+  .d-block-tablet {
+    display: block;
+  }
+
+  .left-pane {
+    max-width: 400px;
+    margin-right: 20px;
+  }
+
+  .right-pane {
+    width: 50%;
+    display: flex;
+    align-items: center;
+
+    img {
+      margin: 0;
+
+      @media screen and(min-width: $desktop) {
+        padding: 20px 0 0 0;
+        height: 500px;
+      }
+    }
+  }
+
+  .d-flex-tablet {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .primory-button--tablet-right,
+  .price-label--tablet-right {
+    text-align: right;
+    margin-right: 0;
+  }
+}

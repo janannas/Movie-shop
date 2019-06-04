@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
   plural: boolean = false;
   orderRows: IOrderRows[] = [];
   emptyCart: boolean;
+  showOverview: boolean = false;
 
   constructor(
     private cartService: CartService,
@@ -62,6 +63,8 @@ export class CartComponent implements OnInit {
         response => console.log("success", response),
         error => console.log("error", error)
       );
+
+    this.showOverview = true;
   }
 
   checkPlural() {

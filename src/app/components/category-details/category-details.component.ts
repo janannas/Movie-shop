@@ -6,18 +6,20 @@ import { IMovie } from "src/app/interfaces/IMovie";
 @Component({
   selector: "app-category-details",
   templateUrl: "./category-details.component.html",
-  styleUrls: ["./category-details.component.css"]
+  styleUrls: ["./category-details.component.scss"]
 })
 export class CategoryDetailsComponent implements OnInit {
   movies: IMovie[] = [];
   error: boolean;
+  id: number;
+  toggleDropdown: boolean = false;
 
   constructor(private route: ActivatedRoute, private service: MovieService) {
     this.service.getMovieData().subscribe(
       myMovieData => {
         this.route.paramMap.subscribe(myParams => {
-          const id = +myParams.get("id");
-          this.searchCategories(id, myMovieData);
+          this.id = +myParams.get("id");
+          this.searchCategories(this.id, myMovieData);
         });
       },
       error => {
@@ -37,5 +39,5 @@ export class CategoryDetailsComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

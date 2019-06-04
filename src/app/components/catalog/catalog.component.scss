@@ -98,12 +98,3 @@ h1 + p {
   opacity: 1;
   transition: ease-in 0.3s;
 }
-
-@media screen and (min-width: $tablet) {
-  .shop {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-  }
-}

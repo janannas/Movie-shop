@@ -20,7 +20,7 @@
     width: 400px;
   }
 
-  .test {
+  .card-right-pane {
     @extend %flex;
     flex-direction: column;
     justify-content: space-between;
@@ -28,11 +28,11 @@
     padding-left: 10px;
   }
 
-  .test .subtitle {
+  .card-right-pane .subtitle {
     align-self: flex-start;
   }
 
-  .flex {
+  .card-row {
     @extend %flex;
     justify-content: space-between;
     width: 100%;
@@ -71,8 +71,58 @@
   .d-none-tablet {
     display: none;
   }
+}
 
-  .d-visible-tablet {
-    display: block;
+.overlay {
+  opacity: 0.8;
+}
+
+.overview {
+  z-index: 2;
+  background-image: linear-gradient(#cfcfd5, #828099);
+  top: $nav-height;
+  bottom: 40px;
+  max-width: 750px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  h1 {
+    padding-top: 30px;
+  }
+
+  @media screen and (min-width: $tablet) {
+    left: 100px;
+    right: 100px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    left: 200px;
+    right: 200px;
+  }
+
+  p {
+    text-align: center;
+    padding-bottom: 14px;
+  }
+
+  .content {
+    border: solid $main-brand-color 3px;
+    padding: 40px 30px;
+    margin: 15px auto 15px auto;
+    max-width: 350px;
+
+    div:first-child {
+      border-bottom: solid $main-brand-color 3px;
+      max-width: 300px;
+      margin: 0 auto 80px auto;
+
+      p:nth-child(2) {
+        font-size: 22px;
+        padding-top: 35px;
+        padding-bottom: 20px;
+      }
+    }
   }
 }

@@ -39,8 +39,7 @@ nav {
   }
 
   .linkActive {
-    i,
-    a {
+    i {
       color: $main-contrast-color;
     }
   }
@@ -145,18 +144,6 @@ nav {
   transition: all ease 1s;
 }
 
-.overlay {
-  background-color: black;
-  opacity: 0.4;
-  position: fixed;
-  top: $nav-height;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  min-height: 100%;
-  z-index: 1;
-}
-
 .product-msg {
   visibility: hidden;
   height: 0;
@@ -168,9 +155,9 @@ nav {
   transition: all ease 0.5s;
 
   @media screen and (min-width: $tablet) {
-    max-width: 500px;
+    max-width: 450px;
     left: 50%;
-    margin-left: -250px;
+    margin-left: -225px;
   }
 
   .card {
@@ -227,8 +214,8 @@ footer {
   bottom: 0;
 
   a {
-    display: block;
     color: $main-middle-shade-color;
+    float: right;
     font-size: 22px;
     cursor: pointer;
     text-align: right;

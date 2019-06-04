@@ -1,12 +1,37 @@
-<div>
-  {{ movie | json }}
-  <br />
-  <br />
+<div class="bg d-none-tablet"></div>
 
-  <p>{{ movie.imageUrl }}</p>
-</div>
-<div *ngIf="movie">
-  <img src="{{ movie.imageUrl }}" alt="poster for {{ movie.name }}" />
+<div class="container d-flex-tablet">
+  <div class="left-pane">
+    <div class="navbar-pad--extra">
+      <a routerLink="/catalog" class="subtitle subtitle--brand-color"
+        >GO BACK</a
+      >
+    </div>
+
+    <div>
+      <h2 class="display2 display2--left">{{ movie.name }}</h2>
+    </div>
+    <div class="d-none-tablet">
+      <img src="{{ movie.imageUrl }}" alt="poster for {{ movie.name }}" />
+    </div>
+
+    <div class="marker"></div>
+    <p class="body1">{{ movie.description }}</p>
+
+    <p class="price-label price-label--tablet-right">
+      {{ movie.price | currency: "SEK" }}
+    </p>
+    <button
+      class="button primory-button primory-button--center primory-button--tablet-right"
+      (click)="handleClick(movie)"
+    >
+      BUY
+    </button>
+  </div>
+
+  <div class="d-none d-block-tablet right-pane bg">
+    <img src="{{ movie.imageUrl }}" alt="poster for {{ movie.name }}" />
+  </div>
 </div>
 
 <app-error *ngIf="error"></app-error>

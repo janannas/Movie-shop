@@ -10,7 +10,7 @@ import { ICategory } from "src/app/interfaces/ICategory";
   styleUrls: ["./catalog.component.scss"]
 })
 export class CatalogComponent {
-  movies: IMovie[];
+  movies: IMovie[] = [];
   error: boolean;
   categories: ICategory[];
   noSearchResult: boolean = false;

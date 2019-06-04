@@ -13,7 +13,7 @@
       <h2 class="display2">{{ movie.name }}</h2>
       <p class="subtitle subtitle--no-margin">Year: {{ movie.year }}</p>
 
-      <h2 class="price">{{ movie.price | currency: "SEK" }}</h2>
+      <h2 class="price-label">{{ movie.price | currency: "SEK" }}</h2>
       <button
         class="button primory-button-inverse"
         (click)="handleClick(movie)"

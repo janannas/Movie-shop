@@ -2,11 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MovieService } from "../../services/movie.service";
 import { IMovie } from "../../interfaces/IMovie";
+import { CartService } from "src/app/services/cart.service";
 
 @Component({
   selector: "app-product-details",
   templateUrl: "./product-details.component.html",
-  styleUrls: ["./product-details.component.css"]
+  styleUrls: ["./product-details.component.scss"]
 })
 export class ProductDetailsComponent implements OnInit {
   movies: IMovie[];
@@ -22,8 +23,12 @@ export class ProductDetailsComponent implements OnInit {
     productCategory: []
   };
 
-  constructor(private route: ActivatedRoute, private service: MovieService) {
-    this.service.getMovieData().subscribe(
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService,
+    private cartService: CartService
+  ) {
+    this.movieService.getMovieData().subscribe(
       myData => {
         this.movies = myData;
         this.route.paramMap.subscribe(myParams => {
@@ -44,6 +49,10 @@ export class ProductDetailsComponent implements OnInit {
         this.movie = this.movies[i];
       }
     }
+  }
+
+  handleClick(product: IMovie): void {
+    this.cartService.addProductToCart(product);
   }
 
   ngOnInit() {}

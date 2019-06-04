@@ -18,12 +18,12 @@
       <div class="card">
         <img src="{{ product.imageUrl }}" alt="Image of product" />
 
-        <div class="test">
+        <div class="card-right-pane">
           <h2 class="subtitle subtitle--left subtitle--inverse">
             {{ product.name }}
           </h2>
 
-          <div class="flex">
+          <div class="card-row">
             <div>
               <select
                 #amountSelect
@@ -61,7 +61,7 @@
     <br />
     <br />
 
-    <h3 class="body1">
+    <h3 class="body1 body1--right">
       <i>Standard shipping: {{ 49 | currency: "SEK" }}</i>
     </h3>
     <h2 class="display2 display2--right">
@@ -72,6 +72,30 @@
   </div>
   <div>
     <app-billing-form (billingForm)="handleForm($event)"></app-billing-form>
+  </div>
+
+  <div *ngIf="showOverview">
+    <div class="overlay"></div>
+    <div class="overview bg">
+      <h1 class="display1">Thanks</h1>
+
+      <div class="content">
+        <div>
+          <p class="body1">for shopping at Top Tier Movies!</p>
+          <p class="body1">Your order is on the way</p>
+          <p class="body1">Check your email for verification</p>
+        </div>
+
+        <div>
+          <p class="body1">Do you want to shop more?</p>
+          <a routerLink="/catalog" routerLinkActive="linkActive">
+            <button class="button primory-button primory-button--center">
+              SHOP
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
