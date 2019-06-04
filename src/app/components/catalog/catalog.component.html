@@ -3,51 +3,53 @@
 </div>
 
 <div class="bg"></div>
-<h1 class="display1 navbar-pad">SHOP</h1>
+<div *ngIf="!error">
+  <h1 class="display1 navbar-pad">SHOP</h1>
 
-<p>
-  Click the poster to read more about the movie, or the different genres to
-  explore more!
-</p>
+  <p>
+    Click the poster to read more about the movie, or the different genres to
+    explore more!
+  </p>
 
-<div class="categories-container">
-  <p>All titles, {{ movies.length }} results</p>
+  <div class="categories-container">
+    <p>All titles, {{ movies.length }} results</p>
 
-  <div>
-    <button (click)="toggleDropdown = !toggleDropdown">
-      Genres <i class="arrow-down"></i>
-    </button>
-    <ul class="categories" [class.categories-open]="toggleDropdown">
-      <a
-        *ngFor="let category of categories"
-        routerLink="/categoryDetails/{{ category.id }}"
-      >
-        <li>{{ category.name }}</li>
-      </a>
-    </ul>
+    <div>
+      <button (click)="toggleDropdown = !toggleDropdown">
+        Genres <i class="arrow-down"></i>
+      </button>
+      <ul class="categories" [class.categories-open]="toggleDropdown">
+        <a
+          *ngFor="let category of categories"
+          routerLink="/categoryDetails/{{ category.id }}"
+        >
+          <li>{{ category.name }}</li>
+        </a>
+      </ul>
+    </div>
   </div>
-</div>
 
-<div class="shop">
-  <app-product
-    *ngFor="let movie of searchResults"
-    [movie]="movie"
-    [moviePoster]="movie.imageUrl"
-    [movieId]="movie.id"
-    [categories]="movie.productCategory"
-  >
-  </app-product>
-</div>
+  <div class="shop">
+    <app-product
+      *ngFor="let movie of searchResults"
+      [movie]="movie"
+      [moviePoster]="movie.imageUrl"
+      [movieId]="movie.id"
+      [categories]="movie.productCategory"
+    >
+    </app-product>
+  </div>
 
-<div class="shop">
-  <app-product
-    *ngFor="let movie of movies"
-    [movie]="movie"
-    [moviePoster]="movie.imageUrl"
-    [movieId]="movie.id"
-    [categories]="movie.productCategory"
-  >
-  </app-product>
+  <div class="shop">
+    <app-product
+      *ngFor="let movie of movies"
+      [movie]="movie"
+      [moviePoster]="movie.imageUrl"
+      [movieId]="movie.id"
+      [categories]="movie.productCategory"
+    >
+    </app-product>
+  </div>
 </div>
 
 <app-error *ngIf="error"></app-error>

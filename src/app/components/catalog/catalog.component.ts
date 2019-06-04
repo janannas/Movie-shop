@@ -32,10 +32,16 @@ export class CatalogComponent {
       myMovieData => {
         this.movies = myMovieData;
 
-        this.service.getCategoryData().subscribe(myCategoryData => {
-          this.categories = myCategoryData;
-          this.connectCategoriesToMovie(myCategoryData);
-        });
+        this.service.getCategoryData().subscribe(
+          myCategoryData => {
+            this.categories = myCategoryData;
+            this.connectCategoriesToMovie(myCategoryData);
+          },
+          error => {
+            this.error = true;
+            console.log("Error: " + error);
+          }
+        );
       },
       error => {
         this.error = true;
