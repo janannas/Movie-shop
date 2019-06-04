@@ -19,6 +19,25 @@ li {
   padding: 0;
 }
 
+.wallpaper-bg {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+
+  @media screen and(min-width: $tablet) {
+    height: 500px;
+    width: 888px;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -444px;
+  }
+}
+
 .display1 {
   font-family: "Playfair Display", serif;
   color: $main-light-shade-color;

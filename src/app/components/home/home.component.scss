@@ -1,34 +1,11 @@
 @import "~src/variables";
 
-.container {
-  padding-top: calc(#{$nav-height} + 40px);
-}
-
 .bg {
   display: none;
 
   @media screen and(min-width: $tablet) {
     display: block;
     bottom: 0;
-  }
-}
-
-img {
-  position: fixed;
-  height: 100vh;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: -1;
-
-  @media screen and(min-width: $tablet) {
-    height: 500px;
-    width: 888px;
-    top: 50%;
-    left: 50%;
-    margin-top: -250px;
-    margin-left: -444px;
   }
 }
 

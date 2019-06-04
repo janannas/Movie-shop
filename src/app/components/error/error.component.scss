@@ -1,0 +1,15 @@
+@import "~src/variables";
+
+.content {
+  max-width: 300px;
+  margin: auto;
+
+  p {
+    color: $main-light-shade-color;
+    text-align: center;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+}
