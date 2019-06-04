@@ -70,22 +70,19 @@ export class MovieService implements IMovieService {
   }
 
   getOrders(): Observable<IOrder[]> {
-    const myOrdersUrl: string =
+    const ordersUrl: string =
       "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9";
 
-    return this.http.get<IOrder[]>(myOrdersUrl).pipe(
+    return this.http.get<IOrder[]>(ordersUrl).pipe(
       retry(3),
       catchError(this.handleError)
     );
   }
 
-  deleteOrder(orderToDelete) {
-    console.log(orderToDelete);
+  deleteOrder(id: number): Observable<IOrder[]> {
+    const orderToDeleteUrl: string = `https://medieinstitutet-wie-products.azurewebsites.net/api/orders/${id}`;
 
-    const myOrdersUrl: string =
-      "https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=9";
-
-    return this.http.delete<IOrder[]>(myOrdersUrl, orderToDelete).pipe(
+    return this.http.delete<IOrder[]>(orderToDeleteUrl).pipe(
       retry(3),
       catchError(this.handleError)
     );

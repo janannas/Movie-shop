@@ -1,21 +1,43 @@
-<h1>All orders!</h1>
-<div *ngFor="let order of orders">
+<div class="bg"></div>
+<h1 class="display1 navbar-pad">All orders</h1>
 
-  <div class="box">
-    <p>id: {{order.id}}</p>
-    <p>time: {{order.created}}</p>
-    <p>totalPrice: {{order.totalPrice}}</p>
-
-    <h4>rows: </h4>
-    <div *ngFor="let rows of order.orderRows">
-      <p>{{rows|json}}</p>
-    </div>
-
-    <button (click)="removeOrder(order)">Remove</button>
-  </div>
-
+<div
+  class="success"
+  [class.success-open]="success"
+  (click)="success = !success"
+>
+  Successfully Removed!
 </div>
 
-<br />
+<div class="container">
+  <div class="order" *ngFor="let order of orders">
+    <div>
+      <label>Orderid:</label>
+      <p>{{ order.id }}</p>
+      <label>Created:</label>
+      <p>{{ order.created }}</p>
+      <label>Email:</label>
+      <p>{{ order.createdBy }}</p>
+      <label>PaymentMethod:</label>
+      <p>{{ order.paymentMethod }}</p>
+      <label>TotalPrice:</label>
+      <p>{{ order.totalPrice }}</p>
+    </div>
 
-<button (click)="saveUpdatedOrders()">Update Orders</button>
+    <div class="dilimeter">
+      <h4>Product-rows:</h4>
+      <div class="products" *ngFor="let rows of order.orderRows">
+        <label> Row-id:</label>
+        <p>{{ rows.id }}</p>
+        <label> Product-id:</label>
+        <p>{{ rows.productId }}</p>
+        <label> Amout:</label>
+        <p>{{ rows.amount }}</p>
+      </div>
+    </div>
+
+    <button class="button secondary-button" (click)="removeOrder(order)">
+      Remove
+    </button>
+  </div>
+</div>

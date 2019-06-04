@@ -1,0 +1,88 @@
+@import "~src/variables";
+
+.container {
+  padding-bottom: 80px;
+
+  .order {
+    border: solid 3px $main-brand-color;
+    padding: 10px;
+    margin: 20px;
+    max-width: 500px;
+
+    label {
+      display: block;
+      width: 200px;
+    }
+
+    p {
+      margin: 0;
+      padding-bottom: 10px;
+      font-weight: 300;
+    }
+
+    .dilimeter {
+      border-top: solid 3px $main-brand-color;
+      margin-top: 50px;
+    }
+
+    button {
+      margin: 50px auto 0 auto;
+      display: block;
+    }
+
+    .products {
+      border-top: solid 1px $main-dark-shade-color;
+      padding-top: 10px;
+      margin: auto;
+    }
+
+    @media screen and (min-width: $mobile-large) {
+      display: flex;
+      margin: 20px auto;
+
+      .dilimeter {
+        border-top: none;
+        border-left: solid 3px $main-brand-color;
+        margin-top: 0;
+        padding-left: 20px;
+      }
+
+      h4 {
+        margin-top: 0;
+      }
+
+      button {
+        align-self: flex-end;
+        margin-left: -50px;
+      }
+    }
+  }
+
+  @media screen and (min-width: $desktop) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.success {
+  visibility: hidden;
+  background-color: $main-bg-color;
+  color: $main-light-shade-color;
+  font-weight: 300;
+  font-size: 18px;
+  position: fixed;
+  right: 0;
+  padding: 17px 100px 17px 17px;
+  border-radius: 5px 0 0 5px;
+  width: 0;
+  opacity: 0;
+  transition: ease all 0.5s;
+  cursor: pointer;
+}
+
+.success-open {
+  visibility: visible;
+  opacity: 1;
+  width: 180px;
+  transition: ease all 0.5s;
+}
