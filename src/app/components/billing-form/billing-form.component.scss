@@ -1,17 +1,8 @@
 @import "~src/variables";
 
-.padding-top {
-  padding-top: 100px;
-
-  @media screen and (min-width: $tablet) {
+@media screen and (min-width: $tablet) {
+  .navbar-pad {
     padding-top: 0;
-  }
-}
-
-@media screen and (min-width: $desktop) {
-  .margin-left-desktop {
-    margin-left: 90px;
-    text-align: left;
   }
 }
 
@@ -20,21 +11,6 @@ form {
   margin: 0 auto 140px auto;
   padding: 0 20px 0 20px;
   box-sizing: border-box;
-
-  @media screen and (min-width: $mobile-small) {
-    width: 400px;
-  }
-
-  @media screen and (min-width: $tablet) {
-    width: 300px;
-  }
-
-  @media screen and (min-width: $desktop) {
-    border-left: 2px $main-brand-color solid;
-    padding-left: 40px;
-    margin-left: 50px;
-    width: 400px;
-  }
 
   input,
   select {
@@ -61,5 +37,27 @@ form {
     .invalid {
       border-color: red;
     }
+  }
+
+  @media screen and (min-width: $mobile-small) {
+    width: 400px;
+  }
+
+  @media screen and (min-width: $tablet) {
+    width: 300px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    border-left: 2px $main-brand-color solid;
+    padding-left: 40px;
+    margin-left: 50px;
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .margin-left-desktop {
+    margin-left: 90px;
+    text-align: left;
   }
 }

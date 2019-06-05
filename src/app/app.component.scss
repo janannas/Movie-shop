@@ -1,4 +1,5 @@
 @import "~src/variables";
+@import "~src/placeholders";
 
 .logo {
   max-width: 55px;
@@ -7,9 +8,8 @@
 }
 
 nav {
-  display: flex;
+  @extend %flex;
   justify-content: flex-end;
-  align-items: center;
   position: fixed;
   width: 100%;
   height: $nav-height;
@@ -107,9 +107,8 @@ nav {
 
   .search-container {
     background-color: #87859d;
-    display: flex;
+    @extend %flex;
     justify-content: flex-end;
-    align-items: center;
     padding: 40px 0px;
     flex-direction: column;
     background-image: $pop-up-gradient;
@@ -206,15 +205,15 @@ nav {
 }
 
 footer {
-  width: 100%;
+  width: 300px;
   height: 40px;
-  background-color: rgb(50, 49, 75);
+  background-image: linear-gradient(to right, transparent, $main-bg-color);
   position: fixed;
-  left: 0;
+  right: 0;
   bottom: 0;
 
   a {
-    color: $main-middle-shade-color;
+    color: $main-light-shade-color;
     float: right;
     font-size: 22px;
     cursor: pointer;

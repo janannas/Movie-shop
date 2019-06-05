@@ -1,4 +1,5 @@
 @import "~src/variables";
+@import "~src/placeholders";
 
 .container {
   padding: 0 30px 80px 30px;
@@ -27,25 +28,50 @@
 }
 
 @media screen and(min-width: $tablet) {
+  .bg {
+    position: relative;
+  }
+
   .container {
-    padding: $nav-height 0 80px 30px;
+    padding: $nav-height 0 0 30px;
+    height: calc(height0vh - 85px);
   }
 
   .d-none-tablet {
     display: none;
   }
 
-  .bg {
-    position: relative;
-  }
-
   .d-block-tablet {
     display: block;
+  }
+
+  .d-flex-tablet {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .primory-button--tablet-right,
+  .price-label--tablet-right {
+    text-align: right;
+    margin-right: 0;
   }
 
   .left-pane {
     max-width: 400px;
     margin-right: 20px;
+
+    @media screen and(min-width: $desktop) {
+      margin: auto;
+
+      .navbar-pad--extra {
+        padding-top: 0px;
+      }
+    }
+  }
+
+  .bg {
+    top: 0;
+    bottom: 0;
   }
 
   .right-pane {
@@ -61,16 +87,5 @@
         height: 500px;
       }
     }
-  }
-
-  .d-flex-tablet {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .primory-button--tablet-right,
-  .price-label--tablet-right {
-    text-align: right;
-    margin-right: 0;
   }
 }
