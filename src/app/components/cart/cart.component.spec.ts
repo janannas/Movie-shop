@@ -66,11 +66,18 @@ describe("CartComponent", () => {
 
     expect(component.cart.length).toBe(1);
 
-    service.removeProductFromCart(mockProduct2);
-    expect(component.cart.length).toBe(1);
-
     service.removeProductFromCart(mockProduct1);
     expect(component.cart.length).toBe(0);
+  });
+
+  it("should not remove wrong product from cart", () => {
+    service.addProductToCart(mockProduct1);
+    component.cart = service.getProductsFromCart();
+
+    expect(component.cart.length).toBe(1);
+
+    service.removeProductFromCart(mockProduct2);
+    expect(component.cart.length).toBe(1);
   });
 
   it("should return true if cart is empty", () => {
@@ -78,7 +85,7 @@ describe("CartComponent", () => {
     expect(component.emptyCart).toBe(true);
   });
 
-  it("should return false if there are products in cart", () => {
+  it("should return false if cart is not empty", () => {
     service.addProductToCart(mockProduct1);
     component.emptyCart = service.checkCartEmpty();
 
@@ -91,5 +98,24 @@ describe("CartComponent", () => {
     service.removeProductFromCart(mockProduct1);
 
     expect(component.emptyCart).toBe(true);
+  });
+
+  it("updating amount should trigger calculateTotalProducts-func", () => {
+    spyOn(component, "calculateTotalProducts");
+    component.handleUpdateAmount(2, 76);
+    fixture.whenStable().then(() => {
+      expect(component.calculateTotalProducts).toHaveBeenCalled();
+    });
+  });
+
+  it("should calculate price for product", () => {
+    expect(component.totalProducts).toBe(49);
+
+    service.addProductToCart(mockProduct1);
+    component.cart = service.getProductsFromCart();
+    component.orderRows = service.createOrderRows();
+    component.calculateTotalProducts();
+
+    expect(component.totalProducts).toBe(149);
   });
 });

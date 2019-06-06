@@ -34,10 +34,10 @@ export class BillingFormComponent implements OnInit {
 
   ngOnInit() {
     const storedForm = sessionStorage.getItem("form");
-    storedForm && this.setForm(storedForm);
+    storedForm && this.setFormValues(storedForm);
   }
 
-  setForm(myStoredForm: string) {
+  setFormValues(myStoredForm: string) {
     let {
       firstName,
       lastName,
@@ -58,6 +58,10 @@ export class BillingFormComponent implements OnInit {
 
   handleOrder() {
     this.billingForm.emit(this.form.value);
+    this.storeForm();
+  }
+
+  storeForm() {
     sessionStorage.setItem("form", JSON.stringify(this.form.value));
   }
 

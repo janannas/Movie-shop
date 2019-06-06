@@ -55,6 +55,7 @@ export class CartComponent implements OnInit {
   }
 
   handleForm(billingForm: IBillingForm) {
+    //Create the "real" order for the api, since the form presented in browser is "fake"
     const order = this.createOrder(billingForm);
 
     this.movieService
@@ -65,6 +66,8 @@ export class CartComponent implements OnInit {
       );
 
     this.showOverview = true;
+
+    this.cartService.resetCart();
   }
 
   checkPlural() {
@@ -82,6 +85,7 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotalProducts() {
+    //Shipping-cost included from beginning
     this.totalProducts = 49;
     for (let i = 0; i < this.cart.length; i++) {
       this.totalProducts += this.cart[i].price * this.orderRows[i].amount;
