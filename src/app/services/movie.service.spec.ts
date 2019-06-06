@@ -2,7 +2,7 @@ import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 import { MovieService } from "./movie.service";
-import { MockService } from './mock.service';
+import { MockService } from "./mock.service";
 
 describe("MovieService", () => {
   const mockService = new MockService();
@@ -30,5 +30,10 @@ describe("MovieService", () => {
     });
 
     expect(result.length).toBe(0);
+  });
+
+  it("should delete specified order", () => {
+    let test = mockService.deleteOrder(1);
+    expect(test).toBeDefined;
   });
 });

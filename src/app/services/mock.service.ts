@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, Subject, of } from "rxjs";
+import { Observable, of } from "rxjs";
 
 import { IMovie } from "../interfaces/IMovie";
 import { IOrderRows } from "../interfaces/IOrderRows";
@@ -9,10 +9,24 @@ import { ICategory } from "../interfaces/ICategory";
 import { IMovieService } from "../interfaces/IMovieService";
 import { IProductMsg } from "../interfaces/IProductMsg";
 
+const mockOrder: IOrder[] = [
+  {
+    id: 1,
+    companyId: 1,
+    created: "11-11-11",
+    createdBy: "testUser@test.com",
+    paymentMethod: "Visa",
+    totalPrice: 999,
+    status: 0,
+    orderRows: []
+  }
+];
+
 @Injectable({
   providedIn: "root"
 })
 export class MockService implements ICartService, IMovieService {
+  //Properties from IMovieService
   movies: IMovie[] = [
     {
       id: 76,
@@ -88,13 +102,13 @@ export class MockService implements ICartService, IMovieService {
       name: "Sci-fi"
     }
   ];
-
+  //Properties from ICartService
   cart: IMovie[] = [];
   orderRows: IOrderRows[] = [];
-  message = new Subject<any>();
+  //Used to trigger "cart-indicator" in scss
+  lastRemoved: boolean;
 
-  constructor() {}
-
+  //Methods from MovieService
   getMovieData(): Observable<IMovie[]> {
     return of(this.movies);
   }
@@ -118,12 +132,25 @@ export class MockService implements ICartService, IMovieService {
     return of(order);
   }
 
+  getOrders(): Observable<IOrder[]> {
+    return of(mockOrder);
+  }
+
+  deleteOrder(id: number): Observable<IOrder[]> {
+    if (id == mockOrder[0].id) {
+      return of(mockOrder);
+    }
+  }
+
+  //Methods from cartService
   getProductsFromCart(): IMovie[] {
     this.checkCartEmpty();
     return this.cart;
   }
 
   addProductToCart(myProduct: IMovie): void {
+    this.lastRemoved = false;
+
     let index = this.cart.findIndex(x => x.id === myProduct.id);
 
     if (index === -1) {
@@ -218,10 +245,16 @@ export class MockService implements ICartService, IMovieService {
     return this.cart.length === 0 ? true : false;
   }
 
+  getLastRemoved(): Observable<boolean> {
+    return of(this.lastRemoved);
+  }
+
   removeProductFromCart(productToRemove: IMovie): void {
     for (let i = 0; i < this.cart.length; i++) {
       if (productToRemove.id === this.cart[i].id) {
         this.cart.splice(i, 1) && this.orderRows.splice(i, 1);
+
+        this.checkCartEmpty && (this.lastRemoved = true);
       }
     }
   }

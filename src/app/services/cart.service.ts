@@ -11,10 +11,10 @@ import { IProductMsg } from "../interfaces/IProductMsg";
 export class CartService implements ICartService {
   cart: IMovie[] = [];
   orderRows: IOrderRows[] = [];
+  //Content of pop-up message when buy button is clicked
   message = new Subject<IProductMsg>();
+  //Used to trigger "cart-indicator/little dot on cart" in scss
   lastRemoved = new Subject<boolean>();
-
-  constructor() {}
 
   getProductsFromCart(): IMovie[] {
     this.checkCartEmpty();
@@ -22,8 +22,8 @@ export class CartService implements ICartService {
   }
 
   addProductToCart(myProduct: IMovie): void {
-    let index = this.cart.findIndex(x => x.id === myProduct.id);
     this.lastRemoved.next(false);
+    let index = this.cart.findIndex(x => x.id === myProduct.id);
 
     if (index === -1) {
       this.cart.push(myProduct);
@@ -49,14 +49,14 @@ export class CartService implements ICartService {
   increaseAmount(myProduct: IMovie): void {
     this.createOrderRows();
 
-    for (const rows of this.orderRows) {
-      if (myProduct.id === rows.productId) {
-        const max = rows.amount >= 9 ? true : false;
+    for (const row of this.orderRows) {
+      if (myProduct.id === row.productId) {
+        const max = row.amount >= 9 ? true : false;
 
         if (!max) {
-          ++rows.amount;
+          ++row.amount;
           this.productMsg({
-            productAmount: rows.amount,
+            productAmount: row.amount,
             productName: myProduct.name,
             productImage: myProduct.imageUrl
           });
@@ -113,7 +113,6 @@ export class CartService implements ICartService {
       if (productToRemove.id === this.cart[i].id) {
         this.cart.splice(i, 1) && this.orderRows.splice(i, 1);
 
-        //toggle little dot on cart in nav
         this.checkCartEmpty() && this.lastRemoved.next(true);
       }
     }

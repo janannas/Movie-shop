@@ -2,10 +2,10 @@ import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 import { MockService } from "./mock.Service";
-import { mockProducts } from "../testing/mockData";
+import { mockProducts } from "../testing/mockProducts";
 import { CartService } from "./cart.Service";
 
-describe("MockCartmockService", () => {
+describe("CartService", () => {
   const mockService = new MockService();
   let { mockProduct1 } = mockProducts;
 
@@ -52,11 +52,21 @@ describe("MockCartmockService", () => {
     expect(mockService.orderRows[0].amount).toBe(3);
   });
 
+  it("should increase amount by 1", () => {
+    expect(mockService.orderRows[0].amount).toBe(3);
+    mockService.increaseAmount(mockProduct1);
+    mockService.createOrderRows();
+    expect(mockService.orderRows[0].amount).toBe(4);
+  });
+
   it("should check if cart is empty", () => {
+    const test1 = mockService.checkCartEmpty();
+    expect(test1).toBe(false);
+
     mockService.removeProductFromCart(mockProduct1);
 
-    const test = mockService.checkCartEmpty();
-    expect(test).toBe(true);
+    const test2 = mockService.checkCartEmpty();
+    expect(test2).toBe(true);
   });
 
   it("should remove product from cart", () => {
@@ -74,6 +84,18 @@ describe("MockCartmockService", () => {
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SY1000_CR0,0,640,1000_AL_.jpg"
       );
       expect(result.productRejected).toBe(false);
+    });
+  });
+
+  it("should change value to false", () => {
+    mockService.addProductToCart(mockProduct1);
+    mockService.getLastRemoved().subscribe(result => {
+      expect(result).toBe(false);
+    });
+
+    mockService.removeProductFromCart(mockProduct1);
+    mockService.getLastRemoved().subscribe(result => {
+      expect(result).toBe(true);
     });
   });
 });
