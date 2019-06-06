@@ -246,4 +246,9 @@ export class MockService implements ICartService, IMovieService {
       }
     }
   }
+
+  resetCart(): void {
+    this.cart = [];
+    this.lastRemoved = true;
+  }
 }

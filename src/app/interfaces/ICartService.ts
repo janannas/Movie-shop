@@ -29,4 +29,5 @@ export interface ICartService {
   checkCartEmpty(): boolean;
   getLastRemoved(): Observable<boolean>;
   removeProductFromCart(productToRemove: IMovie): void;
+  resetCart(): void;
 }

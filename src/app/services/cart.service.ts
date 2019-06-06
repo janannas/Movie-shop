@@ -117,4 +117,9 @@ export class CartService implements ICartService {
       }
     }
   }
+
+  resetCart(): void {
+    this.cart = [];
+    this.lastRemoved.next(true);
+  }
 }

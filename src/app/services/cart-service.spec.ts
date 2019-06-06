@@ -7,7 +7,7 @@ import { CartService } from "./cart.Service";
 
 describe("CartService", () => {
   const mockService = new MockService();
-  let { mockProduct1 } = mockProducts;
+  let { mockProduct1, mockProduct2 } = mockProducts;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
@@ -97,5 +97,13 @@ describe("CartService", () => {
     mockService.getLastRemoved().subscribe(result => {
       expect(result).toBe(true);
     });
+  });
+
+  it("should reset cart", () => {
+    mockService.addProductToCart(mockProduct1);
+    mockService.addProductToCart(mockProduct2);
+    expect(mockService.cart.length).toBe(2);
+    mockService.resetCart();
+    expect(mockService.cart.length).toBe(0);
   });
 });
