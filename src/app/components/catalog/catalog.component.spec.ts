@@ -5,8 +5,8 @@ import { MovieService } from "../../services/movie.service";
 import { CatalogComponent } from "./catalog.component";
 import { ProductComponent } from "../product/product.component";
 import { ErrorComponent } from "../error/error.component";
-import { mockProducts } from "../../testing/mockData";
-import { MockService } from 'src/app/services/mock.service';
+import { mockProducts } from "../../testing/mockProducts";
+import { MockService } from "src/app/services/mock.service";
 
 describe("CatalogComponent", () => {
   let component: CatalogComponent;
@@ -57,12 +57,20 @@ describe("CatalogComponent", () => {
     component.connectCategoriesToMovie(mockCategory);
 
     expect(mockProduct1.productCategory[0].categoryId).toBe(7);
-  })
+  });
 
   it("should display correct category", () => {
     const testMovieCategory = component.movies[1].productCategory[0].category;
     expect(testMovieCategory).toEqual("Sci-fi");
   });
+
+  /* it("should display correct category", () => {
+    let link = testHostFixture.nativeElement
+      .querySelectorAll("a")[1]
+      .querySelector("p");
+
+    expect(link.innerHTML).toContain("Action");
+  }); */
 
   it("should check if there are any search result", () => {
     service.searchMovies("abcd").subscribe(data => {

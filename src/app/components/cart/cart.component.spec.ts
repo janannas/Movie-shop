@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { CartComponent } from "./cart.component";
 import { BillingFormComponent } from "../billing-form/billing-form.component";
-import { mockProducts } from "../../testing/mockData";
-import { MockService } from 'src/app/services/mock.service';
-import { CartService } from 'src/app/services/cart.service';
+import { mockProducts } from "../../testing/mockProducts";
+import { MockService } from "src/app/services/mock.service";
+import { CartService } from "src/app/services/cart.service";
 
 describe("CartComponent", () => {
   let component: CartComponent;
