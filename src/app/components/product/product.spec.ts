@@ -4,8 +4,8 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { MovieService } from "src/app/services/movie.service";
 import { ProductComponent } from "./product.component";
 import { Component } from "@angular/core";
-import { IMovie } from "src/app/interfaces/IMovie";
 import { MockService } from "src/app/services/mock.service";
+import { IMovie } from "src/app/interfaces/IMovie";
 
 describe("ProductComponent", () => {
   let component: ProductComponent;
@@ -74,5 +74,13 @@ describe("ProductComponent", () => {
       ></app-product>
     `
   })
-  class TestHostComponent {}
+  class TestHostComponent {
+    movies: IMovie[];
+
+    constructor(private service: MockService) {
+      this.service.getMovieData().subscribe(myMovieData => {
+        this.movies = myMovieData;
+      });
+    }
+  }
 });

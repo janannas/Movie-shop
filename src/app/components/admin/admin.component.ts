@@ -1,13 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { MovieService } from "src/app/services/movie.service";
 import { IOrder } from "src/app/interfaces/IOrder";
+import { empty } from "rxjs";
 
 @Component({
   selector: "app-admin",
   templateUrl: "./admin.component.html",
   styleUrls: ["./admin.component.scss"]
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   orders: IOrder[];
   success: boolean;
 
@@ -17,24 +18,27 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  removeOrder(orderToRemove: IOrder) {
+  handleRemoveOrder(orderToRemove: IOrder) {
     for (let i = 0; i < this.orders.length; i++) {
       const order = this.orders[i];
       if (orderToRemove.id === order.id) {
-        this.movieService.deleteOrder(order.id).subscribe(
-          response => {
-            this.success = true;
-            console.log("success", response);
-          },
-          error => console.log("error", error)
-        );
+        this.removeOrder(order.id);
+
+        this.spliceOrder(i);
       }
     }
   }
 
-  refresh() {
-    location.reload();
+  removeOrder(id: number) {
+    this.movieService
+      .deleteOrder(id)
+      .subscribe(
+        response => (response ? (this.success = true) : empty()),
+        error => console.log("error", error)
+      );
   }
 
-  ngOnInit() {}
+  spliceOrder(index: number) {
+    this.orders.splice(index, 1);
+  }
 }

@@ -8,19 +8,7 @@ import { IOrder } from "../interfaces/IOrder";
 import { ICategory } from "../interfaces/ICategory";
 import { IMovieService } from "../interfaces/IMovieService";
 import { IProductMsg } from "../interfaces/IProductMsg";
-
-const mockOrder: IOrder[] = [
-  {
-    id: 1,
-    companyId: 1,
-    created: "11-11-11",
-    createdBy: "testUser@test.com",
-    paymentMethod: "Visa",
-    totalPrice: 999,
-    status: 0,
-    orderRows: []
-  }
-];
+import { mockOrders } from "../testing/mockorders";
 
 @Injectable({
   providedIn: "root"
@@ -133,12 +121,12 @@ export class MockService implements ICartService, IMovieService {
   }
 
   getOrders(): Observable<IOrder[]> {
-    return of(mockOrder);
+    return of(mockOrders);
   }
 
   deleteOrder(id: number): Observable<IOrder[]> {
-    if (id == mockOrder[0].id) {
-      return of(mockOrder);
+    if (id == mockOrders[0].id) {
+      return of(mockOrders);
     }
   }
 
