@@ -15,10 +15,10 @@
     <p>All titles, {{ movies.length }} results</p>
 
     <div>
-      <button (click)="toggleDropdown = !toggleDropdown">
+      <button (click)="showCategories = !showCategories">
         Genres <i class="arrow-down"></i>
       </button>
-      <ul class="categories" [class.categories-open]="toggleDropdown">
+      <ul class="categories" [class.categories-open]="showCategories">
         <a
           *ngFor="let category of categories"
           routerLink="/categoryDetails/{{ category.id }}"

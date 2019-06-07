@@ -54,23 +54,20 @@ describe("CatalogComponent", () => {
     ];
 
     component.movies = [mockProduct1];
-    component.connectCategoriesToMovie(mockCategory);
+    component.connectCategoryToMovie(mockCategory);
 
     expect(mockProduct1.productCategory[0].categoryId).toBe(7);
   });
 
-  it("should display correct category", () => {
+  it("should have have been given correct category", () => {
     const testMovieCategory = component.movies[1].productCategory[0].category;
     expect(testMovieCategory).toEqual("Sci-fi");
   });
 
-  /* it("should display correct category", () => {
-    let link = testHostFixture.nativeElement
-      .querySelectorAll("a")[1]
-      .querySelector("p");
-
+  it("should display correct category", () => {
+    let link = fixture.nativeElement.querySelectorAll("li")[0];
     expect(link.innerHTML).toContain("Action");
-  }); */
+  });
 
   it("should check if there are any search result", () => {
     service.searchMovies("abcd").subscribe(data => {

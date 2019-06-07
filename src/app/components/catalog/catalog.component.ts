@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { mergeMap } from "rxjs/operators";
 
 import { MovieService } from "src/app/services/movie.service";
 import { IMovie } from "../../interfaces/IMovie";
@@ -15,39 +16,35 @@ export class CatalogComponent {
   categories: ICategory[];
   noSearchResult: boolean = false;
   searchResults: IMovie[];
-  toggleDropdown: boolean = false;
+  showCategories: boolean = false;
 
   constructor(private service: MovieService) {
-    this.service.getSearchResults().subscribe(
-      myResults => {
-        this.checkIfSearchResults(myResults);
-      },
-      error => {
-        this.error = true;
-        console.log("Error: " + error);
-      }
-    );
-
-    this.service.getMovieData().subscribe(
-      myMovieData => {
-        this.movies = myMovieData;
-
-        this.service.getCategoryData().subscribe(
-          myCategoryData => {
-            this.categories = myCategoryData;
-            this.connectCategoriesToMovie(myCategoryData);
-          },
-          error => {
-            this.error = true;
-            console.log("Error: " + error);
-          }
-        );
-      },
-      error => {
-        this.error = true;
-        console.log("Error: " + error);
-      }
-    );
+    this.service
+      .getMovieData()
+      .pipe(
+        // Presenting all movies unregarding wether user searched for a specific
+        // movie or not
+        mergeMap(myMovieData => {
+          this.movies = myMovieData;
+          return this.service.getCategoryData();
+        }),
+        // Hook the movies up with their repective category
+        mergeMap(myCategoryData => {
+          this.categories = myCategoryData;
+          this.connectCategoryToMovie(myCategoryData);
+          return this.service.getSearchResults();
+        })
+      )
+      .subscribe(
+        // If user searched for a movie, the result will be presented
+        myResults => {
+          this.checkIfSearchResults(myResults);
+        },
+        error => {
+          this.error = true;
+          console.log("Error: " + error);
+        }
+      );
   }
 
   checkIfSearchResults(searchResults: IMovie[]) {
@@ -59,7 +56,7 @@ export class CatalogComponent {
     }
   }
 
-  connectCategoriesToMovie(myCategoryData: ICategory[]) {
+  connectCategoryToMovie(myCategoryData: ICategory[]) {
     for (const movie of this.movies) {
       for (const movieCategory of movie.productCategory) {
         for (const category of myCategoryData) {
