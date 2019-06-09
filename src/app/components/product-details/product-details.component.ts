@@ -13,6 +13,7 @@ import { CartService } from "src/app/services/cart.service";
 export class ProductDetailsComponent {
   movies: IMovie[];
   error: boolean;
+  errorMsg: string;
   movie: IMovie = {
     id: 0,
     name: "",
@@ -44,6 +45,7 @@ export class ProductDetailsComponent {
         },
         error => {
           this.error = true;
+          this.errorMsg = error;
           console.log("Error: " + error);
         }
       );

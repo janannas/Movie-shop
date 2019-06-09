@@ -7,6 +7,7 @@ import { BillingFormComponent } from "../billing-form/billing-form.component";
 import { mockProducts } from "../../testing/mockProducts";
 import { MockService } from "src/app/services/mock.service";
 import { CartService } from "src/app/services/cart.service";
+import { ErrorComponent } from "../error/error.component";
 
 describe("CartComponent", () => {
   let component: CartComponent;
@@ -18,7 +19,7 @@ describe("CartComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule, HttpClientTestingModule],
-      declarations: [CartComponent, BillingFormComponent]
+      declarations: [CartComponent, BillingFormComponent, ErrorComponent]
     })
       .overrideComponent(CartComponent, {
         set: {

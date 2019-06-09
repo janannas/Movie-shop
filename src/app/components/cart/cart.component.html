@@ -1,7 +1,7 @@
 <div class="bg"></div>
-<h1 class="display1 navbar-pad">CART</h1>
+<h1 class="display1 navbar-pad" *ngIf="!error">CART</h1>
 
-<div class="flex-tablet" *ngIf="!emptyCart">
+<div class="flex-tablet" *ngIf="!emptyCart && !error">
   <div class="container">
     <a routerLink="/catalog" routerLinkActive="linkActive"
       ><u>BACK TO SHOP</u></a
@@ -107,3 +107,5 @@
     </button>
   </a>
 </div>
+
+<app-error *ngIf="error" [errorMsg]="errorMsg"></app-error>

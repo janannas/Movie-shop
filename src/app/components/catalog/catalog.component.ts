@@ -13,6 +13,7 @@ import { ICategory } from "src/app/interfaces/ICategory";
 export class CatalogComponent {
   movies: IMovie[] = [];
   error: boolean;
+  errorMsg: string;
   categories: ICategory[];
   noSearchResult: boolean = false;
   searchResults: IMovie[];
@@ -42,6 +43,7 @@ export class CatalogComponent {
         },
         error => {
           this.error = true;
+          this.errorMsg = error;
           console.log("Error: " + error);
         }
       );

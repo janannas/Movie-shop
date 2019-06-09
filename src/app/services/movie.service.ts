@@ -82,7 +82,7 @@ export class MovieService implements IMovieService {
     );
   }
 
-  handleError(error) {
+  handleError(error: any) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error("An error occured:", error.error.message);

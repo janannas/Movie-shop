@@ -15,6 +15,8 @@ import { MovieService } from "src/app/services/movie.service";
 })
 export class CartComponent implements OnInit {
   cart: IMovie[];
+  error: boolean = false;
+  errorMsg: string;
   totalProducts: number = 49;
   plural: boolean = false;
   orderRows: IOrderRows[] = [];
@@ -58,12 +60,14 @@ export class CartComponent implements OnInit {
     //Create the "real" order for the api, since the form presented in browser is "fake"
     const order = this.createOrder(billingForm);
 
-    this.movieService
-      .sendOrder(order)
-      .subscribe(
-        response => console.log("success", response),
-        error => console.log("error", error)
-      );
+    this.movieService.sendOrder(order).subscribe(
+      response => console.log("success", response),
+      error => {
+        this.error = true;
+        this.errorMsg = error;
+        console.log("error", error);
+      }
+    );
 
     this.showOverview = true;
 

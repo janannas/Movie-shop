@@ -11,6 +11,7 @@ import { IMovie } from "src/app/interfaces/IMovie";
 })
 export class CategoryDetailsComponent {
   movies: IMovie[] = [];
+  errorMsg: string;
   error: boolean;
   id: number;
 
@@ -28,6 +29,7 @@ export class CategoryDetailsComponent {
         },
         error => {
           this.error = true;
+          this.errorMsg = error;
           console.log("Error: " + error);
         }
       );
