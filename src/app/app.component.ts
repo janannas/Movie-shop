@@ -31,7 +31,7 @@ export class AppComponent {
       .subscribe(msg => this.handleProductMsg(msg));
 
     this.cartService
-      .getshowCartIndicator()
+      .getShowCartIndicator()
       .subscribe(bool => (this.showCartIndicator = bool));
   }
 

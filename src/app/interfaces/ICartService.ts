@@ -27,7 +27,7 @@ export interface ICartService {
   }): void | Observable<IProductMsg>;
   updateAmount(amount: number, id: number): void;
   checkCartEmpty(): boolean;
-  getshowCartIndicator(): Observable<boolean>;
+  getShowCartIndicator(): Observable<boolean>;
   removeProductFromCart(productToRemove: IMovie): void;
   resetCart(): void;
 }

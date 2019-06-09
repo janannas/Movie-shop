@@ -106,7 +106,7 @@ export class CartService implements ICartService {
     return this.cart.length === 0 ? true : false;
   }
 
-  getshowCartIndicator(): Observable<boolean> {
+  getShowCartIndicator(): Observable<boolean> {
     return this.showCartIndicator.asObservable();
   }
 

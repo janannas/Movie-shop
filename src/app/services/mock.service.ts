@@ -233,7 +233,7 @@ export class MockService implements ICartService, IMovieService {
     return this.cart.length === 0 ? true : false;
   }
 
-  getshowCartIndicator(): Observable<boolean> {
+  getShowCartIndicator(): Observable<boolean> {
     return of(this.showCartIndicator);
   }
 
