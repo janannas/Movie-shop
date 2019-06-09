@@ -73,21 +73,24 @@
 
     img {
       margin: 0;
+
+      @media screen and(min-width: $desktop) {
+        padding: 20px 0 0 0;
+        height: 500px;
+      }
+      @media screen and(min-width: $desktop-large) {
+        height: 700px;
+      }
     }
   }
+}
 
-  @media screen and(min-width: $desktop) {
-    .left-pane {
-      margin: auto;
-    }
+@media screen and(min-width: $desktop) {
+  .left-pane {
+    margin: auto;
+  }
 
-    .navbar-pad--extra {
-      padding-top: 0px;
-    }
-
-    img {
-      padding: 20px 0 0 0;
-      height: 500px;
-    }
+  .navbar-pad--extra {
+    padding-top: 0px;
   }
 }
