@@ -18,9 +18,8 @@ export class AppComponent {
   productName: string;
   productImage: string;
   productRejected: boolean;
-  //toggles scss-classes
-  isShowing: boolean = false;
-  lastRemoved: boolean;
+  showSearch: boolean = false;
+  showCartIndicator: boolean;
 
   constructor(
     private movieService: MovieService,
@@ -32,8 +31,8 @@ export class AppComponent {
       .subscribe(msg => this.handleProductMsg(msg));
 
     this.cartService
-      .getLastRemoved()
-      .subscribe(bool => (this.lastRemoved = bool));
+      .getshowCartIndicator()
+      .subscribe(bool => (this.showCartIndicator = bool));
   }
 
   handleProductMsg(myMsg: IProductMsg) {
@@ -68,7 +67,7 @@ export class AppComponent {
     if (searchText === undefined || searchText === "") {
       this.emptySearch = true;
     } else if (searchText) {
-      this.isShowing = false;
+      this.showSearch = false;
       this.movieService.searchMovies(searchText);
       this.router.navigateByUrl("/catalog");
     }

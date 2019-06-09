@@ -117,6 +117,6 @@ describe("AppComponent", () => {
 
   it("should close if search was successfull", () => {
     app.handleSearch("Dark");
-    expect(app.isShowing).toBe(false);
+    expect(app.showSearch).toBe(false);
   });
 });

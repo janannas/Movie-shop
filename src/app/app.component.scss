@@ -55,7 +55,7 @@ nav {
   }
 }
 
-.dropdown-menu {
+.search-dropdown-menu {
   visibility: hidden;
   position: fixed;
   width: 100%;
@@ -136,7 +136,7 @@ nav {
   }
 }
 
-.dropdown-menu-open {
+.search-dropdown-menu-open {
   visibility: visible;
   opacity: 1;
   transform: translateY(0px);
