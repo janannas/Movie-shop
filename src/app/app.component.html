@@ -13,25 +13,30 @@
     >M</a
   >
 
-  <a class="dropdown-button nav-link" (click)="isShowing = !isShowing">
+  <a class="search-dropdown-button nav-link" (click)="showSearch = !showSearch">
     <i class="fas fa-search"></i>
   </a>
 
   <div
     id="overlay"
-    [class.overlay]="isShowing"
-    (click)="isShowing = !isShowing"
+    [class.overlay]="showSearch"
+    (click)="showSearch = !showSearch"
   ></div>
 
   <a routerLink="/cart" routerLinkActive="linkActive" class="nav-link">
     <i class="fas fa-shopping-cart"></i>
-    <div [class.cart-indicator]="!lastRemoved && productAmount >= 0"></div>
+    <div
+      [class.cart-indicator]="!showCartIndicator && productAmount >= 0"
+    ></div>
   </a>
 </nav>
 
-<div class="dropdown-menu" [class.dropdown-menu-open]="isShowing">
+<div
+  class="search-dropdown-menu"
+  [class.search-dropdown-menu-open]="showSearch"
+>
   <div>
-    <a class="close" (click)="isShowing = !isShowing"></a>
+    <a class="close" (click)="showSearch = !showSearch"></a>
 
     <div class="search-container">
       <h1 class="subtitle">
@@ -55,7 +60,6 @@
     </div>
   </div>
 </div>
-<!-- dropdown-menu -->
 
 <div class="product-msg" [class.product-msg-open]="productAdded">
   <div>
@@ -66,8 +70,8 @@
       <div>
         <br />
         <p class="large">{{ productName }}</p>
-        <p>{{ productDirector }}</p>
         <br />
+
         <p *ngIf="!productRejected">Amount: {{ productAmount }} pcs</p>
         <p *ngIf="productRejected">Amount is limited to 9 pcs</p>
       </div>

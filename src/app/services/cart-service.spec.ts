@@ -89,12 +89,12 @@ describe("CartService", () => {
 
   it("should change value to false", () => {
     mockService.addProductToCart(mockProduct1);
-    mockService.getLastRemoved().subscribe(result => {
+    mockService.getShowCartIndicator().subscribe(result => {
       expect(result).toBe(false);
     });
 
     mockService.removeProductFromCart(mockProduct1);
-    mockService.getLastRemoved().subscribe(result => {
+    mockService.getShowCartIndicator().subscribe(result => {
       expect(result).toBe(true);
     });
   });

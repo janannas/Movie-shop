@@ -14,7 +14,7 @@ export class CartService implements ICartService {
   //Content of pop-up message when buy button is clicked
   message = new Subject<IProductMsg>();
   //Used to trigger "cart-indicator/little dot on cart" in scss
-  lastRemoved = new Subject<boolean>();
+  showCartIndicator = new Subject<boolean>();
 
   getProductsFromCart(): IMovie[] {
     this.checkCartEmpty();
@@ -22,7 +22,7 @@ export class CartService implements ICartService {
   }
 
   addProductToCart(myProduct: IMovie): void {
-    this.lastRemoved.next(false);
+    this.showCartIndicator.next(false);
     let index = this.cart.findIndex(x => x.id === myProduct.id);
 
     if (index === -1) {
@@ -62,6 +62,8 @@ export class CartService implements ICartService {
           });
         } else {
           this.productMsg({
+            productName: myProduct.name,
+            productImage: myProduct.imageUrl,
             productRejected: true
           });
         }
@@ -104,8 +106,8 @@ export class CartService implements ICartService {
     return this.cart.length === 0 ? true : false;
   }
 
-  getLastRemoved(): Observable<boolean> {
-    return this.lastRemoved.asObservable();
+  getShowCartIndicator(): Observable<boolean> {
+    return this.showCartIndicator.asObservable();
   }
 
   removeProductFromCart(productToRemove: IMovie): void {
@@ -113,13 +115,13 @@ export class CartService implements ICartService {
       if (productToRemove.id === this.cart[i].id) {
         this.cart.splice(i, 1) && this.orderRows.splice(i, 1);
 
-        this.checkCartEmpty() && this.lastRemoved.next(true);
+        this.checkCartEmpty() && this.showCartIndicator.next(true);
       }
     }
   }
 
   resetCart(): void {
     this.cart = [];
-    this.lastRemoved.next(true);
+    this.showCartIndicator.next(true);
   }
 }

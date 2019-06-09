@@ -7,7 +7,7 @@ export interface ICartService {
   cart: IMovie[];
   orderRows: IOrderRows[];
   message?: Subject<any>;
-  lastRemoved: Subject<boolean> | boolean;
+  showCartIndicator: Subject<boolean> | boolean;
 
   getProductsFromCart(): IMovie[];
   addProductToCart(myProduct: IMovie): void;
@@ -27,7 +27,7 @@ export interface ICartService {
   }): void | Observable<IProductMsg>;
   updateAmount(amount: number, id: number): void;
   checkCartEmpty(): boolean;
-  getLastRemoved(): Observable<boolean>;
+  getShowCartIndicator(): Observable<boolean>;
   removeProductFromCart(productToRemove: IMovie): void;
   resetCart(): void;
 }

@@ -94,7 +94,7 @@ export class MockService implements ICartService, IMovieService {
   cart: IMovie[] = [];
   orderRows: IOrderRows[] = [];
   //Used to trigger "cart-indicator" in scss
-  lastRemoved: boolean;
+  showCartIndicator: boolean;
 
   //Methods from MovieService
   getMovieData(): Observable<IMovie[]> {
@@ -137,7 +137,7 @@ export class MockService implements ICartService, IMovieService {
   }
 
   addProductToCart(myProduct: IMovie): void {
-    this.lastRemoved = false;
+    this.showCartIndicator = false;
 
     let index = this.cart.findIndex(x => x.id === myProduct.id);
 
@@ -233,8 +233,8 @@ export class MockService implements ICartService, IMovieService {
     return this.cart.length === 0 ? true : false;
   }
 
-  getLastRemoved(): Observable<boolean> {
-    return of(this.lastRemoved);
+  getShowCartIndicator(): Observable<boolean> {
+    return of(this.showCartIndicator);
   }
 
   removeProductFromCart(productToRemove: IMovie): void {
@@ -242,13 +242,13 @@ export class MockService implements ICartService, IMovieService {
       if (productToRemove.id === this.cart[i].id) {
         this.cart.splice(i, 1) && this.orderRows.splice(i, 1);
 
-        this.checkCartEmpty && (this.lastRemoved = true);
+        this.checkCartEmpty && (this.showCartIndicator = true);
       }
     }
   }
 
   resetCart(): void {
     this.cart = [];
-    this.lastRemoved = true;
+    this.showCartIndicator = true;
   }
 }
