@@ -7,7 +7,7 @@ import { MovieService } from "../../services/movie.service";
 
 import { ProductDetailsComponent } from "./product-details.component";
 import { ErrorComponent } from "../error/error.component";
-import { MockService } from 'src/app/services/mock.service';
+import { MockService } from "src/app/services/mock.service";
 
 describe("ProductDetailsComponent", () => {
   let component: ProductDetailsComponent;
@@ -70,5 +70,16 @@ describe("ProductDetailsComponent", () => {
   it("searchMovies should return the the correct id", () => {
     component.searchMovies(77);
     expect(component.movie.id).toBe(77);
+  });
+
+  it("addProductToCart should have been called", () => {
+    spyOn(component.cartService, "addProductToCart");
+
+    let button = fixture.debugElement.nativeElement.querySelector("button");
+    button.click();
+
+    fixture.whenStable().then(() => {
+      expect(component.cartService.addProductToCart).toHaveBeenCalled();
+    });
   });
 });

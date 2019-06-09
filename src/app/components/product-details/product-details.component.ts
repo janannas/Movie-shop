@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { switchMap } from "rxjs/operators";
 import { MovieService } from "../../services/movie.service";
 import { IMovie } from "../../interfaces/IMovie";
 import { CartService } from "src/app/services/cart.service";
@@ -9,7 +10,7 @@ import { CartService } from "src/app/services/cart.service";
   templateUrl: "./product-details.component.html",
   styleUrls: ["./product-details.component.scss"]
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent {
   movies: IMovie[];
   error: boolean;
   movie: IMovie = {
@@ -26,21 +27,26 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private cartService: CartService
+    public cartService: CartService
   ) {
-    this.movieService.getMovieData().subscribe(
-      myData => {
-        this.movies = myData;
-        this.route.paramMap.subscribe(myParams => {
-          const id = +myParams.get("id");
+    this.movieService
+      .getMovieData()
+      .pipe(
+        switchMap(myMovieData => {
+          this.movies = myMovieData;
+          return this.route.paramMap;
+        })
+      )
+      .subscribe(
+        params => {
+          const id = +params.get("id");
           this.searchMovies(id);
-        });
-      },
-      error => {
-        this.error = true;
-        console.log("Error: " + error);
-      }
-    );
+        },
+        error => {
+          this.error = true;
+          console.log("Error: " + error);
+        }
+      );
   }
 
   searchMovies(myId: number): void {
@@ -54,6 +60,4 @@ export class ProductDetailsComponent implements OnInit {
   handleClick(product: IMovie): void {
     this.cartService.addProductToCart(product);
   }
-
-  ngOnInit() {}
 }
