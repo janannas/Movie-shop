@@ -1,29 +1,31 @@
 <div class="bg"></div>
 
-<h1 class="display1 navbar-pad">
-  {{
-    id == 5
-      ? "ACTION"
-      : id == 6
-      ? "THRILLER"
-      : id == 7
-      ? "COMEDY"
-      : id == 8
-      ? "SCI-FI"
-      : undefined
-  }}
-</h1>
+<div *ngIf="!error">
+  <h1 class="display1 navbar-pad">
+    {{
+      id == 5
+        ? "ACTION"
+        : id == 6
+        ? "THRILLER"
+        : id == 7
+        ? "COMEDY"
+        : id == 8
+        ? "SCI-FI"
+        : undefined
+    }}
+  </h1>
 
-<p class="body1 body1--center">{{ movies.length }} results</p>
+  <p class="body1 body1--center">{{ movies.length }} results</p>
 
-<div class="shop">
-  <app-product
-    *ngFor="let movie of movies"
-    [movie]="movie"
-    [moviePoster]="movie.imageUrl"
-    [movieId]="movie.id"
-  >
-  </app-product>
+  <div class="shop">
+    <app-product
+      *ngFor="let movie of movies"
+      [movie]="movie"
+      [moviePoster]="movie.imageUrl"
+      [movieId]="movie.id"
+    >
+    </app-product>
+  </div>
 </div>
 
 <app-error *ngIf="error"></app-error>

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { switchMap } from "rxjs/operators";
 import { MovieService } from "src/app/services/movie.service";
 import { IMovie } from "src/app/interfaces/IMovie";
 
@@ -8,25 +9,28 @@ import { IMovie } from "src/app/interfaces/IMovie";
   templateUrl: "./category-details.component.html",
   styleUrls: ["./category-details.component.scss"]
 })
-export class CategoryDetailsComponent implements OnInit {
+export class CategoryDetailsComponent {
   movies: IMovie[] = [];
   error: boolean;
   id: number;
-  toggleDropdown: boolean = false;
 
   constructor(private route: ActivatedRoute, private service: MovieService) {
-    this.service.getMovieData().subscribe(
-      myMovieData => {
-        this.route.paramMap.subscribe(myParams => {
-          this.id = +myParams.get("id");
+    this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          this.id = +params.get("id");
+          return this.service.getMovieData();
+        })
+      )
+      .subscribe(
+        myMovieData => {
           this.searchCategories(this.id, myMovieData);
-        });
-      },
-      error => {
-        this.error = true;
-        console.log("Error: " + error);
-      }
-    );
+        },
+        error => {
+          this.error = true;
+          console.log("Error: " + error);
+        }
+      );
   }
 
   searchCategories(myId: number, myMovieData: IMovie[]) {
@@ -38,6 +42,4 @@ export class CategoryDetailsComponent implements OnInit {
       }
     }
   }
-
-  ngOnInit() {}
 }
