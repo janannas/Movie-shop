@@ -5,7 +5,7 @@ import { MovieService } from "./movie.service";
 import { MockService } from "./mock.service";
 
 describe("MovieService", () => {
-  const mockService = new MockService();
+  let service: MockService;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
@@ -13,19 +13,23 @@ describe("MovieService", () => {
     })
   );
 
+  beforeEach(() => {
+    service = new MockService();
+  });
+
   it("should be created", () => {
     const service: MovieService = TestBed.get(MovieService);
     expect(service).toBeTruthy();
   });
 
   it("should be able to search for movie", () => {
-    const result = mockService.searchMovies("Dark");
+    const result = service.searchMovies("Dark");
     expect(result).toBeDefined();
   });
 
   it("should return empty if search-input is empty", () => {
     let result = [];
-    mockService.searchMovies("abcd").subscribe(data => {
+    service.searchMovies("abcd").subscribe(data => {
       result = data;
     });
 
@@ -33,7 +37,7 @@ describe("MovieService", () => {
   });
 
   it("should delete specified order", () => {
-    let test = mockService.deleteOrder(1);
+    let test = service.deleteOrder(1);
     expect(test).toBeDefined;
   });
 });

@@ -90,7 +90,7 @@ export class MockService implements ICartService, IMovieService {
       name: "Sci-fi"
     }
   ];
-  //Properties from ICartService
+  //Used to trigger "cart-indicator/little dot on cart" in scss
   cart: IMovie[] = [];
   orderRows: IOrderRows[] = [];
   //Used to trigger "cart-indicator" in scss
@@ -128,6 +128,7 @@ export class MockService implements ICartService, IMovieService {
     if (id == mockOrders[0].id) {
       return of(mockOrders);
     }
+    return of([]);
   }
 
   //Methods from cartService
