@@ -1,5 +1,5 @@
 <div class="bg"></div>
-<h1 class="display1 navbar-pad">All orders</h1>
+<h1 class="display1 navbar-pad" *ngIf="!error">All orders</h1>
 
 <div
   class="success"
@@ -9,7 +9,7 @@
   Successfully Removed!
 </div>
 
-<div class="container">
+<div class="container" *ngIf="!error">
   <div class="order" *ngFor="let order of orders">
     <div>
       <label>Orderid:</label>
@@ -41,3 +41,5 @@
     </button>
   </div>
 </div>
+
+<app-error *ngIf="error" [errorMsg]="errorMsg"></app-error>

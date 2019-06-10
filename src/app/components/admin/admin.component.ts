@@ -11,11 +11,20 @@ import { empty } from "rxjs";
 export class AdminComponent {
   orders: IOrder[];
   success: boolean;
+  errorMsg: string;
+  error: boolean;
 
   constructor(private movieService: MovieService) {
-    this.movieService.getOrders().subscribe(myOrders => {
-      this.orders = myOrders;
-    });
+    this.movieService.getOrders().subscribe(
+      myOrders => {
+        this.orders = myOrders;
+      },
+      error => {
+        this.error = true;
+        this.errorMsg = error;
+        console.log("Error: " + error);
+      }
+    );
   }
 
   handleRemoveOrder(orderToRemove: IOrder) {

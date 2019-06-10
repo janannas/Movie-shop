@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { AdminComponent } from "./admin.component";
 import { MovieService } from "src/app/services/movie.service";
 import { MockService } from "src/app/services/mock.service";
+import { ErrorComponent } from "../error/error.component";
 
 describe("AdminComponent", () => {
   let component: AdminComponent;
@@ -12,7 +13,7 @@ describe("AdminComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      declarations: [AdminComponent]
+      declarations: [AdminComponent, ErrorComponent]
     })
       .overrideComponent(AdminComponent, {
         set: {
