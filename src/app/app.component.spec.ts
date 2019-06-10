@@ -17,7 +17,6 @@ import { ProductDetailsComponent } from "./components/product-details/product-de
 import { ErrorComponent } from "./components/error/error.component";
 import { MockService } from "./services/mock.service";
 import { MovieService } from "./services/movie.service";
-import { CartService } from "./services/cart.service";
 
 describe("AppComponent", () => {
   let fixture: ComponentFixture<AppComponent>;
