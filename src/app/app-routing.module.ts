@@ -8,11 +8,11 @@ import { CartComponent } from "./components/cart/cart.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { ProductDetailsComponent } from "./components/product-details/product-details.component";
 import { CategoryDetailsComponent } from "./components/category-details/category-details.component";
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminComponent } from "./components/admin/admin.component";
 
 const routes: Routes = [
   { path: "categoryDetails/:id", component: CategoryDetailsComponent },
-  { path: "details/:id", component: ProductDetailsComponent },
+  { path: "productDetails/:id", component: ProductDetailsComponent },
   { path: "catalog", component: CatalogComponent },
   { path: "cart", component: CartComponent },
   { path: "orders", component: AdminComponent },
@@ -24,4 +24,4 @@ const routes: Routes = [
   exports: [RouterModule],
   imports: [RouterModule.forRoot(routes)]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
