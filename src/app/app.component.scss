@@ -64,6 +64,10 @@ nav {
   transition: all ease 1s;
   z-index: 3;
 
+  small {
+    margin-bottom: 10px;
+  }
+
   @media screen and (min-width: $tablet) {
     width: 500px;
     left: 50%;
