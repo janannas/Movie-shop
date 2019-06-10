@@ -40,13 +40,6 @@ describe("CartService", () => {
     expect(service.cart.length).toBe(1);
   });
 
-  it("should not add order-row if it already exists", () => {
-    service.addProductToCart(mockProduct1);
-    service.addProductToCart(mockProduct1);
-    service.addProductToCart(mockProduct1);
-    expect(service.orderRows.length).toBe(1);
-  });
-
   it("should not add more than 9 products to amount", () => {
     for (let i = 0; i < 10; i++) {
       service.addProductToCart(mockProduct1);
@@ -71,6 +64,19 @@ describe("CartService", () => {
     expect(service.orderRows[0].amount).toBe(3);
   });
 
+  it("should create rows", () => {
+    service.addProductToCart(mockProduct1);
+    service.orderRows = service.createOrderRows();
+    expect(service.orderRows[0].amount).toBe(1);
+  });
+
+  it("should not add order-row if it already exists", () => {
+    service.addProductToCart(mockProduct1);
+    service.addProductToCart(mockProduct1);
+    service.addProductToCart(mockProduct1);
+    expect(service.orderRows.length).toBe(1);
+  });
+
   it("should remove product completly from cart", () => {
     service.addProductToCart(mockProduct1);
 
@@ -79,6 +85,16 @@ describe("CartService", () => {
 
     expect(service.cart.length).toBe(0);
     expect(service.orderRows.length).toBe(0);
+  });
+
+  it("should not remove wrong product from cart", () => {
+    service.addProductToCart(mockProduct1);
+    service.cart = service.getProductsFromCart();
+
+    expect(service.cart.length).toBe(1);
+
+    service.removeProductFromCart(mockProduct2);
+    expect(service.cart.length).toBe(1);
   });
 
   it("should check if cart is empty", () => {

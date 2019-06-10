@@ -41,13 +41,7 @@ describe("CartComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should create rows", () => {
-    service.addProductToCart(mockProduct1);
-    component.orderRows = service.createOrderRows();
-    expect(component.orderRows[0].amount).toBe(1);
-  });
-
-  it("should evaluate to true if there are serveral products in cart", () => {
+  it("should check if it's product och products", () => {
     expect(component.plural).toEqual(false);
 
     service.addProductToCart(mockProduct1);
@@ -61,44 +55,16 @@ describe("CartComponent", () => {
     expect(component.plural).toEqual(true);
   });
 
-  it("should remove product from cart", () => {
+  it("checkPlural should be called when product is removed", () => {
     service.addProductToCart(mockProduct1);
     component.cart = service.getProductsFromCart();
 
-    expect(component.cart.length).toBe(1);
+    spyOn(component, "checkPlural");
 
-    service.removeProductFromCart(mockProduct1);
-    expect(component.cart.length).toBe(0);
-  });
-
-  it("should not remove wrong product from cart", () => {
-    service.addProductToCart(mockProduct1);
-    component.cart = service.getProductsFromCart();
-
-    expect(component.cart.length).toBe(1);
-
-    service.removeProductFromCart(mockProduct2);
-    expect(component.cart.length).toBe(1);
-  });
-
-  it("should return true if cart is empty", () => {
-    service.getProductsFromCart();
-    expect(component.emptyCart).toBe(true);
-  });
-
-  it("should return false if cart is not empty", () => {
-    service.addProductToCart(mockProduct1);
-    component.emptyCart = service.checkCartEmpty();
-
-    expect(component.emptyCart).toBe(false);
-  });
-
-  it("should return true if last product is removed from cart", () => {
-    service.addProductToCart(mockProduct1);
-    service.getProductsFromCart();
-    service.removeProductFromCart(mockProduct1);
-
-    expect(component.emptyCart).toBe(true);
+    component.handleRemoveProduct(mockProduct1);
+    fixture.whenStable().then(() => {
+      expect(component.checkPlural).toHaveBeenCalled();
+    });
   });
 
   it("updating amount should trigger calculateTotalProducts-func", () => {
