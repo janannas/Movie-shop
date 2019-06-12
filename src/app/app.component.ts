@@ -72,8 +72,4 @@ export class AppComponent {
       this.router.navigateByUrl("/catalog");
     }
   }
-
-  resetEmptySearch(): void {
-    this.emptySearch = false;
-  }
 }

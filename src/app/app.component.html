@@ -6,12 +6,7 @@
 /></a>
 
 <nav>
-  <a
-    routerLink="/catalog"
-    routerLinkActive="linkActive"
-    class="display1 nav-link"
-    >M</a
-  >
+  <a routerLink="/catalog" class="display1 nav-link">M</a>
 
   <a class="search-dropdown-button nav-link" (click)="showSearch = !showSearch">
     <i class="fas fa-search"></i>
@@ -52,7 +47,7 @@
       <small *ngIf="emptySearch">A title to search is required!</small>
       <button
         (click)="handleSearch(search); search = ''"
-        (blur)="resetEmptySearch()"
+        (blur)="emptySearch = !emptySearch"
         class="button secondary-button"
       >
         SEARCH

@@ -41,7 +41,7 @@ describe("CartComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should check if it's product och products", () => {
+  it("should check if it's product or products", () => {
     expect(component.plural).toEqual(false);
 
     service.addProductToCart(mockProduct1);

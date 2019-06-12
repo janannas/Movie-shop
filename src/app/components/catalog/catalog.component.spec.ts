@@ -59,12 +59,12 @@ describe("CatalogComponent", () => {
     expect(mockProduct1.productCategory[0].categoryId).toBe(7);
   });
 
-  it("should have have been given correct category", () => {
+  it("movie should have have been given correct category", () => {
     const testMovieCategory = component.movies[1].productCategory[0].category;
     expect(testMovieCategory).toEqual("Sci-fi");
   });
 
-  it("should display correct category", () => {
+  it("dropdown should display correct category", () => {
     let link = fixture.nativeElement.querySelectorAll("li")[0];
     expect(link.innerHTML).toContain("Action");
   });
