@@ -199,6 +199,13 @@ li {
   }
 }
 
+.button-disabled {
+  color: $main-light-shade-color;
+  background-color: $main-middle-shade-color;
+  border: solid 2.5px $main-light-shade-color;
+  cursor: default;
+}
+
 .overlay {
   background-color: black;
   opacity: 0.4;

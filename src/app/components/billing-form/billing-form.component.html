@@ -116,9 +116,11 @@
   </div>
 
   <button
-    [disabled]="!form.valid"
     type="submit"
-    class="button secondary-button secondary-button--center"
+    class="button secondary-button--center"
+    [class.secondary-button]="form.valid"
+    [class.button-disabled]="!form.valid"
+    [disabled]="!form.valid"
   >
     CHECKOUT
   </button>
